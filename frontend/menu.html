@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Order</title>
     <link rel="stylesheet" href="navbar.css">
-    <link rel="stylesheet" href="order.css">
+    <link rel="stylesheet" href="menu.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -271,9 +271,18 @@
 </head>
 <body>
 <nav class="topnav">
-    <a class="active" href="#home">Home</a>
-    <a href="#about">About</a>
-    <a href="#contact">Contact</a>
+    <a class="dropbtn" href="#home">Home</a>
+    <a href="#contact" class="dropbtn">Contact</a>
+
+    <div class="dropdown">
+        <button onclick="myFunction()" class="dropbtn">Actions</button>
+        <div id="myDropdown" class="dropdown-content">
+            <a href="#">Link 1</a>
+            <a href="#">Link 2</a>
+            <a href="#">Link 3</a>
+        </div>
+    </div>
+
     <div class="login-container">
         <form action="/action_page.php">
             <input type="text" placeholder="Username" name="username">
@@ -283,129 +292,44 @@
     </div>
 </nav>
 <main>
-    <h2>Place your order</h2>
-    <p>Click on the food inside the tabbed menu:</p>
+    <h2>Select today's menu</h2>
     <div class="order-header">
         <div class="order-header-item-1">
-            <div class="tabs-item-1">
-                <div class="tab">
-                <button class="tablinks" onclick="openCity(event, 'London')" id="defaultOpen">Chef A</button>
-                <button class="tablinks" onclick="openCity(event, 'Paris')">Chef B</button>
-                <button class="tablinks" onclick="openCity(event, 'Tokyo')">Chef C</button>
+            <div class="card">
+                <img src="images/food1.jpg">
+                <p class="price">N1019.99</p>
+                <p>Amala.</p>
+                <p><button>Select</button></p>
             </div>
+            <div class="card">
+                <img src="images/food3.jpg">
+                <p class="price">N719.99</p>
+                <p>Jollof rice.</p>
+                <p><button>Select</button></p>
             </div>
-
-            <div class="tabs-item-2">
-                <div id="London" class="tabcontent">
-                    <div class="card">
-                        <img src="avatar2.png">
-                        <p class="price">$19.99</p>
-                        <p>moi moi and eko.</p>
-                        <p><button>Add to Cart</button></p>
-                    </div>
-                    <div class="card">
-                        <img src="avatar2.png">
-                        <p class="price">$19.99</p>
-                        <p>moi moi and eko.</p>
-                        <p><button>Add to Cart</button></p>
-                    </div>
-                    <div class="card">
-                        <img src="avatar2.png">
-                        <p class="price">$19.99</p>
-                        <p>moi moi and eko.</p>
-                        <p><button>Add to Cart</button></p>
-                    </div>
-                    <div class="card">
-                        <img src="avatar2.png">
-                        <p class="price">$19.99</p>
-                        <p>moi moi and eko.</p>
-                        <p><button>Add to Cart</button></p>
-                    </div>
-                    <div class="card">
-                        <img src="avatar2.png">
-                        <p class="price">$19.99</p>
-                        <p>moi moi and eko.</p>
-                        <p><button>Add to Cart</button></p>
-                    </div>
-                    <div class="card">
-                        <img src="avatar2.png">
-                        <p class="price">$19.99</p>
-                        <p>moi moi and eko.</p>
-                        <p><button>Add to Cart</button></p>
-                    </div>
-                    <div class="card">
-                        <img src="avatar2.png">
-                        <p class="price">$19.99</p>
-                        <p>moi moi and eko.</p>
-                        <p><button>Add to Cart</button></p>
-                    </div>
-                    <div class="card">
-                        <img src="avatar2.png">
-                        <p class="price">$19.99</p>
-                        <p>moi moi and eko.</p>
-                        <p><button>Add to Cart</button></p>
-                    </div>
-                </div>
-
-                <div id="Paris" class="tabcontent">
-                    <div class="card">
-                        <img src="avatar2.png">
-                        <p class="price">$19.99</p>
-                        <p>beans and dodo.</p>
-                        <p><button>Add to Cart</button></p>
-                    </div>
-                    <div class="card">
-                        <img src="avatar2.png">
-                        <p class="price">$19.99</p>
-                        <p>beans and dodo.</p>
-                        <p><button>Add to Cart</button></p>
-                    </div>
-                    <div class="card">
-                        <img src="avatar2.png">
-                        <p class="price">$19.99</p>
-                        <p>beans and dodo.</p>
-                        <p><button>Add to Cart</button></p>
-                    </div>
-                    <div class="card">
-                        <img src="avatar2.png">
-                        <p class="price">$19.99</p>
-                        <p>beans and dodo.</p>
-                        <p><button>Add to Cart</button></p>
-                    </div>
-                </div>
-
-                <div id="Tokyo" class="tabcontent">
-                    <div class="card">
-                        <img src="avatar2.png">
-                        <p class="price">$19.99</p>
-                        <p>noodles and egg</p>
-                        <p><button>Add to Cart</button></p>
-                    </div>
-                    <div class="card">
-                        <img src="avatar2.png">
-                        <p class="price">$19.99</p>
-                        <p>noodles and egg</p>
-                        <p><button>Add to Cart</button></p>
-                    </div>
-                    <div class="card">
-                        <img src="avatar2.png">
-                        <p class="price">$19.99</p>
-                        <p>noodles and egg</p>
-                        <p><button>Add to Cart</button></p>
-                    </div>
-                    <div class="card">
-                        <img src="avatar2.png">
-                        <p class="price">$19.99</p>
-                        <p>noodles and egg</p>
-                        <p><button>Add to Cart</button></p>
-                    </div>
-                    <div class="card">
-                        <img src="avatar2.png">
-                        <p class="price">$19.99</p>
-                        <p>noodles and egg</p>
-                        <p><button>Add to Cart</button></p>
-                    </div>
-                </div>
+            <div class="card">
+                <img src="images/food.jpg">
+                <p class="price">N819.99</p>
+                <p>Spaghetti.</p>
+                <p><button>Select</button></p>
+            </div>
+            <div class="card">
+                <img src="images/food4.jpg">
+                <p class="price">N1219.99</p>
+                <p>Amala.</p>
+                <p><button>Select</button></p>
+            </div>
+            <div class="card">
+                <img src="images/food.jpg">
+                <p class="price">N719.99</p>
+                <p>Jollof rice.</p>
+                <p><button>Select</button></p>
+            </div>
+            <div class="card">
+                <img src="images/food3.jpg">
+                <p class="price">N419.99</p>
+                <p>Spaghetti.</p>
+                <p><button>Select</button></p>
             </div>
         </div>
         <div class="order-header-item-2">
@@ -414,71 +338,24 @@
                     <tr>
                         <th>Item</th>
                         <th>Price</th>
-                        <th>Quantity</th>
-                        <th class="">Subtotal</th>
-                        <th></th>
                     </tr>
                 </thead>
 
                 <tbody>
                     <tr class="tr-hover">
-                        <td>Peter</td>
-                        <td>$100</td>
-                        <td>
-                            <input type="number" class="input-quantity" value="1" min="1">
-                        </td>
-                        <td>
-                            100
-                        </td>
-                        <td>
-                            <i class="fa fa-trash"></i>
-                        </td>
+                        <td>Amala</td>
+                        <td>N1000</td>
                     </tr>
                     <tr class="tr-hover">
-                        <td>Lois</td>
-                        <td>$100</td>
-                        <td>
-                            <input type="number" class="input-quantity" value="1" min="1">
-                        </td>
-                        <td>
-                            100
-                        </td>
-                        <td>
-                            <i class="fa fa-trash"></i>
-                        </td>
-                    </tr>
-                    <tr class="tr-hover">
-                        <td>Joe</td>
-                        <td>$100</td>
-                        <td>
-                            <input type="number" class="input-quantity" value="1">
-                        </td>
-                        <td>
-                            100
-                        </td>
-                        <td>
-                            <i class="fa fa-trash"></i>
-                        </td>
-                    </tr>
-                    <tr class="tr-hover">
-                        <td>Cleveland</td>
-                        <td>$100</td>
-                        <td>
-                            <input type="number" class="input-quantity" value="1">
-                        </td>
-                        <td>
-                            100
-                        </td>
-                        <td>
-                            <i class="fa fa-trash"></i>
-                        </td>
+                        <td>Jollofrice</td>
+                        <td>N1200</td>
                     </tr>
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td colspan="2"></td>
-                        <td><a href="" class="btn-checkout">Checkout</a></td>
-                        <td><strong>Total $150.00</strong></td>
+                        <td colspan="1"></td>
+                        <td><a href="" class="btn-checkout">Confirm</a></td>
+                        <!--<td><strong>Total $150.00</strong></td>-->
                     </tr>
                 </tfoot>
             </table>
@@ -487,25 +364,7 @@
 
 </main>
 
-<script>
-    function openCity(evt, cityName) {
-        let i, tabcontent, tablinks;
-        tabcontent = document.getElementsByClassName("tabcontent");
-        for (i = 0; i < tabcontent.length; i++) {
-            tabcontent[i].style.display = "none";
-            /*tabcontent[i].style.gridTemplateColumns = "repeat(3, 200px)";*/
-        }
-        tablinks = document.getElementsByClassName("tablinks");
-        for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].className = tablinks[i].className.replace(" active", "");
-        }
-        document.getElementById(cityName).style.display = "grid";
-        evt.currentTarget.className += " active";
-    }
 
-    // Get the element with id="defaultOpen" and click on it
-    document.getElementById("defaultOpen").click();
-</script>
 
 <!--<script>
     /* Set rates + misc */

@@ -1,0 +1,30 @@
+body {
+    /*font-family: "Roboto", sans-serif;*/
+    font-family: "Comic Sans MS";
+}
+
+.caterer-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    width: 70%;
+    margin: 20px auto;
+    text-align: center;
+}
+
+.caterer-container {
+    text-decoration: none;
+    color: black;
+}
+
+.caterer-container > div*:hover {
+    text-decoration: none;
+}
+
+h2 {
+    text-align: center;
+}
+
+img {
+    width: 225px;
+    height: 225px;
+}
