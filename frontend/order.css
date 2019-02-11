@@ -7,6 +7,8 @@ body {
 h2 {
     text-align: center;
 }
+
+
 .order-header {
     display: flex;
     justify-content: space-between;
@@ -21,12 +23,8 @@ h2 {
     margin-top: 10px;
     grid-template-columns: repeat(4, 200px);
     grid-row-gap: 20px;
-
 }
 
-.order-header-item-2 {
-    margin-right: 15px;
-}
 
 /*.tabs-item-2 {
     display: flex;

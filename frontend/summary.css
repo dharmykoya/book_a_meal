@@ -83,7 +83,7 @@ th, td {
     border-radius: 5px;
     text-align: center;
 }
-.tr-hover:hover {background-color: red;}
+.tr-hover:hover {background-color: #dd4f05;}
 
 .btn-checkout {
     display: flex;
