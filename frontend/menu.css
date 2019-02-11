@@ -1,7 +1,12 @@
 /** {box-sizing: border-box}*/
-body {font-family: "Lato", sans-serif;}
+body {
+    /*font-family: "Roboto", sans-serif;*/
+    font-family: "Comic Sans MS";
+}
 
-
+h2 {
+    text-align: center;
+}
 .order-header {
     display: flex;
     justify-content: space-between;
@@ -9,12 +14,19 @@ body {font-family: "Lato", sans-serif;}
     /*align-content: center;*/
 }
 
-/*.order-header-item-1 {
-    flex-grow: 2;
-    display: flex;
+.order-header-item-1 {
     width: 70%;
-}*/
+    display: grid;
+    margin-left: 30px;
+    margin-top: 10px;
+    grid-template-columns: repeat(4, 200px);
+    grid-row-gap: 20px;
 
+}
+
+.order-header-item-2 {
+    margin-right: 15px;
+}
 
 /*.tabs-item-2 {
     display: flex;
@@ -104,7 +116,7 @@ styling for table*/
 
 table {
     border-collapse: collapse;
-    width: 550px;
+    width: 450px;
 }
 
 th, td {
