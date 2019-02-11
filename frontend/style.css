@@ -110,17 +110,29 @@ body {
 /* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */
 
 /* Extra small devices (phones, 600px and down) */
-/*@media only screen and (max-width: 600px) {
+@media(max-width: 600px) {
     .header-container {
-        display: grid;
+        max-width: 100%;
         grid-template-columns: auto;
+    }
+    .header-container div {
+        width: 100%;
+    }
+
+    img {
+        max-width: 100%;
+    }
+
+    .form {
+        padding: 0px;
+        box-shadow: none;
+        margin: 0px auto 10px;
     }
 }
 
-!* Small devices (portrait tablets and large phones, 600px and up) *!
-@media only screen and (min-width: 600px) {
+/*
+@media(min-width: 768px) {
     .header-container {
-        display: grid;
-        grid-template-columns: auto;
+        border: 2px solid blue;
     }
 }*/
