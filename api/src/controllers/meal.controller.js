@@ -3,31 +3,30 @@ import MealService from '../services/meal.service';
 
 const MealController = {
     fetchAllMeals(req, res) {
-        const allMeals = MealService.getAll;
+        const allMeals = MealService.getAll();
         return res.json({
             status: 'success',
             data: allMeals,
         }).status(200);
     },
 
-
-    /*
-      Expect json of format
-      {
-        'name': 'sample name',
-        'price': '500',
-        'image': 'image.png'
-      }
-    */
     addMeal(req, res) {
+        /*
+            Expect json of format
+            {
+                'name': 'sample name',
+                'user_id': 'caterer id'
+                'price': '500',
+                'image': 'image.png'
+            }
+        */
         const meal = req.body;
-        const mealCreated = MealService.addMeal(meal);
+        const createdMeal = MealService.addMeal(meal);
         return res.json({
             status: 'success',
             data: createdMeal,
         }).status(201)
     },
-
     getMeal(req, res) {
         const id = req.params.id;
         const meal = MealService.getMeal(id);
@@ -48,5 +47,71 @@ const MealController = {
             };
             status = 404;
         }
-    }
-}
+        return res.json({
+            response,
+          }).status(status);
+    },
+    updateMeal(req, res) {
+        /*
+            Expect json of format
+            {
+                'name': 'sample name',
+                'user_id': 'caterer id'
+                'price': '500',
+                'image': 'image.png'
+            }
+        */
+
+       const { id } = req.params;
+       const entry = req.body;
+       const result = MealService.updateMeal(id, entry);
+       let response = {};
+       let status = 0;
+       if (result.foundId) {
+         response = {
+           ...response,
+           status: 'success',
+           message: `Meal with id: ${id} edited successfully.`,
+           data: result.editedMeal,
+         };
+         status = 200;
+       } else {
+         response = {
+           ...response,
+           status: 'error',
+           message: `Meal with id: ${id} not found.`,
+         };
+         status = 404;
+       }
+       return res.json({
+         response,
+       }).status(status);
+    },
+    
+     deleteMeal(req, res) {
+        const { id } = req.params;
+        const foundId = MealService.deleteMeal(id);
+        let response = {};
+        let status = 0;
+        if (foundId) {
+          response = {
+            ...response,
+            status: 'success',
+            message: `Meal with id: ${id} deleted successfully.`,
+          };
+          status = 200;
+        } else {
+          response = {
+            ...response,
+            status: 'error',
+            message: `Meal with id: ${id} not found.`,
+          };
+          status = 404;
+        }
+        return res.json({
+          response,
+        }).status(status);
+    },
+};
+
+export default MealController;
