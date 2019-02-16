@@ -37,6 +37,7 @@ const MealService = {
   updateMeal(id, mealList){
     const parseId = parseInt(id, Number);
     const newMealData = mealData.meals.filter((meal) => meal.id !== parseId);
+    console.log(newMealData);
     const foundId = (mealData.meals.length !== newMealData.length);
 
     const editedMeal = {
