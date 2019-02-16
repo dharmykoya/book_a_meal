@@ -22,10 +22,10 @@ const MealController = {
         */
         const meal = req.body;
         const createdMeal = MealService.addMeal(meal);
-        return res.json({
+        return res.status(201).json({
             status: 'success',
             data: createdMeal,
-        }).status(201)
+        })
     },
     getMeal(req, res) {
         const id = req.params.id;
@@ -47,9 +47,9 @@ const MealController = {
             };
             status = 404;
         }
-        return res.json({
+        return res.status(status).json({
             response,
-          }).status(status);
+        })
     },
     updateMeal(req, res) {
         /*
@@ -83,9 +83,9 @@ const MealController = {
          };
          status = 404;
        }
-       return res.json({
+       return res.status(status).json({
          response,
-       }).status(status);
+       });
     },
     
      deleteMeal(req, res) {
@@ -108,9 +108,9 @@ const MealController = {
           };
           status = 404;
         }
-        return res.json({
+        return res.status(status).json({
           response,
-        }).status(status);
+        });
     },
 };
 
