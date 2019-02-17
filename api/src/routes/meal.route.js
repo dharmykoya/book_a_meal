@@ -1,4 +1,4 @@
-import { Router } from 'express'
+import { Router } from 'express';
 import MealController from '../controllers/meal.controller';
 
 const router = Router();
