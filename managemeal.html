@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Manage Meal</title>
     <link rel="stylesheet" href="navbar.css">
-    <link rel="stylesheet" href="managemeal.css">
+    <link rel="stylesheet" href="managemeal2.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -37,27 +37,35 @@
         <div class="managemeal-header-item-1">
             <div class="card">
                 <img src="images/food.jpg">
-                <p class="price">N450.99</p>
-                <p>Burger</p>
-                <p><button class="edit-meal">Edit</button><button class="delete-meal">Delete</button></p>
+                <div>
+                    <p class="price">N450.99</p>
+                    <p>Burger</p>
+                </div>
+                <div><button id="btnModal" class="edit-meal">Edit</button><button class="delete-meal">Delete</button></div>
             </div>
             <div class="card">
                 <img src="images/food1.jpg">
-                <p class="price">N1000.99</p>
-                <p>chips and chicken</p>
-                <p><button class="edit-meal">Edit</button><button class="delete-meal">Delete</button></p>
+                <div>
+                    <p class="price">N1000.99</p>
+                    <p>chips and chicken</p>
+                </div>
+                <div><button class="edit-meal">Edit</button><button class="delete-meal">Delete</button></div>
             </div>
             <div class="card">
                 <img src="images/food3.jpg">
-                <p class="price">N619.99</p>
-                <p>Jollofrice and Chicken</p>
-                <p><button class="edit-meal">Edit</button><button class="delete-meal">Delete</button></p>
+                <div>
+                    <p class="price">N619.99</p>
+                    <p>Jollofrice and Chicken</p>
+                </div>
+                <div><button class="edit-meal">Edit</button><button class="delete-meal">Delete</button></div>
             </div>
             <div class="card">
                 <img src="images/food1.jpg">
-                <p class="price">N819.99</p>
-                <p>moi moi and eko.</p>
-                <p><button class="edit-meal">Edit</button><button class="delete-meal">Delete</button></p>
+                <div>
+                    <p class="price">N819.99</p>
+                    <p>moi moi and eko.</p>
+                </div>
+                <div><button class="edit-meal">Edit</button><button class="delete-meal">Delete</button></div>
             </div>
         </div>
         <div class="managemeal-header-item-2">
@@ -85,5 +93,114 @@
         </div>
     </div>
 </main>
+
+<div class="modal" id="myModal">
+  <form action="action_page.php" style="border:1px solid #ccc" class="modal-content">
+      <span class="close">&times;</span>
+      <div class="container">
+          <h1>Edit Meal</h1>
+        
+          <hr>
+
+          <label for="name"><b>Meal Name</b></label>
+          <input type="text" placeholder="Enter Name" name="name" required>
+
+          <label for="price"><b>Price</b></label>
+          <input type="text" placeholder="Enter Price" name="price" required>
+
+          <label for="pic"><b>Image</b></label>
+          <input type="file" name="pic" accept="image/*">
+
+          <div class="clearfix">
+              <!-- <button type="reset" class="cancelbtn">Cancel</button> -->
+              <button type="submit" class="signupbtn create-button">confirm</button>
+          </div>
+      </div>
+  </form>
+</div>
+
+<div class="modal" id="myModal2">
+  <form action="action_page.php" style="border:1px solid #ccc" class="modal-content">
+      <span class="close">&times;</span>
+      <div class="container">
+          <p>Please confirm.</p>
+          <hr>
+
+          <label for="name"><b>Meal Name</b></label>
+          <input type="text" placeholder="Enter Name" name="name" required>
+
+          <label for="price"><b>Price</b></label>
+          <input type="text" placeholder="Enter Price" name="price" required>
+
+          <!-- <label for="pic"><b>Image</b></label> -->
+          <input type="hidden" name="foodId" value="1">
+
+          <div class="clearfix">
+              <!-- <button type="reset" class="cancelbtn">Cancel</button> -->
+              <button type="submit" class="signupbtn create-button">Confirm</button>
+          </div>
+      </div>
+  </form>
+</div>
+
+<script>
+ 
+ /* 
+    for the edit modal getting the nodeList and
+    spreading it into an array to be able to loop thru
+ */
+  const editMealBtns = document.querySelectorAll('.edit-meal');
+  const buttons = [...editMealBtns];
+  let modal = document.getElementById('myModal');
+  buttons.map((btn) => {
+    btn.onclick = function () {
+      if(modal2.style.display === "block"){
+        modal2.style.display = "none"
+        modal.style.display = "block";
+      }else{
+        modal.style.display = "block";
+      }
+    }    
+  });
+
+
+  /* 
+      for the delete modal getting the nodeList and
+      spreading it into an array to be able to loop thru
+  */
+  const deleteMealBtns = document.querySelectorAll('.delete-meal');
+  const delBtns = [...deleteMealBtns];
+  let modal2 = document.getElementById('myModal2');
+  delBtns.map((delBtn) => {
+    delBtn.onclick = function () {
+      if(modal.style.display === "block"){
+        modal.style.display = "none"
+        modal2.style.display = "block";
+      }else{
+        modal2.style.display = "block";
+      }
+    }
+  })
+
+  var spansNode = document.querySelectorAll(".close");
+  const spans = [...spansNode];
+  spans.map((span) => {
+    span.onclick = function() {
+      modal.style.display = "none";
+      modal2.style.display = "none";
+    }
+  })
+
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+    if (event.target == modal || event.target == modal2) {
+      modal.style.display = "none";
+      modal2.style.display = "none";
+    }
+  }
+ 
+
+</script>
+
 </body>
 </html>

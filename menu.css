@@ -8,29 +8,22 @@ h2 {
     text-align: center;
 }
 .order-header {
-    display: flex;
-    justify-content: space-between;
-    flex-direction: row;
+    display: grid;
+    justify-content: space-around;
+    grid-template-columns: auto auto;
     /*align-content: center;*/
 }
 
 .order-header-item-1 {
-    width: 70%;
+    /* width: 70%; */
     display: grid;
     margin-left: 30px;
     margin-top: 10px;
     grid-template-columns: repeat(4, 200px);
     grid-row-gap: 20px;
-
 }
 
-.order-header-item-2 {
-    margin-right: 15px;
-}
 
-/*.tabs-item-2 {
-    display: flex;
-}*/
 
 /* Style the tab */
 .tab {
@@ -116,7 +109,7 @@ styling for table*/
 
 table {
     border-collapse: collapse;
-    width: 450px;
+    width: 400px;
 }
 
 th, td {
@@ -153,4 +146,40 @@ th, td {
 .btn-checkout:hover {
     filter: alpha(opacity=70);
     opacity: 0.7;
+}
+
+/* design for mobiles phones with 600px and below */
+@media(max-width: 600px) {
+    .order-header {
+        display: grid;
+        justify-content: space-around;
+        grid-template-columns: auto;
+    }
+
+    .order-header-item-1 {
+        display: grid;
+        grid-row-gap: 20px;
+        grid-template-columns: auto auto;
+    }
+
+    .order-header-item-2 {
+        margin-top: 20px;
+    }
+}
+
+@media(max-width: 968px) {
+    .order-header {
+        display: grid;
+        justify-content: space-around;
+        grid-template-columns: auto auto;
+    }
+
+    .order-header-item-1 {
+        width: 70%;
+        display: grid;
+        margin-left: 30px;
+        margin-top: 10px;
+        grid-template-columns: repeat(3,auto);
+        grid-row-gap: 20px;
+    }
 }
