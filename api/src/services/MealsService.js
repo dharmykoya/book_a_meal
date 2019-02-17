@@ -45,11 +45,47 @@ export default class MealsService {
   getAll() {
     //This will be a call to our ORM
     //and manipulations to make data presentable
-    return this.fetchAllMeals();
+    const data =  this.fetchAllMeals();
+    return data;
   }
+
+  // get(id) {
+  //   //because we have our data in an array which starts at 0
+  //   return this.fetchAllMeals()[id - 1];
+  // }
 
   get(id) {
     //because we have our data in an array which starts at 0
-    return this.fetchAllMeals()[id - 1];
+    if(this.fetchAllMeals()[id - 1]) {
+      return this.fetchAllMeals()[id - 1];
+    } else{
+      return null;
+    }
+    
+  }
+
+  // addMeal(meal) {
+  //   const mealLength = this.meals.length;
+  //   const lastId = this.meals[mealLength - 1].id;
+  //   const id = lastId + 1;
+  //   const newMeal = {id, ...meal};
+  //   this.meals = [...this.meals, newMeal];
+  //   // return this.meals.push(meal);
+  //   return newMeal;
+  // }
+
+  addMeal(meal) {
+    let meals = this.fetchAllMeals();
+    const mealLength = this.fetchAllMeals().length;
+    const lastId = meals[mealLength - 1].id;
+    const id = lastId + 1;
+    const newMeal = {id, ...meal};
+    meals = [...meals, newMeal];
+    // return this.meals.push(meal);
+    return meals;
+  }
+
+  test(message) {
+    return 'Damilola';
   }
 }
