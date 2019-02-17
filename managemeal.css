@@ -5,8 +5,9 @@ body {
 }
 
 .managemeal-header {
-    display: flex;
+    display: grid;
     justify-content: space-between;
+    grid-template-columns: auto auto;
     margin: 20px;
 }
 
@@ -16,14 +17,8 @@ body {
     margin: auto;
 }
 
-.managemeal-header-item-2 {
-    width: 30%;
-}
-
 .card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    /* max-width: 300px; */
-    width: 200px;
     margin: 0px 10px;
     text-align: center;
     height: 250px;
@@ -121,5 +116,45 @@ button:hover {
 @media screen and (max-width: 300px) {
     .cancelbtn, .signupbtn {
         width: 100%;
+    }
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media(max-width: 600px) {
+       
+    .managemeal-header {
+        display: grid;
+        justify-content: space-between;
+        grid-template-columns: auto;
+        margin: 20px;    
+    }
+
+    .managemeal-header-item-1 {
+        display: grid;
+        grid-template-columns: auto auto;
+        margin: auto;
+        grid-row-gap: 20px;
+    }
+
+    .managemeal-header-item-2 {
+        margin-top: 20px;
+    }
+
+    .card {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        margin: 0px 10px;
+        text-align: center;
+        height: auto;    
+    }
+}
+
+
+/* for ipad (phones, 968px and down) */
+@media(max-width: 968px) { 
+    .managemeal-header-item-1 {
+        display: grid;
+        grid-template-columns: repeat(3, 200px);
+        margin: auto;
+        grid-row-gap: 40px;
     }
 }

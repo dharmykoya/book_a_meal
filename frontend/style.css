@@ -110,7 +110,7 @@ body {
 /* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */
 
 /* Extra small devices (phones, 600px and down) */
-@media(max-width: 600px) {
+@media only screen and (max-width: 600px) {
     .header-container {
         max-width: 100%;
         grid-template-columns: auto;
@@ -130,9 +130,10 @@ body {
     }
 }
 
-/*
-@media(min-width: 768px) {
-    .header-container {
-        border: 2px solid blue;
+
+@media(max-width: 968px) {
+    img {
+        max-width: 80%;
     }
-}*/
+}
+
