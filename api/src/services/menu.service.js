@@ -8,7 +8,8 @@ const MenuService = {
     const lastId = MenuData.menu[menuLength - 1].id;
     const id = lastId + 1;
     const newMenu = { id, ...menu };
-    MenuData.menu = { ...MenuData.menu, newMenu };
+    MenuData.menu = [...MenuData.menu, newMenu];
+    // MenuData.menu.push(newMenu);
     return MenuData.menu;
   },
 
@@ -32,15 +33,9 @@ const MenuService = {
     const today = `${day}-${month}-${year}`;
     return today;
   },
+
   getMealById(mealsId) {
-    const result = [];
-    mealsId.map((mealId) => {
-      MealData.meals.map((meal) => {
-        if (mealId === meal.id) {
-          result.push(meal);
-        }
-      });
-    });
+    const result = MealData.meals.filter(meal => mealsId.includes(meal.id));
     return result;
   },
 
@@ -53,6 +48,11 @@ const MenuService = {
       newMenu.date = data.date;
       return newMenu;
     });
+  },
+
+  getAll() {
+    const meals = this.fetchAllMenu();
+    return meals;
   },
 };
 
