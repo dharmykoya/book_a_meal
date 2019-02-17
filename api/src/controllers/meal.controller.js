@@ -74,14 +74,14 @@ const MealController = {
            message: `Meal with id: ${id} edited successfully.`,
            data: result.editedMeal,
          };
-         status = 200;
+         status = 202;
        } else {
          response = {
            ...response,
            status: 'error',
            message: `Meal with id: ${id} not found.`,
          };
-         status = 404;
+         status = 204;
        }
        return res.status(status).json({
          response,

@@ -17,6 +17,8 @@ app.use('/api/v1/meals', MealsRoute);
 
 app.use('/api/v1/menu', MenuRoute);
 
+// app.use('/api/v1/order', OrdersRoute);
+
 app.use((req, res) => {
     const error = new Error('Not found');
     res.status(404);
