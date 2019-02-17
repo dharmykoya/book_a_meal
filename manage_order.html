@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>summary page</title>
+    <title>Manage Order</title>
 
     <link rel="stylesheet" href="navbar.css">
-    <link rel="stylesheet" href="summary.css">
+    <link rel="stylesheet" href="manage_order.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -34,12 +34,12 @@
     </div>
 </nav>
 <main>
+  <h3>NB: Any Order confirmed by the Caterer Already can't be <strong>edited</strong> or <strong>canceled</strong></h3>
     <section class="summary-container">
         <!-- Tab links -->
         <div class="tab">
             <button class="tablinks" onclick="openCity(event, 'all_order')">All Orders</button>
             <button class="tablinks" onclick="openCity(event, 'today_order')">Today's Order</button>
-            <button class="tablinks" onclick="openCity(event, 'summary')">Summary</button>
         </div>
 
         <!-- Tab content -->
@@ -47,166 +47,23 @@
             <table>
                 <thead>
                 <tr>
-                    <th>Name</th>
                     <th>Item</th>
                     <th>Date</th>
                     <th>Quantity</th>
-                    <th class="">Subtotal</th>
                     <th>Status</th>
+                    <th class="">Subtotal</th>
                     <th></th>
                 </tr>
                 </thead>
 
                 <tbody>
                 <tr class="tr-hover">
-                    <td>Peter</td>
                     <td>Beans and dodo</td>
                     <td><input type="text" class="input-quantity" value="09/02/2019" disabled></td>
                     <td>
                         <input type="number" class="input-quantity" value="4" disabled>
-                    </td>
-                    <td>
-                        1000
-                    </td>
-                    <td>Canceled</td>
-                    <td>
-                        <i class="fa fa-eye"></i>
-                    </td>
-                </tr>
-                <tr class="tr-hover">
-                    <td>Doyin</td>
-                    <td>Beans and yam</td>
-                    <td><input type="text" class="input-quantity" value="09/02/2019" disabled></td>
-                    <td>
-                        <input type="number" class="input-quantity" value="4" disabled>
-                    </td>
-                    <td>
-                        1000
                     </td>
                     <td>Delivered</td>
-                    <td>
-                        <i class="fa fa-eye"></i>
-                    </td>
-                </tr>
-                <tr class="tr-hover">
-                    <td>Bola</td>
-                    <td>Rice and dodo</td>
-                    <td><input type="text" class="input-quantity" value="09/02/2019" disabled></td>
-                    <td>
-                        <input type="number" class="input-quantity" value="4" disabled>
-                    </td>
-                    <td>
-                        1000
-                    </td>
-                    <td>Delivered</td>
-                    <td>
-                        <i class="fa fa-eye"></i>
-                    </td>
-                </tr>
-                </tbody>
-                <tfoot>
-                <tr>
-                    <td colspan="4"></td>
-                    <!--<td><a href="" class="btn-checkout">Print</a></td>-->
-                    <td><strong>Total N3000.00</strong></td>
-                </tr>
-                </tfoot>
-            </table>
-        </div>
-
-        <div id="today_order" class="tabcontent">
-            <table>
-                <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Item</th>
-                    <th>Date</th>
-                    <th>Quantity</th>
-                    <th class="">Subtotal</th>
-                    <th>Status</th>
-                    <th></th>
-                </tr>
-                </thead>
-
-                <tbody>
-                <tr class="tr-hover">
-                    <td>Peter</td>
-                    <td>Beans and dodo</td>
-                    <td><input type="text" class="input-quantity" value="09/02/2019" disabled></td>
-                    <td>
-                        <input type="number" class="input-quantity" value="4" disabled>
-                    </td>
-                    <td>
-                        1000
-                    </td>
-                    <td>accepted</td>
-                    <td>
-                        <i class="fa fa-eye"></i>
-                    </td>
-                </tr>
-                <tr class="tr-hover">
-                    <td>Doyin</td>
-                    <td>Beans and yam</td>
-                    <td><input type="text" class="input-quantity" value="09/02/2019" disabled></td>
-                    <td>
-                        <input type="number" class="input-quantity" value="4" disabled>
-                    </td>
-                    <td>
-                        1000
-                    </td>
-                    <td>accepted</td>
-                    <td>
-                        <i class="fa fa-eye"></i>
-                    </td>
-                </tr>
-                <tr class="tr-hover">
-                    <td>Bola</td>
-                    <td>Rice and dodo</td>
-                    <td><input type="text" class="input-quantity" value="09/02/2019" disabled></td>
-                    <td>
-                        <input type="number" class="input-quantity" value="4" disabled>
-                    </td>
-                    <td>
-                        1000
-                    </td>
-                    <td>Pending</td>
-                    <td>
-                        <div><button id="edit-meal" class="edit-meal">Edit</button><i class="fa fa-eye"></i></div>           
-                        
-                    </td>
-                </tr>
-                </tbody>
-                <tfoot>
-                <tr>
-                    <td colspan="4"></td>
-                    <!--<td><a href="" class="btn-checkout">Print</a></td>-->
-                    <td><strong>Total N3000.00</strong></td>
-                </tr>
-                </tfoot>
-            </table>
-        </div>
-
-        <div id="summary" class="tabcontent">
-            <table>
-                <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Item</th>
-                    <th>Date</th>
-                    <th>Quantity</th>
-                    <th class="">Subtotal</th>
-                    <th></th>
-                </tr>
-                </thead>
-
-                <tbody>
-                <tr class="tr-hover">
-                    <td>Peter</td>
-                    <td>Beans and dodo</td>
-                    <td><input type="text" class="input-quantity" value="09/02/2019" disabled></td>
-                    <td>
-                        <input type="number" class="input-quantity" value="4" disabled>
-                    </td>
                     <td>
                         100
                     </td>
@@ -215,12 +72,12 @@
                     </td>
                 </tr>
                 <tr class="tr-hover">
-                    <td>Doyin</td>
                     <td>Beans and yam</td>
                     <td><input type="text" class="input-quantity" value="09/02/2019" disabled></td>
                     <td>
                         <input type="number" class="input-quantity" value="4" disabled>
                     </td>
+                    <td>Delivered</td>
                     <td>
                         100
                     </td>
@@ -229,12 +86,12 @@
                     </td>
                 </tr>
                 <tr class="tr-hover">
-                    <td>Bola</td>
                     <td>Rice and dodo</td>
                     <td><input type="text" class="input-quantity" value="09/02/2019" disabled></td>
                     <td>
                         <input type="number" class="input-quantity" value="4" disabled>
                     </td>
+                    <td>Delivered</td>
                     <td>
                         100
                     </td>
@@ -252,58 +109,132 @@
                 </tfoot>
             </table>
         </div>
+
+        <div id="today_order" class="tabcontent">
+            <table>
+                <thead>
+                <tr>
+                    <th>Restuarant</th>
+                    <th>Item</th>
+                    <th>Date</th>
+                    <th>Quantity</th>
+                    <th class="">Subtotal</th>
+                    <th>Status</th>
+                    <th></th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr class="tr-hover">
+                    <td>Mr Bigs</td>
+                    <td>Beans and dodo</td>
+                    <td><input type="text" class="input-quantity" value="09/02/2019" disabled></td>
+                    <td>
+                        <input type="number" class="input-quantity" value="4" disabled>
+                    </td>
+                    <td>
+                        1000
+                    </td>
+                    <td>Confirmed</td>
+                    <td>
+                        <i class="fa fa-eye"></i>
+                    </td>
+                </tr>
+                <tr class="tr-hover">
+                    <td>Mavise</td>
+                    <td>Beans and yam</td>
+                    <td><input type="text" class="input-quantity" value="09/02/2019" disabled></td>
+                    <td>
+                        <input type="number" class="input-quantity" value="4" disabled>
+                    </td>
+                    <td>
+                        1000
+                    </td>
+                    <td>Pending</td>
+                    <td>
+                      <div><a href="order.html" class="edit-meal">Edit</a><a id="delete-meal" class="delete-meal">Cancel</a></div>
+                        <!-- <i class="fa fa-eye"></i> -->
+                    </td>
+                </tr>
+                <tr class="tr-hover">
+                    <td>Sweet Sensation</td>
+                    <td>Rice and dodo</td>
+                    <td><input type="text" class="input-quantity" value="09/02/2019" disabled></td>
+                    <td>
+                        <input type="number" class="input-quantity" value="4" disabled>
+                    </td>
+                    <td>
+                        1500
+                    </td>
+                    <td>Confirmed</td>
+                    <td>
+                        <i class="fa fa-eye"></i>
+                    </td>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr>
+                    <td colspan="4"></td>
+                    <!--<td><a href="" class="btn-checkout">Print</a></td>-->
+                    <td><strong>Total N3500.00</strong></td>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+
     </section>
 </main>
-<div class="modal" id="myModal">
-        <div class="container modal-content">
-                <span class="close">&times;</span>
-            <form action="/action_page.php" class="form">   
-              <div class="container">
-                  <p>Change Status.</p>
-                  <hr>
-        
-                  <label for="status"><b>Select</b></label>
-                  <select name="status">
-                        <option value="1">accepted</option>
-                        <option value="2">rejected</option>
-                    </select>
-        
-                  <div class="clearfix">
-                      <!-- <button type="reset" class="cancelbtn">Cancel</button> -->
-                      <button type="submit" class="signupbtn confirm">Confirm</button>
-                  </div>
-              </div>
-            </form>
-        </div>    
-    </div>
 
+<div class="modal" id="myModal">
+    <div class="container modal-content">
+            <span class="close">&times;</span>
+        <form action="/action_page.php" class="form">   
+          <div class="container">
+              <p>Please confirm.</p>
+              <hr>
+    
+              <label for="reason"><b>Reason for cancel</b></label>
+              <textarea type="text" placeholder="Reason" name="reason" required></textarea>
+    
+              <!-- <label for="pic"><b>Image</b></label> -->
+              <input type="hidden" name="foodId" value="1">
+    
+              <div class="clearfix">
+                  <!-- <button type="reset" class="cancelbtn">Cancel</button> -->
+                  <button type="submit" class="signupbtn delete-meal">Confirm</button>
+              </div>
+          </div>
+        </form>
+    </div>    
+</div>
 <script>
-        // Get the modal
-        var modal = document.getElementById('myModal');
-      
-      // Get the button that opens the modal
-      var btn = document.getElementById("edit-meal");
-      
-      // Get the <span> element that closes the modal
-      var span = document.getElementsByClassName("close")[0];
-      
-      // When the user clicks on the button, open the modal 
-      btn.onclick = function() {
-          modal.style.display = "block";
-      }
-      
-      // When the user clicks on <span> (x), close the modal
-      span.onclick = function() {
-          modal.style.display = "none";
-      }
-      
-      // When the user clicks anywhere outside of the modal, close it
-      window.onclick = function(event) {
-          if (event.target == modal) {
-              modal.style.display = "none";
-          }
-      }
-      </script>
+  // Get the modal
+  var modal = document.getElementById('myModal');
+
+// Get the button that opens the modal
+var btn = document.getElementById("delete-meal");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal 
+btn.onclick = function() {
+    modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
+
 
 <script>
     function openCity(evt, cityName) {
