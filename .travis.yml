@@ -1,0 +1,25 @@
+language: node_js
+node_js: 
+  - "stable"
+env:
+  global:
+    - CC_TEST_REPORTER_ID=506d4ee84b11bfa9898dfb7f3732667af17db4dcd27337f117fb4d05188dcded
+
+before_script:
+  - cd api
+  - npm install
+  - chmod 0755 node_modules/.bin/mocha
+  # CODE CLIMATE BEFORE_SCRIPT
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
+script:  
+  - npm run test
+after_script:
+  - npm run coveralls
+  - npm run coverage
+    # CODE CLIMATE AFTER_SCRIPT
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+cache:
+directories:
+    - "api/node_modules"
