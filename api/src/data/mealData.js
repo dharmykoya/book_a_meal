@@ -21,5 +21,5 @@ export default {
           price: '500',
           image: 'https://www.google.com/url?sa=i&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwjIhaWqvbzgAhUIJBoKHayVAcAQjRx6BAgBEAU&url=http%3A%2F%2Fwww.travelstart.com.ng%2Fblog%2F22-foods-nigerians-miss-most-while-living-abroad%2F&psig=AOvVaw04dmsJF7soEi0M1Sy5irg3&ust=1550276669599924',
         },
-      ];
+      ]
 }
