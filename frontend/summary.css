@@ -8,6 +8,30 @@ body {
     margin: 20px auto;
 }
 
+.edit-meal {
+    background-color: lightskyblue;
+    color: white;
+    border: none;
+    cursor: pointer;
+    /* width: 50%; */
+    opacity: 0.9;
+    /* padding: 10px;
+    margin: 5px; */
+    text-decoration: none;
+  }
+
+  .confirm {
+    background-color: lightskyblue;
+    color: white;
+    border: none;
+    cursor: pointer;
+    /* width: 50%; */
+    opacity: 0.9;
+    padding: 10px;
+    margin: 5px;
+    text-decoration: none;
+  }
+
 
 
 /* Style the tab */
@@ -108,17 +132,88 @@ th, td {
 }
 
 
+
+/* Styling for modal */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    width: 50%; /* Full width */
+    height: auto; /* Full height */
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 100px;
+  }
+  
+  .modal-delete {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    width: 50%; /* Full width */
+    height: auto; /* Full height */
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 100px;
+  }
+  
+  
+  .modal-content {
+    background-color: #fefefe;
+    /*margin: 15% auto;  15% from the top and centered 
+    padding: 20px;*/
+    /* border: 1px solid #888; */
+    width: 50%; /* Could be more or less, depending on screen size */
+    margin: auto;
+  }
+  
+  /* The Close Button */
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .container {
+      padding: 20px;
+  }
+
+
 /* Extra small devices (phones, 600px and down) */
 @media(max-width: 600px) { 
     .summary-container {
         margin: 20px auto;
         width: auto;
     }
+    table {
+        font-size: 10px;
+    }
+
+    .container {
+        padding: 10px;
+    }
+
+    .modal-content {
+        width: 100%;
+    }
+
+    .modal {
+        top: 350px;
+    }
 }
 
 
 /* for ipad screen sizes */
-@media(max-width: 968px) { 
+@media (min-width: 601px) and (max-width: 968px) { 
     .summary-container {
         margin: 20px auto;
         width: auto;
