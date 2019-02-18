@@ -2,7 +2,13 @@
 An application that allows a user to make meal orders from various vendors.
 It also allows food vendors manage their meals and know the profit made.
 
-[UI template] (https://dharmykoya.github.io/book_a_meal/frontend/)
+**UI template:** (https://dharmykoya.github.io/book_a_meal/frontend/)
+
+## Built With
+- [Node.js](https://nodejs.org/en/)
+- [React](https://reactjs.org)
+- [Express](https://expressjs.com)
+- [PostgresSQL](https://postgresql.org)
 
 
 ## Installation
@@ -12,7 +18,10 @@ It also allows food vendors manage their meals and know the profit made.
 ```bash
 $ git clone https://github.com/dharmykoya/book_a_meal.git
 ```
-3. 
+3. Install Dependencies
+```bash
+npm install
+```
 
 ## Features
 - Users can create an account and log in
