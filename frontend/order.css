@@ -245,13 +245,15 @@ th, td {
     left: 0;
     right: 0;
     top: 0;
-    overflow: scroll;
+    overflow: auto;
   }
     
   .modal-content {
     background-color: #fefefe;
     width: 50%; /* Could be more or less, depending on screen size */
     margin: auto;
+    overflow-x: auto;
+    overflow-y: auto;
   }
   
   /* The Close Button */
@@ -280,7 +282,7 @@ th, td {
     }
 
     .order-header-item-1 {
-        width: 70%;
+        width: 100%;
         display: grid;
         margin:auto;
         grid-template-columns: auto auto;
@@ -290,6 +292,45 @@ th, td {
     .order-header-item-2 {
         margin-top: 20px;
     }
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: auto;
+        overflow-x: auto;
+        overflow-y: auto;
+        max-height: 100%;
+    }
+
+    .form {
+        display: block;
+        overflow-y: auto;
+        max-height: 100%;
+        font-size: 10px;
+    }
+
+    .col-25,
+    .col-50,
+    .col-75 {
+    padding: 0px;
+  }
+
+  label {
+    margin-bottom: 5px;
+    display: block;
+  }
+
+  input[type="text"] {
+    margin-bottom: 10px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    width: 90%
+    }
+
+    .card-details {
+        display: block;
+        justify-content: space-between;
+    }
 }
 
 
@@ -297,8 +338,27 @@ th, td {
     .order-header-item-1 {
         max-width: 100%;
         display: grid;
-        margin: auto;
+        margin: auto 0px;
         grid-template-columns: auto auto;
         grid-row-gap: 20px;
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        width: 70%;
+        margin: auto;
+        overflow-x: auto;
+        overflow-y: auto;    
+    }
+
+    .form {
+        display: grid;
+        grid-template-columns: 200px 250px;    
+    }
+
+    .card-details {
+        display: grid;
+        grid-template-columns: 150px 100px;
+        justify-content: space-between;    
     }
 }
