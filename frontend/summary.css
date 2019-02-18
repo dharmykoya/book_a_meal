@@ -213,7 +213,7 @@ th, td {
 
 
 /* for ipad screen sizes */
-@media(max-width: 968px) { 
+@media (min-width: 601px) and (max-width: 968px) { 
     .summary-container {
         margin: 20px auto;
         width: auto;

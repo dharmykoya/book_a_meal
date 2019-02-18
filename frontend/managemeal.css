@@ -232,11 +232,14 @@ body {
     .modal-content {
       width: 100%;
     }
+    .cancelbtn, .signupbtn {
+      width: 100%;
+  }
   }
   
   
   /* for ipad (phones, 968px and down) */
-  @media(max-width: 968px) { 
+  @media (min-width: 601px) and (max-width: 968px) { 
     .managemeal-header {
       display: grid;
       justify-content: space-between;
