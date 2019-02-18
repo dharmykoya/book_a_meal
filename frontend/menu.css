@@ -159,7 +159,7 @@ th, td {
     .order-header-item-1 {
         display: grid;
         grid-row-gap: 20px;
-        grid-template-columns: auto auto;
+        grid-template-columns: auto auto auto;
     }
 
     .order-header-item-2 {
@@ -168,7 +168,7 @@ th, td {
 }
 
 @media(max-width: 968px) {
-    .order-header {
+    /* .order-header {
         display: grid;
         justify-content: space-around;
         grid-template-columns: auto auto;
@@ -181,5 +181,5 @@ th, td {
         margin-top: 10px;
         grid-template-columns: repeat(3,auto);
         grid-row-gap: 20px;
-    }
+    } */
 }

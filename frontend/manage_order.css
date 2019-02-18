@@ -212,6 +212,26 @@ th, td {
       margin: 20px auto;
       width: auto;
   }
+  table {
+    border-collapse: collapse;
+    margin: 0px auto;
+    max-width: 50%;
+    font-size: 10px;
+  }
+  textarea {
+    width: 178px;
+    height: 68px;
+  }
+
+  .modal-content {
+    background-color: #fefefe;
+    width: 80%;
+    margin: auto;
+  }
+
+  .modal {
+    top: 300px;
+  }
 }
 
 

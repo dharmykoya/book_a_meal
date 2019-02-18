@@ -194,6 +194,21 @@ th, td {
         margin: 20px auto;
         width: auto;
     }
+    table {
+        font-size: 10px;
+    }
+
+    .container {
+        padding: 10px;
+    }
+
+    .modal-content {
+        width: 100%;
+    }
+
+    .modal {
+        top: 350px;
+    }
 }
 
 

@@ -24,6 +24,7 @@ body {
     height: 250px;
   }
   
+  
   /* Full-width input fields */
   input[type=text], input[type=password] {
     width: 90%;
@@ -228,6 +229,9 @@ body {
         text-align: center;
         height: auto;    
     }
+    .modal-content {
+      width: 100%;
+    }
   }
   
   
@@ -245,4 +249,7 @@ body {
         margin: auto;
         grid-row-gap: 40px;
     }
-  }
+    .modal-content {
+      width: 100%;
+    }
+}
