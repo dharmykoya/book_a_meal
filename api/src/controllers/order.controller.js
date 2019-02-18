@@ -60,7 +60,7 @@ const OrderController = {
         status: 'error',
         message: `Order with id: ${id} not found.`,
       };
-      status = 204;
+      status = 404;
     }
     return res.status(status).json({
       response,

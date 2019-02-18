@@ -23,21 +23,20 @@ const MealService = {
     const mealLength = mealData.meals.length;
     const lastId = mealData.meals[mealLength - 1].id;
     const id = lastId + 1;
-    const newMeal = { id, ...meal};
+    const newMeal = { id, ...meal };
     mealData.meals = [...mealData.meals, newMeal];
     return mealData.meals;
   },
 
   getMeal(id) {
     const parseId = parseInt(id, Number);
-    const singleMeal = mealData.meals.find((meal) => meal.id === parseId);
+    const singleMeal = mealData.meals.find(meal => meal.id === parseId);
     return singleMeal || {};
   },
 
-  updateMeal(id, mealList){
+  updateMeal(id, mealList) {
     const parseId = parseInt(id, Number);
-    const newMealData = mealData.meals.filter((meal) => meal.id !== parseId);
-    console.log(newMealData);
+    const newMealData = mealData.meals.filter(meal => meal.id !== parseId);
     const foundId = (mealData.meals.length !== newMealData.length);
 
     const editedMeal = {
@@ -49,19 +48,19 @@ const MealService = {
     };
 
     mealData.meals = [...newMealData, editedMeal];
-    return{
+    return {
       editedMeal,
-      foundId
+      foundId,
     };
   },
 
   deleteMeal(id) {
     const parseId = parseInt(id, Number);
-    const newMealData = mealData.meals.filter((meal) => meal.id !== parseId);
+    const newMealData = mealData.meals.filter(meal => meal.id !== parseId);
     const foundId = (mealData.meals.length !== newMealData.length);
-    
+
     mealData.meals = newMealData;
-    return mealData.meals;
+    return foundId;
   },
 
 };
