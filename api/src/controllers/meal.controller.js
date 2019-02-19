@@ -30,26 +30,21 @@ const MealController = {
   getMeal(req, res) {
     const [id] = req.params.id;
     const meal = MealService.getMeal(id);
-    let response = {};
-    let status = 0;
+    let response;
     if (Object.keys(meal).length > 0) {
-      response = {
-        ...response,
+      res.status(200);
+      response = res.json({
         status: 'success',
         data: meal,
-      };
-      status = 200;
+      });
     } else {
-      response = {
-        ...response,
+      res.status(404);
+      response = res.json({
         status: 'error',
         message: `meal with id: ${id} not found`,
-      };
-      status = 404;
+      });
     }
-    return res.status(status).json({
-      response,
-    });
+    return response;
   },
   updateMeal(req, res) {
     /*
@@ -81,7 +76,7 @@ const MealController = {
         status: 'error',
         message: `Meal with id: ${id} not found.`,
       };
-      status = 204;
+      status = 404;
     }
     return res.status(status).json({
       response,
@@ -98,7 +93,7 @@ const MealController = {
         status: 'success',
         message: `Meal with id: ${id} deleted successfully.`,
       };
-      status = 200;
+      status = 202;
     } else {
       response = {
         ...response,

@@ -4,7 +4,8 @@ import MealsRoute from './routes/meal.route';
 import MenuRoute from './routes/menu.route';
 import OrdersRoute from './routes/order.route';
 
-const app = express();
+export const app = express();
+
 
 const PORT = 8080;
 
@@ -38,7 +39,7 @@ app.use('/api/v1/orders', OrdersRoute);
 // });
 
 // export const server = app.listen(PORT, () => (`Server is running at ${PORT}`));
-app.listen(PORT, () => (`Server is running at ${PORT}`));
+export const server = app.listen(PORT, () => (`Server is running at ${PORT}`));
 
 // module.exports.app = app;
-export default app;
+// export default app;
