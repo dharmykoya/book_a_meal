@@ -8,9 +8,9 @@ import { app } from '../index';
 
 describe('Meal API test', () => {
   /*
-  // test for fetch all meals API
-  // test to see if the res body is an object
-  // test to see if the response data is an object and if it includes required keys
+   test for fetch all meals API
+   test to see if the res body is an object
+   test to see if the response data is an object and if it includes required keys
   */
   describe('get meals API', () => {
     it('should return all meals', (done) => {

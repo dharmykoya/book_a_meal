@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+
+    <link rel="stylesheet" href="navbar.css">
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+</head>
+<body>
+
+<nav class="topnav">
+    <a class="dropbtn" href="#home">Home</a>
+    <a href="#contact" class="dropbtn">Contact</a>
+
+    <div class="dropdown">
+        <button onclick="myFunction()" class="dropbtn">Actions</button>
+        <div id="myDropdown" class="dropdown-content">
+            <a href="#">Link 1</a>
+            <a href="#">Link 2</a>
+            <a href="#">Link 3</a>
+        </div>
+    </div>
+
+    <div class="login-container">
+        <form action="/action_page.php">
+            <input type="text" placeholder="Username" name="username">
+            <input type="text" placeholder="Password" name="psw">
+            <button type="submit">Login</button>
+        </form>
+    </div>
+</nav>
+
+
+<main>
+
+    <div class="dashboard-header">
+        <div class="dashboard-header-item-1">
+            <div class="rounded-circle">
+                <img class="profilepic" src="images/avatar2.png">
+            </div>
+        </div>
+
+        <div class="dashboard-header-item-2" style="align-self: center">
+            <h4>DHARMYKOYA</h4>
+        </div>
+
+
+        <ul class="dashboard-header-item-3">
+            <li class="list-inline-item list-small">0<br><small>total Orders</small></li>
+            <li class="list-inline-item list-small">0<br><small>today's Orders</small></li>
+            <li class="list-inline-item list-small">0<br><small>total balance</small></li>
+        </ul>
+
+    </div>
+
+    <div class="dashboard-main">
+        <div class="dashboard-main-item-1">
+            <h5>CONTROL PANEL</h5>
+            <ul class="list-inline-item">
+                <li class="list-inline-item"><a href="index.html"><i class="fa fa-envelope"></i>update email</a></li>
+                <li class="list-inline-item"><a href="index.html"><i class="fa fa-lock"></i>change password</a></li>
+                <li class="list-inline-item"><a href="index.html"><i class="fa fa-trash-alt"></i>delete profile</a></li>
+            </ul>
+        </div>
+        <div class="dashboard-main-item-2" >
+            <h5>ACTIONS</h5>
+
+            <ul class="list-inline">
+                <li><a class="button" href="index.html">Place Order</a></li>
+                <li><a class="button" href="index.html">Manage Meals</a></li>
+                <li><a class="button" href="index.html">Set today's menu</a></li>
+                <li><a class="button" href="index.html">Transactions Summary</a></li>
+            </ul>
+        </div>
+    </div>
+</main>
+</body>
+</html>
