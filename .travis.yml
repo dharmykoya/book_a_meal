@@ -15,11 +15,13 @@ before_script:
   # - ./cc-test-reporter before-build
 script:  
   - npm run test
-# after_script:
+after_script:
 #   - npm run coveralls
 #   - npm run coverage
 #     # CODE CLIMATE AFTER_SCRIPT
-#   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 cache:
 directories:
     - "api/node_modules"
+# install: 
+#   - travis_wait mvn install
