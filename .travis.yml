@@ -23,5 +23,5 @@ script:
 cache:
 directories:
     - "api/node_modules"
-install: 
-  - travis_wait mvn install
+# install: 
+#   - travis_wait mvn install
