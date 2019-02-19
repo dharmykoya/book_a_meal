@@ -13,7 +13,6 @@ before_script:
   # - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   # - chmod +x ./cc-test-reporter
   # - ./cc-test-reporter before-build
-install: travis_wait mvn install
 script:  
   - npm run test
 # after_script:
@@ -24,3 +23,5 @@ script:
 cache:
 directories:
     - "api/node_modules"
+install: 
+  - travis_wait mvn install
