@@ -261,15 +261,13 @@
               <div class="container">
                   <p>Change Status.</p>
                   <hr>
-        
-                  <label for="status"><b>Select</b></label>
-                  <select name="status">
-                        <option value="1">accepted</option>
-                        <option value="2">rejected</option>
-                    </select>
+                <div>
+                    <!-- <label for="status"><b>Select</b></label> -->
+                    <input type="radio" name="status" value="Pending"> Pending <br>
+                    <input type="radio" name="status" value="Accepted"> Accepted
+                </div>             
         
                   <div class="clearfix">
-                      <!-- <button type="reset" class="cancelbtn">Cancel</button> -->
                       <button type="submit" class="signupbtn confirm">Confirm</button>
                   </div>
               </div>
