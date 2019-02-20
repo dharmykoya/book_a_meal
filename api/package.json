@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon --exec babel-node src/index.js",
-    "test": "mocha **/*.spec.js -w --require @babel/register --timeout 10000",
+    "test": "mocha **/*.spec.js --require @babel/register --timeout 10000",
     "test:travis": "mocha **/*.spec.js --require @babel/register --exit",
     "test-watch": "nodemon --exec \"npm test\"",
     "coveralls": "nyc --reporter=lcov --reporter=text-lcov npm test:travis",
