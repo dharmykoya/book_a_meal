@@ -4,6 +4,9 @@ node_js:
 env:
   global:
     - CC_TEST_REPORTER_ID=eb1d19652a04b63c35488a0f191667d307108e7673792f96269145d7d29ea542
+addons:
+    code_climate:
+        repo_token: CJOUr9uk0cabamCwV8WYzjw6Dk97SSzuo
 
 before_script:
   - cd api
