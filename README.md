@@ -2,6 +2,8 @@
 An application that allows a user to make meal orders from various vendors.
 It also allows food vendors manage their meals and know the profit made.
 
+[![Build Status](https://travis-ci.org/dharmykoya/book_a_meal.svg?branch=feature_menu_test)](https://travis-ci.org/dharmykoya/book_a_meal)
+
 **UI template:** (https://dharmykoya.github.io/book_a_meal/frontend/)
 
 ## Built With
