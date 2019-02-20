@@ -18,7 +18,7 @@ describe('Menu API test', () => {
         .expect((res) => {
           expect(res.body)
             .toBeA('object');
-        })
+        })        
         .end(done);
     });
   });
