@@ -16,9 +16,9 @@ before_script:
 script:  
   - npm run test:travis
 after_script:
-#   - npm run coveralls
-#   - npm run coverage
-#     # CODE CLIMATE AFTER_SCRIPT
+  - npm run coveralls
+  # - npm run coverage
+    # CODE CLIMATE AFTER_SCRIPT
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 cache:
 directories:
