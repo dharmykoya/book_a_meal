@@ -3,7 +3,7 @@ node_js:
   - "stable"
 env:
   global:
-    - CC_TEST_REPORTER_ID=506d4ee84b11bfa9898dfb7f3732667af17db4dcd27337f117fb4d05188dcded
+    - CC_TEST_REPORTER_ID=eb1d19652a04b63c35488a0f191667d307108e7673792f96269145d7d29ea542
 
 before_script:
   - cd api
