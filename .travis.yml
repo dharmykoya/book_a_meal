@@ -1,39 +1,42 @@
-# language: node_js
-# node_js: 
-#   - "stable"
-# env:
-#   global:
-#     - CC_TEST_REPORTER_ID=eb1d19652a04b63c35488a0f191667d307108e7673792f96269145d7d29ea542
-
-# before_script:
-#   - cd api
-#   - npm install
-#   - chmod 0755 node_modules/.bin/mocha
-#   # CODE CLIMATE BEFORE_SCRIPT
-#   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-#   - chmod +x ./cc-test-reporter
-#   - ./cc-test-reporter before-build
-# script:  
-#   - npm run test:travis
-# after_script:
-#   - npm run coveralls
-#   - npm run coverage
-# #     # CODE CLIMATE AFTER_SCRIPT
-#   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
-# cache:
-
-
 language: node_js
-node_js:
+node_js: 
   - "stable"
-addons:
-    code_climate:
-        repo_token: CJOUr9uk0cabamCwV8WYzjw6Dk97SSzuo
-script: npm run test:travis
+env:
+  global:
+    - CC_TEST_REPORTER_ID=eb1d19652a04b63c35488a0f191667d307108e7673792f96269145d7d29ea542
+
 before_script:
   - cd api
-  - npm install nyc
+  - npm install
+  - chmod 0755 node_modules/.bin/mocha
+  # CODE CLIMATE BEFORE_SCRIPT
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
+script:  
+  - npm run test:travis
 after_script:
   - codeclimate-test-reporter < ./coverage/lcov.info
+  - npm run coveralls
+  - npm run coverage
+#     # CODE CLIMATE AFTER_SCRIPT
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+cache:
 directories:
     - "api/node_modules"
+
+
+# language: node_js
+# node_js:
+#   - "stable"
+# addons:
+#     code_climate:
+#         repo_token: CJOUr9uk0cabamCwV8WYzjw6Dk97SSzuo
+# script: npm run test:travis
+# before_script:
+#   - cd api
+#   - npm install nyc
+# after_script:
+#   - codeclimate-test-reporter < ./coverage/lcov.info
+# directories:
+#     - "api/node_modules"
