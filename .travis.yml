@@ -7,7 +7,7 @@ env:
 
 before_script:
   - cd api
-  - npm install
+  # - npm install
   # - chmod 0755 node_modules/.bin/mocha
   # # CODE CLIMATE BEFORE_SCRIPT
   # - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
@@ -16,10 +16,11 @@ before_script:
 script:  
   # - npm run test:travis
 after_script:
-  - npm run coverage
+  - npm run coveralls
 #     # CODE CLIMATE AFTER_SCRIPT
   # - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
-cache:
+
+  cache:
   directories:
     - "api/node_modules"
 
