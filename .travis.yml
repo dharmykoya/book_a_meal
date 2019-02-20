@@ -32,7 +32,7 @@ addons:
 script: istanbul cover node_modules/mocha/bin/_mocha -- -R spec
 before_script:
   - cd api
-  - npm install codeclimate-test-reporter istanbul -g
+  - npm install nyc
 after_script:
   - codeclimate-test-reporter < ./coverage/lcov.info
 directories:
