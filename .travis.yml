@@ -14,8 +14,8 @@ before_script:
   # - chmod +x ./cc-test-reporter
   # - ./cc-test-reporter before-build
 script:  
-  - npm run test:travis
-after_script:
+  - npm run test
+after_success:
   - npm run coveralls
   # - npm run coverage
     # CODE CLIMATE AFTER_SCRIPT
