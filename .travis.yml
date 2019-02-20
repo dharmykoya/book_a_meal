@@ -29,7 +29,7 @@ node_js:
 addons:
     code_climate:
         repo_token: CJOUr9uk0cabamCwV8WYzjw6Dk97SSzuo
-script: istanbul cover node_modules/mocha/bin/_mocha -- -R spec
+script: npm run test:travi
 before_script:
   - cd api
   - npm install nyc
