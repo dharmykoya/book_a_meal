@@ -3,3 +3,4 @@
 /coverage
 lcov.info
 .coveralls.yml
+src/server.js

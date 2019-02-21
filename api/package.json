@@ -1,7 +1,7 @@
 {
   "name": "book-a-meal",
   "version": "1.0.0",
-  "description": "A meal App for for food vendors",
+  "description": "Book-A-Meal is an application that connect customers and food vendors together.",
   "main": "index.js",
   "scripts": {
     "start": "nodemon --exec babel-node src/index.js",
@@ -23,6 +23,14 @@
     "type": "git",
     "url": "git+https://github.com/dharmykoya/book_a_meal.git"
   },
+  "keywords": [
+    "Book-a-Meal",
+    "Andela"
+  ],
+  "bugs": {
+    "url": "https://github.com/dharmykoya/book_a_meal/issues"
+  },
+  "homepage": "https://github.com/dharmykoya/book_a_meal#readme",
   "devDependencies": {
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.2.2",

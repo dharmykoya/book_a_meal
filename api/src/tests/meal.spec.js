@@ -70,6 +70,18 @@ describe('Meal API test', () => {
         })
         .end(done);
     });
+
+    // test if we get a status: 404 when the get id doesn't exist
+    it('should return a 404 if meal id doesn\'t exist', (done) => {
+      request(app)
+        .get('/api/v1/meals/5')
+        .expect(404)
+        .expect({
+          status: 'error',
+          message: 'meal with id: 5 not found',
+        })
+        .end(done);
+    });
   });
 
   /*
