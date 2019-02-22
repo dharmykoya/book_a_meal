@@ -1,1 +1,7 @@
 /api/node_modules
+/api/.nyc_output
+/api/coverage
+/api/lcov.info
+/api/.travis.yml
+/api/.coveralls.yml
+/api/src/index.js

@@ -6,7 +6,7 @@ import { app } from '../index';
 
 describe('Menu API test', () => {
   /*
-    should return the selected meal
+    should return the selected menu
     and user details
   */
   describe('Add Menu API test', () => {
@@ -18,7 +18,7 @@ describe('Menu API test', () => {
         .expect((res) => {
           expect(res.body)
             .toBeA('object');
-        })        
+        })
         .end(done);
     });
   });
