@@ -146,6 +146,7 @@ th, td {
     text-align: center;*/
     text-decoration: none;
     justify-content: center;
+    cursor: pointer;
 }
 
 .btn-checkout:hover {
