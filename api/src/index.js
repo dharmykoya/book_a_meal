@@ -39,7 +39,7 @@ app.use('/api/v1/orders', OrdersRoute);
 // });
 
 // export const server = app.listen(PORT, () => (`Server is running at ${PORT}`));
-export const server = app.listen(PORT, () => (`Server is running at ${PORT}`));
+app.listen(PORT, () => (`Server is running at ${PORT}`));
 
 // module.exports.app = app;
 // export default app;

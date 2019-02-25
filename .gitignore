@@ -4,4 +4,4 @@
 /api/lcov.info
 /api/.travis.yml
 /api/.coveralls.yml
-/api/src/index.js
+/api/dist
