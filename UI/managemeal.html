@@ -3,35 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title>Manage Meal</title>
-    <link rel="stylesheet" href="navbar.css">
-    <link rel="stylesheet" href="managemeal.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/managemeal.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 </head>
 <body>
-<nav class="topnav">
-    <a class="dropbtn" href="#home">Home</a>
-    <a href="#contact" class="dropbtn">Contact</a>
-
-    <div class="dropdown">
-        <button onclick="myFunction()" class="dropbtn">Actions</button>
-        <div id="myDropdown" class="dropdown-content">
-            <a href="#">Link 1</a>
-            <a href="#">Link 2</a>
-            <a href="#">Link 3</a>
+    <div class="topnav" id="myTopnav">
+        <a href="#home" class="active">Home</a>
+        <a href="managemeal.html">Manage meals</a>
+        <a href="dashboard.html">dashboard</a>
+        <a href="summary.html">Summary</a>
+        <a class="icon" onclick="navToggle()">
+            <i class="fa fa-bars"></i>
+        </a>
+        <div class="right">
+            <a href="index.html">Logout</a>
         </div>
     </div>
-
-    <div class="login-container">
-        <form action="/action_page.php">
-            <input type="text" placeholder="Username" name="username">
-            <input type="text" placeholder="Password" name="psw">
-            <button type="submit">Login</button>
-        </form>
-    </div>
-</nav>
 <main>
     <div class="managemeal-header">
         <div class="managemeal-header-item-1">
@@ -143,64 +134,8 @@
   </form>
 </div>
 
-<script>
- 
- /* 
-    for the edit modal getting the nodeList and
-    spreading it into an array to be able to loop thru
- */
-  const editMealBtns = document.querySelectorAll('.edit-meal');
-  const buttons = [...editMealBtns];
-  let modal = document.getElementById('myModal');
-  buttons.map((btn) => {
-    btn.onclick = function () {
-      if(modal2.style.display === "block"){
-        modal2.style.display = "none"
-        modal.style.display = "block";
-      }else{
-        modal.style.display = "block";
-      }
-    }    
-  });
-
-
-  /* 
-      for the delete modal getting the nodeList and
-      spreading it into an array to be able to loop thru
-  */
-  const deleteMealBtns = document.querySelectorAll('.delete-meal');
-  const delBtns = [...deleteMealBtns];
-  let modal2 = document.getElementById('myModal2');
-  delBtns.map((delBtn) => {
-    delBtn.onclick = function () {
-      if(modal.style.display === "block"){
-        modal.style.display = "none"
-        modal2.style.display = "block";
-      }else{
-        modal2.style.display = "block";
-      }
-    }
-  })
-
-  var spansNode = document.querySelectorAll(".close");
-  const spans = [...spansNode];
-  spans.map((span) => {
-    span.onclick = function() {
-      modal.style.display = "none";
-      modal2.style.display = "none";
-    }
-  })
-
-  // When the user clicks anywhere outside of the modal, close it
-  window.onclick = function(event) {
-    if (event.target == modal || event.target == modal2) {
-      modal.style.display = "none";
-      modal2.style.display = "none";
-    }
-  }
- 
-
-</script>
+<script src="js/navbar.js"></script>
+<script src="js/managemeal.js"></script> 
 
 </body>
 </html>

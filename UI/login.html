@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Meal App</title>
+    <title>Login</title>
 
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/login.css">
     <link rel="stylesheet" href="css/navbar.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -15,6 +15,7 @@
 <body>
     <div class="topnav" id="myTopnav">
         <a href="#home" class="active">Home</a>
+        <a href="#contact">Contact</a>
         <a class="icon" onclick="navToggle()">
             <i class="fa fa-bars"></i>
         </a>
@@ -24,25 +25,19 @@
             <a href="signup.html">Caterer</a>
         </div>
     </div>
+
 <main>
     <section>
         <div class="header-container">
-            <!--about the app-->
-            <div class="head-item head-item-1">
-                <img src="images/bg1.png" alt="hungry?">
-            </div>
-
             <div class="head-item head-item-2">
                 <div class="login-page">
+                    <h3 class="login-header">Please Login</h3>
                     <div class="form">
                         <form class="register-form">
-                            <input type="text" placeholder="name"/>
-                            <input type="text" placeholder="email address"/>
-                            <input type="password" placeholder="password"/>
-                            <input type="password" placeholder="confirm password"/>
-                            <p>By creating an account you agree to our <a href="#" style="color:#dd4f05">Terms & Privacy</a>.</p>
-                            <a href="caterer.html"><button >create</button></a>
-                            <p class="message">Already registered? <a href="login.html">Sign In</a></p>
+                            <input type="text" placeholder="email address" name="email" required/>
+                            <input type="password" placeholder="password" name="password" required/>
+                            <a href="caterer.html"><button>login</button></a>
+                            <p class="message">Not registered? <a href="signup.html">Sign UP</a></p>
                         </form>
                     </div>
                 </div>
@@ -50,7 +45,6 @@
         </div>
     </section>
 </main>
-
 <script src="js/navbar.js"></script>
 </body>
 </html>

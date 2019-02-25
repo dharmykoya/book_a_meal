@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Checkout</title>
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/checkout.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+</head>
+<body>
+    <div class="topnav" id="myTopnav">
+        <a href="#home" class="active">Home</a>
+        <a href="manage_order.html">Order History</a>
+        <a href="dashboard.html">dashboard</a>
+        <a class="icon" onclick="navToggle()">
+            <i class="fa fa-bars"></i>
+        </a>
+        <div class="right">
+            <a href="index.html">Logout</a>
+        </div>
+    </div>
+<main>
+    <h2>Checkout</h2>
+    <div class="order-header">
+        <div class="order-header-item-1">
+            <form action="/action_page.php" class="form">   
+                
+                <div class="col-50">
+                    <h3>Billing Address</h3>
+                    <div>
+                            <label for="fname"><i class="fa fa-user"></i> Full Name</label>
+                            <input type="text" id="fname" name="firstname" placeholder="John M. Doe">
+                    </div>
+                    <div>
+                            <label for="email"><i class="fa fa-envelope"></i> Email</label>
+                            <input type="text" id="email" name="email" placeholder="john@example.com">
+                    </div>
+                    <div>
+                            <label for="adr"><i class="fa fa-address-card-o"></i> Address</label>
+                            <input type="text" id="adr" name="address" placeholder="542 W. 15th Street">
+                    </div>
+                </div>
+        
+                <div class="col-50">
+                    <h3>Payment</h3>
+                    
+                    <label for="cname">Name on Card</label>
+                    <input type="text" id="cname" name="cardname" placeholder="Damilola Adekoya">
+                    <label for="ccnum">Credit card number</label>
+                    <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444">
+            
+                    <div class="card-details">
+                        <div class="col-50">
+                            <label for="expmonth">Exp Month</label>
+                            <input type="text" id="expmonth" name="expmonth" placeholder="november">
+                        </div>
+                        <div class="col-50">
+                            <label for="expyear">Exp Year</label>
+                            <input type="text" id="expyear" name="expyear" placeholder="2028">
+                        </div>
+                        <div class="col-50">
+                            <label for="cvv">CVV</label>
+                            <input type="text" id="cvv" name="cvv" placeholder="647">
+                        </div>
+                    </div>
+                    
+                </div>
+        
+                <a href="confirm.html" style="text-decoration: none;"><input type="submit" value="PAY" class="btn"></a>
+            </form>
+        </div>
+        <div class="order-header-item-2">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th class="">Subtotal</th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr class="tr-hover">
+                        <td>Amala</td>
+                        <td>&#8358; 700</td>
+                        <td>
+                            <input type="number" class="input-quantity" value="1" min="1">
+                        </td>
+                        <td>
+                            700
+                        </td>
+                    </tr>
+                    <tr class="tr-hover">
+                        <td>Jollofrice</td>
+                        <td>&#8358; 1100</td>
+                        <td>
+                            <input type="number" class="input-quantity" value="1" min="1">
+                        </td>
+                        <td>
+                            1100
+                        </td>
+                    </tr>
+                    <tr class="tr-hover">
+                        <td>Chips and chicken</td>
+                        <td>&#8358; 700</td>
+                        <td>
+                            <input type="number" class="input-quantity" value="1">
+                        </td>
+                        <td>
+                            700
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3"></td>
+                        <td><strong>Total &#8358;2500.00</strong></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+
+</main>
+<script src="js/navbar.js"></script> 
+</body>
+</html>

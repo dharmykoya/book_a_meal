@@ -3,35 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>Order</title>
-    <link rel="stylesheet" href="navbar.css">
-    <link rel="stylesheet" href="order.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/order.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
 </head>
 <body>
-<nav class="topnav">
-    <a class="dropbtn" href="#home">Home</a>
-    <a href="#contact" class="dropbtn">Contact</a>
-
-    <div class="dropdown">
-        <button onclick="myFunction()" class="dropbtn">Actions</button>
-        <div id="myDropdown" class="dropdown-content">
-            <a href="#">Link 1</a>
-            <a href="#">Link 2</a>
-            <a href="#">Link 3</a>
+    <div class="topnav" id="myTopnav">
+        <a href="#home" class="active">Home</a>
+        <a href="manage_order.html">Order History</a>
+        <a href="dashboard.html">dashboard</a>
+        <a class="icon" onclick="navToggle()">
+            <i class="fa fa-bars"></i>
+        </a>
+        <div class="right">
+            <a href="index.html">Logout</a>
         </div>
     </div>
-
-    <div class="login-container">
-        <form action="/action_page.php">
-            <input type="text" placeholder="Username" name="username">
-            <input type="text" placeholder="Password" name="psw">
-            <button type="submit">Login</button>
-        </form>
-    </div>
-</nav>
 <main>
     <h2>Place your order</h2>
     <div class="order-header">
@@ -142,7 +132,7 @@
                 <tfoot>
                     <tr>
                         <td colspan="2"></td>
-                        <td><button href="" id="btn-checkout" class="btn-checkout">Checkout</button></td>
+                        <td><a href="confirm-order.html" style="text-decoration: none;"><button href="" id="btn-checkout" class="btn-checkout">Proceed</button></a></td>
                         <td><strong>Total $150.00</strong></td>
                     </tr>
                 </tfoot>
@@ -151,7 +141,8 @@
     </div>
 
 </main>
-<div class="modal" id="myModal">
+<script src="js/navbar.js"></script>
+<!-- <div class="modal" id="myModal">
     <div class="container modal-content">
             <span class="close">&times;</span>
         <form action="/action_page.php" class="form">   
@@ -230,7 +221,7 @@
         }
     }
     
-    </script>
+</script> -->
 
 
 <!--<script>

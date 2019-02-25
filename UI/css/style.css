@@ -131,7 +131,7 @@ body {
 }
 
 
-@media(max-width: 968px) {
+@media (min-width: 601px) and (max-width: 968px) { 
     img {
         max-width: 80%;
     }

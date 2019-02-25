@@ -1,6 +1,13 @@
 # book_a_meal
-An application that allows a user to make meal orders from various vendors.
+An application that connect customers with food vendors.
 It also allows food vendors manage their meals and know the profit made.
+
+
+[![Build Status](https://travis-ci.org/dharmykoya/book_a_meal.svg?branch=ft-coveralls-fix)](https://travis-ci.org/dharmykoya/book_a_meal)
+[![Coverage Status](https://coveralls.io/repos/github/dharmykoya/book_a_meal/badge.svg?branch=climate)](https://coveralls.io/github/dharmykoya/book_a_meal?branch=climate)
+[![Maintainability](https://api.codeclimate.com/v1/badges/f0906ab5998ac768fe5c/maintainability)](https://codeclimate.com/github/dharmykoya/book_a_meal/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/f0906ab5998ac768fe5c/test_coverage)](https://codeclimate.com/github/dharmykoya/book_a_meal/test_coverage)
+
 
 **UI template:** (https://dharmykoya.github.io/book_a_meal/frontend/)
 

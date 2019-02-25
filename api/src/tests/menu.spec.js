@@ -6,7 +6,7 @@ import { app } from '../index';
 
 describe('Menu API test', () => {
   /*
-    should return the selected meal
+    should return the selected menu
     and user details
   */
   describe('Add Menu API test', () => {

@@ -36,21 +36,6 @@ const MenuService = {
     const result = MealData.meals.filter(meal => mealsId.includes(meal.id));
     return result;
   },
-
-  fetchAllMenu() {
-    return MenuData.menu.map((data) => {
-      const newMenu = new Menu();
-      newMenu.id = data.id;
-      newMenu.user_id = data.user_id;
-      newMenu.meal_id = this.getMealById(data.meal_id);
-      newMenu.date = data.date;
-      return newMenu;
-    });
-  },
-  getAll() {
-    const meals = this.fetchAllMenu();
-    return meals;
-  },
 };
 
 export default MenuService;
