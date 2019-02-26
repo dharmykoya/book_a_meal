@@ -24,7 +24,7 @@ export default (sequelize, DataTypes) => {
         },
       },
     },
-    phoneNumber: {
+    phone_number: {
       type: DataTypes.STRING,
       allowNull: false,
     },

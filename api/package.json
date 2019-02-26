@@ -4,7 +4,7 @@
   "description": "Book-A-Meal is an application that connect customers and food vendors together.",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --exec babel-node src/index.js",
+    "start": "nodemon --exec babel-node index.js",
     "test": "mocha **/*.spec.js --require @babel/register --timeout 10000 --exit",
     "test:travis": "mocha **/*.spec.js --require @babel/register --exit",
     "test-watch": "nodemon --exec \"npm test\"",
@@ -20,8 +20,10 @@
   "author": "Damilola Adekoya",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^3.0.4",
     "body-parser": "^1.18.3",
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "jsonwebtoken": "^8.5.0"
   },
   "repository": {
     "type": "git",
