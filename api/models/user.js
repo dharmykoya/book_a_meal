@@ -42,15 +42,11 @@ export default (sequelize, DataTypes) => {
         },
       },
     },
-    role_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
   });
   User.associate = (models) => {
     User.hasMany(models.Meal, {
       foreignKey: 'user_id',
     });
-    return User;
   };
+  return User;
 };

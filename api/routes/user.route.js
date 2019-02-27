@@ -4,8 +4,9 @@ import UserController from '../controllers/user.controller';
 const router = Router();
 
 // router.get('/', MealController.fetchAllMeals);
-router.post('/', UserController.signup);
-// router.post('/api/auth/signin');
+router.post('/register', UserController.signup);
+// router.post('/login', (req, res) => res.send('login'));
+router.post('/login', UserController.login);
 
 
 export default router;

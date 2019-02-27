@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 
 app.get('/', (req, res) => res.send('Welcome to meal app'));
 
-app.use('/api/v1/signup', UsersRoute);
+app.use('/api/v1/auth', UsersRoute);
 
 // app.use('/api/v1/menu', MenuRoute);
 

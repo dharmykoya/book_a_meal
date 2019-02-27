@@ -22,14 +22,6 @@ module.exports = {
       type: Sequelize.STRING,
       allowNull: false,
     },
-    role_id: {
-      type: Sequelize.INTEGER,
-      references: {
-        model: 'Roles',
-        key: 'id',
-        as: 'role_id',
-      },
-    },
     createdAt: {
       allowNull: false,
       type: Sequelize.DATE,

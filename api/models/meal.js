@@ -41,6 +41,6 @@ export default (sequelize, DataTypes) => {
     Meal.belongsTo(models.User, {
       foreignKey: 'user_id',
     });
-    return Meal;
   };
+  return Meal;
 };

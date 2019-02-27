@@ -1,5 +1,6 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import config from '../config/config';
 
 const Helper = {
   /**
@@ -16,7 +17,7 @@ const Helper = {
    * @param {string} password
    * @returns {Boolean} return True or False
    */
-  comparePassword(hashPassword, password) {
+  comparePassword(password, hashPassword) {
     return bcrypt.compareSync(password, hashPassword);
   },
   /**
@@ -36,7 +37,7 @@ const Helper = {
     const token = jwt.sign({
       user_id: id,
     },
-    process.env.SECRET, { expiresIn: '7d' });
+    config.secret, { expiresIn: '7d' });
     return token;
   },
 };
