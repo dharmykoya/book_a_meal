@@ -22,12 +22,12 @@ module.exports = {
       type: Sequelize.STRING,
       allowNull: false,
     },
-    user_id: {
+    caterer_id: {
       type: Sequelize.INTEGER,
       references: {
-        model: 'Users',
+        model: 'Caterers',
         key: 'id',
-        as: 'user_id',
+        as: 'caterer_id',
       },
     },
     createdAt: {

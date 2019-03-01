@@ -42,6 +42,20 @@ export default (sequelize, DataTypes) => {
         },
       },
     },
+    role_id: {
+      type: DataTypes.INTEGER,
+      defaultValue: 3,
+      allowNull: {
+        args: false,
+        msg: 'Please enter the role',
+      },
+      validate: {
+        isInt: {
+          args: true,
+          msg: 'Please enter a valid number',
+        },
+      },
+    },
   });
   User.associate = (models) => {
     User.hasMany(models.Meal, {

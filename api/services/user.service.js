@@ -2,40 +2,8 @@
 import jwt from 'jsonwebtoken';
 import Helper from './helper';
 import config from '../config/config';
+import { User, Caterer } from '../models';
 
-
-const { User } = require('../models');
-// import db from '../models/index';
-// const Us = db.Sequelize;
-
-// const UserService = {
-//   signup(user) {
-//     if (!user.email || !user.password || !user.name || !user.phone_number) {
-//       return { message: 'Some values are missing' };
-//     }
-//     if (!Helper.isValidEmail(user.email)) {
-//       return { message: 'Please enter a valid email address' };
-//     }
-//     let response;
-//     const hashPassword = Helper.hashPassword(user.password);
-//     User.create({
-//       name: user.name,
-//       email: user.email,
-//       phone_number: user.phone_number,
-//       password: hashPassword,
-//       role_id: 3,
-//     })
-//       .then((userData) => ({
-//         response = {
-//           status: 'success',
-//           data: userData,
-//           token: Helper.generateToken(userData.id),
-//         };
-//         return response;
-//       }
-//     ));
-//   },
-// };
 const UserService = {
   emailExist(email) {
     return User.findAll({
@@ -44,21 +12,57 @@ const UserService = {
       },
     });
   },
-  signup(user) {
+  signup(user, callback) {
+    let response = {};
     if (!user.email || !user.password || !user.name || !user.phone_number) {
-      return { message: 'Some values are missing' };
+      response = { message: 'Some values are missing', err: true };
+      return callback(response);
     }
     if (!Helper.isValidEmail(user.email)) {
-      return { message: 'Please enter a valid email address' };
+      response = { message: 'Please enter a valid email address', err: true };
+      return callback(response);
     }
-    const hashPassword = Helper.hashPassword(user.password);
-    return User.create({
-      name: user.name,
-      email: user.email,
-      phone_number: user.phone_number,
-      password: hashPassword,
-      role_id: 3,
-    });
+    const hashPassword = Helper.hashPassword(user.password);    
+    if (user.type === 2) {
+      if (!user.restaurant_name || !user.restaurant_logo) {
+        response = { message: 'Some values are missing', err: true };
+        return callback(response);
+      }
+      User.create({
+        name: user.name,
+        email: user.email,
+        phone_number: user.phone_number,
+        password: hashPassword,
+        role_id: 2,
+      })
+        .then(createdUser => Caterer.create({
+          user_id: createdUser.id,
+          restaurant_name: user.restaurant_name,
+          restaurant_logo: user.restaurant_logo,
+        })
+          .then(caterer => callback({ user: createdUser, caterer, err: false }))
+          .catch((err) => {
+            User.destroy({ where: { id: createdUser.id } });
+            Caterer.destroy({ where: { user_id: createdUser.id } });
+            callback({ err: true, message: 'Something went wrong', err_message: err });
+          }))
+        .catch((err) => {
+          callback({ err: true, message: 'Something went wrong', err_message: err });
+        });
+    } else if (user.type === 3) {
+      const newUser = User.create({
+        name: user.name,
+        email: user.email,
+        phone_number: user.phone_number,
+        password: hashPassword,
+        role_id: 3,
+      });
+      return callback({ err: false, message: 'user created successfully', newUser });
+    } else {
+      response = { message: 'You are not authorised to perform this action.', err: true };
+      return callback(response);
+    }
+    return callback;
   },
   authenticate(user) {
     if (!user.email || !user.password) {

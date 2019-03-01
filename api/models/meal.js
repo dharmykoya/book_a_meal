@@ -7,12 +7,12 @@ export default (sequelize, DataTypes) => {
         msg: 'Please enter meal name',
       },
     },
-    user_id: {
+    caterer_id: {
       type: DataTypes.INTEGER,
       references: {
-        model: 'User',
+        model: 'Caterer',
         key: 'id',
-        as: 'user_id',
+        as: 'caterer_id',
       },
     },
     size: {
@@ -38,8 +38,8 @@ export default (sequelize, DataTypes) => {
     },
   });
   Meal.associate = (models) => {
-    Meal.belongsTo(models.User, {
-      foreignKey: 'user_id',
+    Meal.belongsTo(models.Caterer, {
+      foreignKey: 'caterer_id',
     });
   };
   return Meal;
