@@ -5,10 +5,11 @@ import { Meal } from '../models';
 
 const MealService = {
   // fetchAllMeals() {
-  //   return mealData.meals.map((data) => {
+  //   return Meal.meals.map((data) => {
   //     const newMeal = new Meal();
   //     newMeal.id = data.id;
-  //     newMeal.user_id = data.user_id;
+  //     newMeal.name = data.name;
+  //     newMeal.caterer_id = data.caterer_id;
   //     newMeal.name = data.name;
   //     newMeal.price = data.price;
   //     newMeal.image = data.image;
@@ -16,10 +17,19 @@ const MealService = {
   //   });
   // },
 
-  // getAll() {
-  //   const meals = this.fetchAllMeals();
-  //   return meals;
-  // },
+  getAll() {
+    const meals = this.fetchAllMeals();
+    return meals;
+  },
+
+  getAllMeals() {
+    Meal.findAll({
+      where: {
+        caterer_id: 4,
+      },
+    })
+      .then(allMeals => allMeals);
+  },
 
   // addMeal(meal) {
   //   const mealLength = mealData.meals.length;

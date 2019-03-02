@@ -57,10 +57,5 @@ export default (sequelize, DataTypes) => {
       },
     },
   });
-  User.associate = (models) => {
-    User.hasMany(models.Meal, {
-      foreignKey: 'user_id',
-    });
-  };
   return User;
 };

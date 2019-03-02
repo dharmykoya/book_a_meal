@@ -2,13 +2,13 @@ import MealService from '../services/meal.service';
 
 
 const MealController = {
-  // fetchAllMeals(req, res) {
-  //   const allMeals = MealService.getAll();
-  //   return res.json({
-  //     status: 'success',
-  //     data: allMeals,
-  //   }).status(200);
-  // },
+  fetchAllMeals(req, res) {
+    const allMeals = MealService.getAllMeals();
+    return res.json({
+      status: 'success',
+      data: allMeals.allMeals,
+    }).status(200);
+  },
 
   addMeal(req, res) {
     /*

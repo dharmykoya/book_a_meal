@@ -19,7 +19,7 @@ export default (sequelize, DataTypes) => {
         },
       },
     },
-    restaurant_name: {
+    restaurant_name: {ch
       type: DataTypes.STRING,
       allowNull: {
         args: false,
