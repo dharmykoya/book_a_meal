@@ -2,6 +2,7 @@ export default (sequelize, DataTypes) => {
   const Meal = sequelize.define('Meal', {
     name: {
       type: DataTypes.STRING,
+      unique: true,
       allowNull: {
         args: false,
         msg: 'Please enter meal name',
