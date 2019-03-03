@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import Helper from './helper';
-import config from '../config/config';
+import config from '../config/configuration';
 import { User, Caterer } from '../models';
 
 
@@ -45,6 +45,7 @@ class UserService {
     }
     const hashPassword = Helper.hashPassword(user.password);
     if (user.type === 2) {
+      console.log('admin');
       if (!user.restaurant_name || !user.restaurant_logo) {
         response = { message: 'Some values are missing', err: true };
         return callback(response);
@@ -71,6 +72,7 @@ class UserService {
           callback({ err: true, message: 'Something went wrong', err_message: err });
         });
     } else if (user.type === 3) {
+      console.log('user');
       const newUser = User.create({
         name: user.name,
         email: user.email,

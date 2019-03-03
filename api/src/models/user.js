@@ -70,11 +70,11 @@ export default (sequelize, DataTypes) => {
       as: 'Role',
     });
   };
-  User.associate = (models) => {
-    User.hasMany(models.Order, {
-      foreignKey: 'user_id',
-      as: 'Orders',
-    });
-  };
+  // User.associate = (models) => {
+  //   User.hasMany(models.Order, {
+  //     foreignKey: 'user_id',
+  //     as: 'Orders',
+  //   });
+  // };
   return User;
 };

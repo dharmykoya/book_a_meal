@@ -1,6 +1,7 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import config from '../config/config';
+import config from '../config/configuration';
+
 
 const Helper = {
   /**
