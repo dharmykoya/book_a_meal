@@ -1,6 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import MealsRoute from './routes/meal.route';
+// import MealsRoute from './routes/meal.route';
 // import MenuRoute from './routes/menu.route';
 // import OrdersRoute from './routes/order.route';
 import UsersRoute from './routes/user.route';
@@ -12,11 +12,13 @@ const PORT = process.env.PORT || 8080;
 
 app.use(bodyParser.json());
 
+// rout for the landing page or home page
 app.get('/', (req, res) => res.send('Welcome to meal app'));
 
+// route for user authentication both sigup and login
 app.use('/api/v1/auth', UsersRoute);
 
-app.use('/api/v1/meals', MealsRoute);
+// app.use('/api/v1/meals', MealsRoute);
 
 // app.use('/api/v1/menu', MenuRoute);
 
