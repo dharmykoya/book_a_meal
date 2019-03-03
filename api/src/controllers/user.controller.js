@@ -31,8 +31,10 @@ class UserController {
               message: response.message,
             });
           } else {
+            console.log('dami', response.data);
             res.status(201).send({
               status: 'success',
+              user: response.data,
             });
           }
         });
@@ -50,6 +52,7 @@ class UserController {
   static login(req, res) {
     return UserService.login(req.body)
       .then((token) => {
+        console.log(token);
         res.send({
           status: 'success',
           data: { token },

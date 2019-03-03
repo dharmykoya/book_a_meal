@@ -45,7 +45,6 @@ class UserService {
     }
     const hashPassword = Helper.hashPassword(user.password);
     if (user.type === 2) {
-      console.log('admin');
       if (!user.restaurant_name || !user.restaurant_logo) {
         response = { message: 'Some values are missing', err: true };
         return callback(response);
@@ -55,32 +54,42 @@ class UserService {
         email: user.email,
         phone_number: user.phone_number,
         password: hashPassword,
+        role_id: 3,
         authorizations: [2, 3, 4, 5],
       })
-        .then(createdUser => Caterer.create({
-          user_id: createdUser.id,
+        .then(createdCaterer => Caterer.create({
+          user_id: createdCaterer.id,
           restaurant_name: user.restaurant_name,
           restaurant_logo: user.restaurant_logo,
         })
-          .then(caterer => callback({ user: createdUser, caterer, err: false }))
+          .then(caterer => callback({ user: createdCaterer, caterer, err: false }))
           .catch((err) => {
-            User.destroy({ where: { id: createdUser.id } });
-            Caterer.destroy({ where: { user_id: createdUser.id } });
+            User.destroy({ where: { id: createdCaterer.id } });
+            Caterer.destroy({ where: { user_id: createdCaterer.id } });
             callback({ err: true, message: 'Something went wrong', err_message: err });
           }))
         .catch((err) => {
           callback({ err: true, message: 'Something went wrong', err_message: err });
         });
     } else if (user.type === 3) {
-      console.log('user');
-      const newUser = User.create({
+      let data = [];
+      User.create({
         name: user.name,
         email: user.email,
         phone_number: user.phone_number,
         password: hashPassword,
+        role_id: 3,
         authorizations: [5, 6],
-      });
-      return callback({ err: false, message: 'user created successfully', newUser });
+      })
+        .then((createdUser) => {
+          data = createdUser.get({
+            plain: true,
+          });
+          callback({ user: data, err: false, message: 'user created successfully' });
+        })
+        .catch(err =>
+          // User.destroy({ where: { id: newUser.id } });
+          callback({ err: true, message: 'Something went wrong', err_message: err }));
     } else {
       response = { message: 'You are not authorised to perform this action.', err: true };
       return callback(response);
@@ -108,15 +117,21 @@ class UserService {
           // throw new Error('Authentication failed. Wrong password.');
           return { message: 'Authentication failed.Wrong password.' };
         }
+        console.log('dami', foundUser);
         const payload = {
           email: foundUser.email,
           id: foundUser.id,
+          role_id: foundUser.role_id,
           time: new Date(),
         };
         const token = jwt.sign(payload, config.secret, {
           expiresIn: config.tokenExpireTime,
         });
-        return token;
+        const loginUser = {
+          token,
+          user: foundUser,
+        };
+        return loginUser;
       });
   }
 }

@@ -14,7 +14,10 @@
     "generate-lcov": "nyc report --reporter=text-lcov > lcov.info",
     "coveralls-coverage": "coveralls < lcov.info",
     "codeclimate-coverage": "codeclimate-test-reporter < lcov.info",
-    "coverage": "nyc npm run test:travis && npm run generate-lcov && npm run coveralls-coverage && npm run codeclimate-coverage"
+    "coverage": "nyc npm run test:travis && npm run generate-lcov && npm run coveralls-coverage && npm run codeclimate-coverage",
+    "sequelize": "./node_modules/.bin/babel-node ./node_modules/.bin/sequelize $*",
+    "seed": "npm run sequelize db:seed:all",
+    "seed-user": "npm run sequelize db:seed --seed 20190303113530-user"
   },
   "heroku-run-build-script": true,
   "author": "Damilola Adekoya",
