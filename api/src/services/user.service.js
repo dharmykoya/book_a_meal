@@ -13,7 +13,6 @@ class UserService {
    * @static
    * @description - Checks id the email in the request body exist on the system already.
    * @param{Object} email - api request
-   * @param{Object} res - check response
    * @return{json} the email
    */
   static emailExist(email) {
@@ -28,8 +27,8 @@ class UserService {
    * Create A User
    * @static
    * @description - Creates a new user in the app.
-   * @param{Object} user - api request
-   * @param{Object} res - route response
+   * @param{Object} user - user details to be created.
+   * @param{Object} callback - call back function to return responses.
    * @return{json} the registered user's detail
    */
 
@@ -97,6 +96,13 @@ class UserService {
     return callback;
   }
 
+  /**
+   * Authenticate A User
+   * @static
+   * @description - authenticate a user trying to login in to the app.
+   * @param{Object} user - user email to query the database.
+   * @return{json} the user's detail
+   */
   static login(user) {
     if (!user.email || !user.password) {
       return { message: 'Some values are missing' };
@@ -117,7 +123,6 @@ class UserService {
           // throw new Error('Authentication failed. Wrong password.');
           return { message: 'Authentication failed.Wrong password.' };
         }
-        console.log('dami', foundUser);
         const payload = {
           email: foundUser.email,
           id: foundUser.id,
