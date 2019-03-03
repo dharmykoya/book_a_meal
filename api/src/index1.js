@@ -1,9 +1,8 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import MealsRoute from './routes/meal.route';
-// import MenuRoute from './routes/menu.route';
-// import OrdersRoute from './routes/order.route';
-import UsersRoute from './routes/user.route';
+import MealsRoute from './routes1/meal.route';
+import MenuRoute from './routes1/menu.route';
+import OrdersRoute from './routes1/order.route';
 
 export const app = express();
 
@@ -14,14 +13,11 @@ app.use(bodyParser.json());
 
 app.get('/', (req, res) => res.send('Welcome to meal app'));
 
-app.use('/api/v1/auth', UsersRoute);
-
 app.use('/api/v1/meals', MealsRoute);
 
-// app.use('/api/v1/menu', MenuRoute);
+app.use('/api/v1/menu', MenuRoute);
 
-// app.use('/api/v1/orders', OrdersRoute);
-
+app.use('/api/v1/orders', OrdersRoute);
 
 // app.use((req, res) => {
 //   const error = new Error('Not found');
@@ -43,7 +39,7 @@ app.use('/api/v1/meals', MealsRoute);
 // });
 
 // export const server = app.listen(PORT, () => (`Server is running at ${PORT}`));
-app.listen(PORT, () => console.log(`Server is running at ${PORT}`));
+app.listen(PORT, () => (`Server is running at ${PORT}`));
 
 // module.exports.app = app;
 // export default app;
