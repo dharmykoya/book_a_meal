@@ -10,7 +10,7 @@ router.get('/', MealController.fetchAllMeals);
 router.post('/', MealController.addMeal);
 
 // route for getting a particular meal with the meal id
-router.get('/:id', MealController.getMeal);
+router.get('/:id', MealController.getMeals);
 
 // route for deleting a particular meal with the meal id
 router.delete('/:id', MealController.deleteMeal);

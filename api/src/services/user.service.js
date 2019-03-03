@@ -5,6 +5,7 @@ import { User, Caterer } from '../models';
 
 
 /**
+ * @class UserService
  * @description - Describes the Users behaviour of the app, basic CRUD operations etc.
  */
 class UserService {

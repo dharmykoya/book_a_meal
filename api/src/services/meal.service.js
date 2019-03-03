@@ -2,6 +2,7 @@
 import { Meal } from '../models';
 
 /**
+ * @class MealService
  * @description - Describes the Meals behaviour of the app, basic CRUD operations etc and can only be accessed if user have the authorization.
  */
 class MealService {
@@ -60,9 +61,9 @@ class MealService {
     })
       .then((createdMeal, error) => {
         if (!createdMeal) {
-          return { err: true };
+          return { err: true, error_message: error };
         }
-        return { meal: createdMeal, err: false, error_message: error };
+        return { meal: createdMeal, err: false };
       });
   }
 

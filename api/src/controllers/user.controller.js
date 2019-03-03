@@ -1,16 +1,18 @@
+/* eslint-disable max-len */
 import UserService from '../services/user.service';
 
 /**
  *
  *
- * @class userController
+ * @class - UserController
+ * @description - handles the request coming from the route and interacts with the userService class.
  */
 class UserController {
   /**
    * Create A User
    * @static
    * @param {object} req
-   * @memberof userController
+   * @memberof UserController
    * @param {object} res
    * @returns {*} createUser
    */
