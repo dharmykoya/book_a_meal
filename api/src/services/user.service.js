@@ -56,8 +56,8 @@ class UserService {
         email: user.email,
         phone_number: user.phone_number,
         password: hashPassword,
-        role_id: 3,
-        authorizations: [2, 3, 4, 5],
+        role_id: 2,
+        authorizations: [5, 6, 7, 8, 9],
       })
         .then(createdCaterer => Caterer.create({
           user_id: createdCaterer.id,
@@ -81,7 +81,7 @@ class UserService {
         phone_number: user.phone_number,
         password: hashPassword,
         role_id: 3,
-        authorizations: [5, 6],
+        authorizations: [3, 10, 13, 14, 15],
       })
         .then((createdUser) => {
           data = createdUser.get({
@@ -106,7 +106,7 @@ class UserService {
    * @param{Object} user - user email to query the database.
    * @return{json} the user's detail
    */
-  static login(user, callback) {
+  static async login(user, callback) {
     let response = {};
     if (!user.email || !user.password) {
       response = { message: 'Some values are missing', err: true };
@@ -121,7 +121,7 @@ class UserService {
         email: user.email,
       },
     })
-      .then((foundUser) => {
+      .then(async (foundUser) => {
         if (!foundUser) {
           return callback({ message: 'Authentication failed. User not found.' });
         }
@@ -129,12 +129,31 @@ class UserService {
           // throw new Error('Authentication failed. Wrong password.');
           return callback({ message: 'Authentication failed.Wrong password.' });
         }
-        const authUser = {
-          user_id: foundUser.id,
-          name: foundUser.name,
-          role_id: foundUser.role_id,
-          authorizations: foundUser.authorizations,
-        };
+        const username = await foundUser.getCaterer();
+        // console.log('damilola', username.id);
+        // username.then((caterer) => {
+        //   console.log(caterer.id);
+        // }).catch(console.log);
+        // console.log ('caterer', username);
+        let authUser = {};
+        if (foundUser.role_id === 2) {
+          authUser = {
+            user_id: foundUser.id,
+            caterer_id: username.id,
+            name: foundUser.name,
+            role_id: foundUser.role_id,
+            authorizations: foundUser.authorizations,
+          };
+        }
+        if (foundUser.role_id === 3) {
+          authUser = {
+            user_id: foundUser.id,
+            name: foundUser.name,
+            role_id: foundUser.role_id,
+            authorizations: foundUser.authorizations,
+          };
+        }
+        console.log(authUser);
         const token = Helper.generateToken(authUser, config.secret);
         const loginUser = {
           token,

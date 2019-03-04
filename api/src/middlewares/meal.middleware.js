@@ -21,7 +21,7 @@ const MealMiddleware = {
     const superAdmin = authorizations.includes(Authorizations.GLOBAL);
     const caterer = authorizations.includes(Authorizations.CREATE_MEAL);
 
-    if (!superAdmin || !caterer) {
+    if (!superAdmin && !caterer) {
       return res.status(403).send({ message: 'You don\'t have the authorization or right to perform this action' });
     }
     return next();
@@ -67,7 +67,7 @@ const MealMiddleware = {
     const superAdmin = authorizations.includes(Authorizations.GLOBAL);
     const caterer = authorizations.includes(Authorizations.UPDATE_MEAL);
 
-    if (!superAdmin || !caterer) {
+    if (!superAdmin && !caterer) {
       return res.status(403).send({ message: 'You don\'t have the authorization or right to perform this action' });
     }
     return next();
@@ -90,7 +90,7 @@ const MealMiddleware = {
     const superAdmin = authorizations.includes(Authorizations.GLOBAL);
     const caterer = authorizations.includes(Authorizations.DELETE_MEAL);
 
-    if (!superAdmin || !caterer) {
+    if (!superAdmin && !caterer) {
       return res.status(403).send({ message: 'You don\'t have the authorization or right to perform this action' });
     }
     return next();

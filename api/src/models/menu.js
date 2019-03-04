@@ -1,3 +1,5 @@
+import Meal from './meal';
+
 export default (sequelize, DataTypes) => {
   const Menu = sequelize.define('Menu', {
     meal_id: {
@@ -21,11 +23,15 @@ export default (sequelize, DataTypes) => {
       allowNull: true,
     },
   });
-  Menu.associate = (models) => {
-    Menu.hasMany(models.Meal, {
-      foreignKey: 'meal_id',
-      as: 'Menus',
-    });
-  };
+  // Menu.associate = (models) => {
+  //   Menu.hasMany(models.Meal, {
+  //     foreignKey: 'meal_id',
+  //     as: 'Menus',
+  //   });
+  // };
+  // Menu.hasMany(Meal, {
+  //   foreignKey: 'meal_id',
+  //   as: 'Menus',
+  // });
   return Menu;
 };
