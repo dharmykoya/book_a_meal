@@ -33,7 +33,6 @@ class UserController {
               message: response.message,
             });
           } else {
-            console.log('dami', response.data);
             res.status(201).send({
               status: 'success',
               user: response.data,
@@ -52,14 +51,25 @@ class UserController {
    * @memberof userController
    */
   static login(req, res) {
-    return UserService.login(req.body)
-      .then((token) => {
-        console.log(token);
-        res.send({
-          status: 'success',
-          data: { token },
+    return UserService.login(req.body, (response) => {
+      if (response.err) {
+        res.status(400).send({
+          status: 'error',
+          message: response.message,
         });
-      });
+      } else {
+        res.status(200).send({
+          status: 'success',
+          user: response,
+        });
+      }
+    });
+      // .then((user) => {
+      //   res.send({
+      //     status: 'success',
+      //     user,
+      //   });
+      // });
     // .catch((err) = {
     //   res.send({
     //     status: 'failed',

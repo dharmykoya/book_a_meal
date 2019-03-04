@@ -31,7 +31,7 @@ class MealService {
    * @param{Object} caterer_id - id of the caterer that owns the meal.
    * @return{json} all meals available in the database
    */
-  static getMeals(catererId) {
+  static getMeals(catererId, callback) {
     return Meal.findAll({
       where: {
         caterer_id: catererId,
@@ -39,10 +39,10 @@ class MealService {
     })
       .then((foundMeals) => {
         if (!foundMeals) {
-          return { message: 'No meals in the system for this particular caterer.', err: true };
+          return callback({ message: 'No meals in the system for this particular caterer.', err: true });
         }
         const allMeals = { meals: foundMeals, message: 'meals returned successfully.', err: false };
-        return allMeals;
+        return callback(allMeals);
       });
   }
 

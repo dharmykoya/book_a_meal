@@ -18,21 +18,38 @@ class MealController {
    * @returns {*} - a meal
    */
   static getMeals(req, res) {
-    const { catererId } = req.params.caterer_id;
-    MealService.getMeals(catererId)
-      .then((meals) => {
-        if (!meals) {
-          const data = meals.message;
-          res.status(401).send({
-            status: 'error',
-            data,
-          });
-        }
+    try {
+    const { catererId } = req.decoded.user.user_id;
+    MealService.getMeals(catererId, (response) => {
+      if (response.err) {
+        res.status(401).send({
+          status: 'error',
+          message: response.message,
+        });
+      } else {
         res.status(200).send({
           status: 'success',
-          data: meals,
+          meal: response,
         });
-      });
+      }
+    })
+  } catch (err) {
+    const errMessage = 'try again please';
+    res.status(500).send({ errMessage },
+    )};
+      // .then((meals) => {
+      //   if (!meals) {
+      //     const data = meals.message;
+      //     res.status(401).send({
+      //       status: 'error',
+      //       data,
+      //     });
+      //   }
+      //   res.status(200).send({
+      //     status: 'success',
+      //     data: meals,
+      //   });
+      // });
   }
 
   /**

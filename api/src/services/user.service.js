@@ -1,7 +1,7 @@
-import jwt from 'jsonwebtoken';
 import Helper from './helper';
 import config from '../config/configuration';
 import { User, Caterer } from '../models';
+
 
 
 /**
@@ -104,40 +104,41 @@ class UserService {
    * @param{Object} user - user email to query the database.
    * @return{json} the user's detail
    */
-  static login(user) {
+  static login(user, callback) {
+    let response = {};
     if (!user.email || !user.password) {
-      return { message: 'Some values are missing' };
+      response = { message: 'Some values are missing', err: true };
+      return callback(response);
     }
     if (!Helper.isValidEmail(user.email)) {
-      return { message: 'Please enter a valid email address' };
+      response = { message: 'Please enter a valid email address', err: true };
+      return callback(response);
     }
-    return User.findAll({
+    return User.findOne({
       where: {
         email: user.email,
       },
     })
       .then((foundUser) => {
         if (!foundUser) {
-          return { message: 'Authentication failed. User not found.' };
+          return callback({ message: 'Authentication failed. User not found.' });
         }
-        if (!Helper.comparePassword(user.password, foundUser[0].password)) {
+        if (!Helper.comparePassword(user.password, foundUser.password)) {
           // throw new Error('Authentication failed. Wrong password.');
-          return { message: 'Authentication failed.Wrong password.' };
+          return callback({ message: 'Authentication failed.Wrong password.' });
         }
-        const payload = {
-          email: foundUser.email,
-          id: foundUser.id,
+        const authUser = {
+          user_id: foundUser.id,
+          name: foundUser.name,
           role_id: foundUser.role_id,
-          time: new Date(),
         };
-        const token = jwt.sign(payload, config.secret, {
-          expiresIn: config.tokenExpireTime,
-        });
+        const token = Helper.generateToken(authUser, config.secret);
         const loginUser = {
           token,
           user: foundUser,
+          message: 'login successful',
         };
-        return loginUser;
+        return callback(loginUser);
       });
   }
 }
