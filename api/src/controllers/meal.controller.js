@@ -1,111 +1,135 @@
+/* eslint-disable max-len */
+/* eslint-disable consistent-return */
 import MealService from '../services/meal.service';
 
 
-const MealController = {
-  fetchAllMeals(req, res) {
-    const allMeals = MealService.getAll();
-    return res.json({
-      status: 'success',
-      data: allMeals,
-    }).status(200);
-  },
-
-  addMeal(req, res) {
-    /*
-            Expect json of format
-            {
-                'name': 'sample name',
-                'user_id': 'caterer id'
-                'price': '500',
-                'image': 'image.png'
-            }
-        */
-    const meal = req.body;
-    const createdMeal = MealService.addMeal(meal);
-    return res.status(201).json({
-      status: 'success',
-      data: createdMeal,
-    });
-  },
-  getMeal(req, res) {
-    const [id] = req.params.id;
-    const meal = MealService.getMeal(id);
-    let response;
-    if (Object.keys(meal).length > 0) {
-      res.status(200);
-      response = res.json({
-        status: 'success',
-        data: meal,
+/**
+ *
+ *
+ * @class MealController
+ * @description - handles the request coming from the route and interacts with the mealService class.
+ */
+class MealController {
+  /**
+   * @description - get meal for a particular user
+   * @static
+   * @param {object} req
+   * @memberof MealController
+   * @param {object} res
+   * @returns {*} - a meal
+   */
+  static getMeals(req, res) {
+    try {
+      const { catererId } = req.decoded.user.user_id;
+      MealService.getMeals(catererId, (response) => {
+        if (response.err) {
+          res.status(401).send({
+            status: 'error',
+            message: response.message,
+          });
+        } else {
+          res.status(200).send({
+            status: 'success',
+            meal: response,
+          });
+        }
       });
-    } else {
-      res.status(404);
-      response = res.json({
-        status: 'error',
-        message: `meal with id: ${id} not found`,
-      });
+    } catch (err) {
+      const errMessage = 'try again please';
+      res.status(500).send({ errMessage });
     }
-    return response;
-  },
-  updateMeal(req, res) {
-    /*
-            Expect json of format
-            {
-                'name': 'sample name',
-                'user_id': 'caterer id'
-                'price': '500',
-                'image': 'image.png'
-            }
-        */
+    // .then((meals) => {
+    //   if (!meals) {
+    //     const data = meals.message;
+    //     res.status(401).send({
+    //       status: 'error',
+    //       data,
+    //     });
+    //   }
+    //   res.status(200).send({
+    //     status: 'success',
+    //     data: meals,
+    //   });
+    // });
+  }
 
-    const { id } = req.params;
-    const entry = req.body;
-    const result = MealService.updateMeal(id, entry);
-    let response = {};
-    let status = 0;
-    if (result.foundId) {
-      response = {
-        ...response,
-        status: 'success',
-        message: `Meal with id: ${id} edited successfully.`,
-        data: result.editedMeal,
-      };
-      status = 202;
-    } else {
-      response = {
-        ...response,
-        status: 'error',
-        message: `Meal with id: ${id} not found.`,
-      };
-      status = 404;
-    }
-    return res.status(status).json({
-      response,
-    });
-  },
-  deleteMeal(req, res) {
-    const { id } = req.params;
-    const foundId = MealService.deleteMeal(id);
-    let response = {};
-    let status = 0;
-    if (foundId) {
-      response = {
-        ...response,
-        status: 'success',
-        message: `Meal with id: ${id} deleted successfully.`,
-      };
-      status = 202;
-    } else {
-      response = {
-        ...response,
-        status: 'error',
-        message: `Meal with id: ${id} not found.`,
-      };
-      status = 404;
-    }
-    return res.status(status).json({
-      response,
-    });
-  },
-};
+  /**
+   * @description - Add a meal option, only a caterer or an admin can perform this action.
+   * @static
+   * @param {object} req
+   * @memberof MealController
+   * @param {object} res
+   * @returns {*} - created meal
+   */
+  static addMeal(req, res) {
+    const { meal } = req.body;
+    MealService.addMeal(meal)
+      .then((createdMeal) => {
+        if (!createdMeal) {
+          const data = createdMeal.error_message;
+          res.status(401).send({
+            status: 'error',
+            data,
+          });
+        }
+        res.status(201).send({
+          status: 'success',
+          data: createdMeal,
+        });
+      });
+  }
+
+  /**
+   * @description - update a meal option, only a caterer or an admin can perform this action.
+   * @static
+   * @param {object} req
+   * @memberof MealController
+   * @param {object} res
+   * @returns {*} - error or succes messgaes
+   */
+  static updateMeal(req, res) {
+    const { meal } = req.body;
+    MealService.updateMeal(meal)
+      .then((updatedMeal) => {
+        if (!updatedMeal) {
+          const data = updatedMeal.error_message;
+          res.status(401).send({
+            status: 'error',
+            data,
+          });
+        }
+        res.status(201).send({
+          status: 'success',
+          data: updatedMeal.message,
+        });
+      });
+  }
+
+  /**
+   * @description - delete a meal option, only a caterer or an admin can perform this action.
+   * @static
+   * @param {object} req
+   * @memberof MealController
+   * @param {object} res
+   * @returns {*} - error or succes messgaes
+   */
+  static deleteMeal(req, res) {
+    const { meal } = req.body;
+    MealService.deleteMeal(meal)
+      .then((destroyedMeal) => {
+        if (!destroyedMeal) {
+          const data = destroyedMeal.error_message;
+          res.status(401).send({
+            status: 'error',
+            data,
+          });
+        }
+        res.status(201).send({
+          status: 'success',
+          data: destroyedMeal.message,
+        });
+      });
+  }
+}
 
 export default MealController;

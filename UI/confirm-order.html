@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Confirm Order</title>
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/confirm-order.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+</head>
+<body>
+    <div class="topnav" id="myTopnav">
+        <a href="#home" class="active">Home</a>
+        <a href="manage_order.html">Order History</a>
+        <a href="dashboard.html">dashboard</a>
+        <a class="icon" onclick="navToggle()">
+            <i class="fa fa-bars"></i>
+        </a>
+        <div class="right">
+            <a href="index.html">Logout</a>
+        </div>
+    </div>
+<main>
+    <h2>Confirm your order</h2>
+    <div class="order-header">
+        <div class="order-header-item-2">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th class="">Subtotal</th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr class="tr-hover">
+                        <td>Amala</td>
+                        <td>&#8358; 700</td>
+                        <td>
+                            <input type="number" class="input-quantity" value="1" min="1">
+                        </td>
+                        <td>
+                            700
+                        </td>
+                        <td>
+                            <i class="fa fa-trash"></i>
+                        </td>
+                    </tr>
+                    <tr class="tr-hover">
+                        <td>Jollofrice</td>
+                        <td>&#8358; 1100</td>
+                        <td>
+                            <input type="number" class="input-quantity" value="1" min="1">
+                        </td>
+                        <td>
+                            1100
+                        </td>
+                        <td>
+                            <i class="fa fa-trash"></i>
+                        </td>
+                    </tr>
+                    <tr class="tr-hover">
+                        <td>Joe</td>
+                        <td>$100</td>
+                        <td>
+                            <input type="number" class="input-quantity" value="1">
+                        </td>
+                        <td>
+                            100
+                        </td>
+                        <td>
+                            <i class="fa fa-trash"></i>
+                        </td>
+                    </tr>
+                    <tr class="tr-hover">
+                        <td>Chips and chicken</td>
+                        <td>&#8358; 700</td>
+                        <td>
+                            <input type="number" class="input-quantity" value="1">
+                        </td>
+                        <td>
+                            700
+                        </td>
+                        <td>
+                            <i class="fa fa-trash"></i>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="2"></td>
+                        <td><a href="checkout.html" style="text-decoration: none;"><button id="btn-checkout" class="btn-checkout">Checkout</button></a></td>
+                        <td><strong>Total $150.00</strong></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+
+</main>  
+</div>
+<script src="js/navbar.js"></script>
+
+
+<!--<script>
+    function openCity(evt, cityName) {
+        let i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+            /*tabcontent[i].style.gridTemplateColumns = "repeat(3, 200px)";*/
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(cityName).style.display = "grid";
+        evt.currentTarget.className += " active";
+    }
+
+    // Get the element with id="defaultOpen" and click on it
+    document.getElementById("defaultOpen").click();
+</script>-->
+
+<!--<script>
+    /* Set rates + misc */
+    var taxRate = 0.05;
+    var shippingRate = 15.00;
+    var fadeTime = 300;
+
+
+    /* Assign actions */
+    $('.product-quantity input').change( function() {
+        updateQuantity(this);
+    });
+
+    $('.product-removal button').click( function() {
+        removeItem(this);
+    });
+
+
+    /* Recalculate cart */
+    function recalculateCart()
+    {
+        var subtotal = 0;
+
+        /* Sum up row totals */
+        $('.product').each(function () {
+            subtotal += parseFloat($(this).children('.product-line-price').text());
+        });
+
+        /* Calculate totals */
+        var tax = subtotal * taxRate;
+        var shipping = (subtotal > 0 ? shippingRate : 0);
+        var total = subtotal + tax + shipping;
+
+        /* Update totals display */
+        $('.totals-value').fadeOut(fadeTime, function() {
+            $('#cart-subtotal').html(subtotal.toFixed(2));
+            $('#cart-tax').html(tax.toFixed(2));
+            $('#cart-shipping').html(shipping.toFixed(2));
+            $('#cart-total').html(total.toFixed(2));
+            if(total == 0){
+                $('.checkout').fadeOut(fadeTime);
+            }else{
+                $('.checkout').fadeIn(fadeTime);
+            }
+            $('.totals-value').fadeIn(fadeTime);
+        });
+    }
+
+
+    /* Update quantity */
+    function updateQuantity(quantityInput)
+    {
+        /* Calculate line price */
+        var productRow = $(quantityInput).parent().parent();
+        var price = parseFloat(productRow.children('.product-price').text());
+        var quantity = $(quantityInput).val();
+        var linePrice = price * quantity;
+
+        /* Update line price display and recalc cart totals */
+        productRow.children('.product-line-price').each(function () {
+            $(this).fadeOut(fadeTime, function() {
+                $(this).text(linePrice.toFixed(2));
+                recalculateCart();
+                $(this).fadeIn(fadeTime);
+            });
+        });
+    }
+
+
+    /* Remove item from cart */
+    function removeItem(removeButton)
+    {
+        /* Remove row from DOM and recalc cart total */
+        var productRow = $(removeButton).parent().parent();
+        productRow.slideUp(fadeTime, function() {
+            productRow.remove();
+            recalculateCart();
+        });
+    }
+</script>-->
+</body>
+</html>

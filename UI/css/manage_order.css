@@ -1,0 +1,245 @@
+body {
+  /*font-family: "Roboto", sans-serif;*/
+  font-family: "Comic Sans MS";
+}
+
+.summary-container {
+  width: 70%;
+  margin: 20px auto;
+}
+
+h3 {
+  text-align: center;
+}
+.delete-meal {
+  background-color: red;
+  color: white;
+  border: none;
+  cursor: pointer;
+  /* width: 50%; */
+  opacity: 0.9;
+  padding: 10px;
+  margin: 5px;
+  text-decoration: none;
+}
+
+.edit-meal {
+  background-color: lightskyblue;
+  color: white;
+  border: none;
+  cursor: pointer;
+  /* width: 50%; */
+  opacity: 0.9;
+  padding: 10px;
+  margin: 5px;
+  text-decoration: none;
+}
+
+.container {
+  padding: 20px;
+}
+textarea {
+  width: 272px;
+height: 72px;
+}
+/* Style the tab */
+.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+  display: grid;
+  grid-template-columns: auto auto;
+}
+
+/* Style the buttons that are used to open the tab content */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #dd4f05;
+  color: white;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border-top: none;
+  overflow: auto;
+}
+
+
+/*
+styling for table*/
+
+
+table {
+  border-collapse: collapse;
+  width: 70%;
+  margin: 0px auto;
+}
+
+/*
+table tr:not(:first-child) {
+  counter-increment: rowNumber;
+}
+
+table tr td:first-child::before {
+  content: counter(rowNumber);
+  min-width: 1em;
+  margin-right: 0.5em;
+}*/
+
+th, td {
+  padding: 8px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+.input-quantity {
+  width: 70px;
+  height: 30px;
+  border-radius: 5px;
+  text-align: center;
+}
+.tr-hover:hover {background-color: #dd4f05;}
+
+.btn-checkout {
+  display: flex;
+  /*width: 200px;
+  height: 25px;*/
+  border-color: #1c7430;
+  background-color: #1e7e34;
+  padding: 10px;
+  /*align-items: center;*/
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  /*margin-bottom: 10px;
+  text-align: center;*/
+  text-decoration: none;
+  justify-content: center;
+}
+
+.btn-checkout:hover {
+  filter: alpha(opacity=70);
+  opacity: 0.7;
+}
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  /* left: 0;
+  top: 0px; */
+  width: 50%; /* Full width */
+  height: auto; /* Full height */
+  /*overflow: auto;  Enable scroll if needed */
+  /* background-color: rgb(0,0,0);  Fallback color */
+  /* background-color: rgba(0,0,0,0.4); Black w/ opacity */
+  margin: auto;
+  left: 0;
+  right: 0;
+  top: 100px;
+}
+
+.modal-delete {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  /* left: 0;
+  top: 0px; */
+  width: 50%; /* Full width */
+  height: auto; /* Full height */
+  /*overflow: auto;  Enable scroll if needed */
+  /* background-color: rgb(0,0,0);  Fallback color */
+  /* background-color: rgba(0,0,0,0.4); Black w/ opacity */
+  margin: auto;
+  left: 0;
+  right: 0;
+  top: 100px;
+}
+
+/* Modal Content/Box */
+/* .modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; 
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; 
+} */
+
+.modal-content {
+  background-color: #fefefe;
+  /*margin: 15% auto;  15% from the top and centered 
+  padding: 20px;*/
+  /* border: 1px solid #888; */
+  width: 50%; /* Could be more or less, depending on screen size */
+  margin: auto;
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media(max-width: 600px) { 
+  .summary-container {
+      margin: 20px auto;
+      width: auto;
+  }
+
+  table {
+    border-collapse: collapse;
+    margin: 0px auto;
+    max-width: 50%;
+    font-size: 10px;
+  }
+  textarea {
+    width: 178px;
+    height: 68px;
+  }
+
+  .modal-content {
+    background-color: #fefefe;
+    width: 80%;
+    margin: auto;
+  }
+
+  .modal {
+    top: 300px;
+  }
+}
+
+
+/* for ipad screen sizes */
+@media (min-width: 601px) and (max-width: 968px) { 
+  .summary-container {
+      margin: 20px auto;
+      width: auto;
+  }
+}
