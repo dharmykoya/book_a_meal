@@ -12,6 +12,7 @@ import config from '../config/configuration';
    */
 const AUTH = {};
 AUTH.checkToken = (req, res, next) => {
+  // eslint-disable-next-line max-len
   // const token = req.headers['x-access-token'] || req.headers.authorization; // Express headers are auto converted to lowercase
   // if (token.startsWith('Bearer ')) {
   //   // Remove Bearer from string
@@ -24,7 +25,7 @@ AUTH.checkToken = (req, res, next) => {
     jwt.verify(token, config.secret, (err, decoded) => {
       if (err) {
         return res.status(500).send({
-          success: false,
+          status: false,
           message: 'Token is not valid',
         });
       }
@@ -33,10 +34,14 @@ AUTH.checkToken = (req, res, next) => {
     });
   } else {
     return res.status(403).send({
-      success: false,
+      status: false,
       message: 'Auth token is not supplied',
     });
   }
+  return res.status(500).send({
+    status: false,
+    message: 'something went wrong',
+  });
 };
 
 export default AUTH;

@@ -131,6 +131,7 @@ class UserService {
           user_id: foundUser.id,
           name: foundUser.name,
           role_id: foundUser.role_id,
+          authorizations: foundUser.authorizations,
         };
         const token = Helper.generateToken(authUser, config.secret);
         const loginUser = {

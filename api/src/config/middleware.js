@@ -27,6 +27,4 @@ const checkToken = (req, res, next) => {
   }
 };
 
-module.exports = {
-  checkToken,
-};
+export default checkToken;

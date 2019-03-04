@@ -5,21 +5,24 @@ const Authorizations = {
   READ_USER: 2,
   UPDATE_USER: 3,
   DELETE_USER: 4,
-  
+
   // Crude authorizations for meal
-  READ_MEAL: 5,
-  UPDATE_MEAL: 6,
-  DELETE_MEAL: 7,
-  
+  CREATE_MEAL: 5,
+  READ_MEAL: 6,
+  UPDATE_MEAL: 7,
+  DELETE_MEAL: 8,
+
   // Crude authorizations for menu
-  READ_MENU: 8,
-  UPDATE_MENU: 9,
-  DELETE_MENU: 10,
- 
+  CREATE_MENU: 9,
+  READ_MENU: 10,
+  UPDATE_MENU: 11,
+  DELETE_MENU: 12,
+
   // crude authorizations for order
-  READ_ORDER: 11,
-  UPDATE_ORDER: 12,
-  DELETE_ORDER: 13,
+  CREATE_ORDER: 13,
+  READ_ORDER: 14,
+  UPDATE_ORDER: 15,
+  DELETE_ORDER: 16,
 
 };
 
