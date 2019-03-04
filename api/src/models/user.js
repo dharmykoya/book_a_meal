@@ -53,6 +53,15 @@ export default (sequelize, DataTypes) => {
         },
       },
     },
+    role_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'Role',
+        key: 'id',
+        as: 'role_id',
+      },
+    },
     authorizations: {
       type: DataTypes.ARRAY(DataTypes.INTEGER),
       defaultValue: [],

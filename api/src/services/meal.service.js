@@ -1,4 +1,5 @@
 /* eslint-disable max-len */
+/* eslint-disable consistent-return */
 import { Meal } from '../models';
 
 /**
@@ -18,6 +19,9 @@ class MealService {
       .then((foundMeals) => {
         if (!foundMeals) {
           return { message: 'No meals in the system.', err: true };
+        }
+        if (foundMeals.length === 0) {
+          return { message: 'You have bot created any meal.', err: false };
         }
         const allMeals = { meals: foundMeals, message: 'All the meals available.', err: false };
         return allMeals;

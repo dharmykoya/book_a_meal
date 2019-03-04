@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 import Authorizations from '../config/rolesList';
 
 

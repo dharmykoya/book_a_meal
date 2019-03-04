@@ -44,6 +44,8 @@ class UserService {
       return callback(response);
     }
     const hashPassword = Helper.hashPassword(user.password);
+
+    // creating a caterer
     if (user.type === 2) {
       if (!user.restaurant_name || !user.restaurant_logo) {
         response = { message: 'Some values are missing', err: true };

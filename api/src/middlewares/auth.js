@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 import jwt from 'jsonwebtoken';
 import config from '../config/configuration';
 
@@ -38,10 +39,6 @@ AUTH.checkToken = (req, res, next) => {
       message: 'Auth token is not supplied',
     });
   }
-  return res.status(500).send({
-    status: false,
-    message: 'something went wrong',
-  });
 };
 
 export default AUTH;
