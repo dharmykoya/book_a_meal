@@ -53,6 +53,15 @@ export default (sequelize, DataTypes) => {
         },
       },
     },
+    role_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'Role',
+        key: 'id',
+        as: 'role_id',
+      },
+    },
     authorizations: {
       type: DataTypes.ARRAY(DataTypes.INTEGER),
       defaultValue: [],
@@ -69,11 +78,15 @@ export default (sequelize, DataTypes) => {
       foreignKey: 'role_id',
       as: 'Role',
     });
+    User.hasOne(models.Caterer, {
+      foreignKey: 'user_id',
+      as: 'caterer',
+    });
   };
   // User.associate = (models) => {
-  //   User.hasMany(models.Order, {
+  //   User.hasOne(models.Caterer, {
   //     foreignKey: 'user_id',
-  //     as: 'Orders',
+  //     as: 'Caterer',
   //   });
   // };
   return User;

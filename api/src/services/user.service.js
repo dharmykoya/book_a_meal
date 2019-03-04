@@ -1,10 +1,11 @@
-import jwt from 'jsonwebtoken';
 import Helper from './helper';
 import config from '../config/configuration';
 import { User, Caterer } from '../models';
 
 
+
 /**
+ * @class UserService
  * @description - Describes the Users behaviour of the app, basic CRUD operations etc.
  */
 class UserService {
@@ -13,7 +14,6 @@ class UserService {
    * @static
    * @description - Checks id the email in the request body exist on the system already.
    * @param{Object} email - api request
-   * @param{Object} res - check response
    * @return{json} the email
    */
   static emailExist(email) {
@@ -28,8 +28,8 @@ class UserService {
    * Create A User
    * @static
    * @description - Creates a new user in the app.
-   * @param{Object} user - api request
-   * @param{Object} res - route response
+   * @param{Object} user - user details to be created.
+   * @param{Object} callback - call back function to return responses.
    * @return{json} the registered user's detail
    */
 
@@ -44,6 +44,8 @@ class UserService {
       return callback(response);
     }
     const hashPassword = Helper.hashPassword(user.password);
+
+    // creating a caterer
     if (user.type === 2) {
       if (!user.restaurant_name || !user.restaurant_logo) {
         response = { message: 'Some values are missing', err: true };
@@ -54,8 +56,8 @@ class UserService {
         email: user.email,
         phone_number: user.phone_number,
         password: hashPassword,
-        role_id: 3,
-        authorizations: [2, 3, 4, 5],
+        role_id: 2,
+        authorizations: [5, 6, 7, 8, 9],
       })
         .then(createdCaterer => Caterer.create({
           user_id: createdCaterer.id,
@@ -79,7 +81,7 @@ class UserService {
         phone_number: user.phone_number,
         password: hashPassword,
         role_id: 3,
-        authorizations: [5, 6],
+        authorizations: [3, 10, 13, 14, 15],
       })
         .then((createdUser) => {
           data = createdUser.get({
@@ -97,41 +99,68 @@ class UserService {
     return callback;
   }
 
-  static login(user) {
+  /**
+   * Authenticate A User
+   * @static
+   * @description - authenticate a user trying to login in to the app.
+   * @param{Object} user - user email to query the database.
+   * @return{json} the user's detail
+   */
+  static async login(user, callback) {
+    let response = {};
     if (!user.email || !user.password) {
-      return { message: 'Some values are missing' };
+      response = { message: 'Some values are missing', err: true };
+      return callback(response);
     }
     if (!Helper.isValidEmail(user.email)) {
-      return { message: 'Please enter a valid email address' };
+      response = { message: 'Please enter a valid email address', err: true };
+      return callback(response);
     }
-    return User.findAll({
+    return User.findOne({
       where: {
         email: user.email,
       },
     })
-      .then((foundUser) => {
+      .then(async (foundUser) => {
         if (!foundUser) {
-          return { message: 'Authentication failed. User not found.' };
+          return callback({ message: 'Authentication failed. User not found.' });
         }
-        if (!Helper.comparePassword(user.password, foundUser[0].password)) {
+        if (!Helper.comparePassword(user.password, foundUser.password)) {
           // throw new Error('Authentication failed. Wrong password.');
-          return { message: 'Authentication failed.Wrong password.' };
+          return callback({ message: 'Authentication failed.Wrong password.' });
         }
-        console.log('dami', foundUser);
-        const payload = {
-          email: foundUser.email,
-          id: foundUser.id,
-          role_id: foundUser.role_id,
-          time: new Date(),
-        };
-        const token = jwt.sign(payload, config.secret, {
-          expiresIn: config.tokenExpireTime,
-        });
+        const username = await foundUser.getCaterer();
+        // console.log('damilola', username.id);
+        // username.then((caterer) => {
+        //   console.log(caterer.id);
+        // }).catch(console.log);
+        // console.log ('caterer', username);
+        let authUser = {};
+        if (foundUser.role_id === 2) {
+          authUser = {
+            user_id: foundUser.id,
+            caterer_id: username.id,
+            name: foundUser.name,
+            role_id: foundUser.role_id,
+            authorizations: foundUser.authorizations,
+          };
+        }
+        if (foundUser.role_id === 3) {
+          authUser = {
+            user_id: foundUser.id,
+            name: foundUser.name,
+            role_id: foundUser.role_id,
+            authorizations: foundUser.authorizations,
+          };
+        }
+        console.log(authUser);
+        const token = Helper.generateToken(authUser, config.secret);
         const loginUser = {
           token,
           user: foundUser,
+          message: 'login successful',
         };
-        return loginUser;
+        return callback(loginUser);
       });
   }
 }

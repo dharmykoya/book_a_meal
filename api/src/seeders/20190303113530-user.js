@@ -1,4 +1,4 @@
-var hashPassword = require('../services/helper');
+const hashPassword = require('../services/helper');
 // import hashPassword from '../services/helper';
 // const date = new Date();
 module.exports = {
