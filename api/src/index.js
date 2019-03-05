@@ -2,7 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import MealsRoute from './routes/meal.route';
 import MenuRoute from './routes/menu.route';
-// import OrdersRoute from './routes/order.route';
+import OrdersRoute from './routes/order.route';
 import UsersRoute from './routes/user.route';
 
 export const app = express();
@@ -22,7 +22,7 @@ app.use('/api/v1/meals', MealsRoute);
 
 app.use('/api/v1/menu', MenuRoute);
 
-// app.use('/api/v1/orders', OrdersRoute);
+app.use('/api/v1/orders', OrdersRoute);
 
 
 // app.use((req, res) => {

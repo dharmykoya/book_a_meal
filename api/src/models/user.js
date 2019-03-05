@@ -78,9 +78,11 @@ export default (sequelize, DataTypes) => {
       foreignKey: 'role_id',
       as: 'role',
     });
+  };
+  User.associate = (models) => {
     User.hasOne(models.Caterer, {
       foreignKey: 'user_id',
-      as: 'caterer',
+      as: 'Caterer',
     });
   };
   User.associate = (models) => {

@@ -1,38 +1,63 @@
 export default (sequelize, DataTypes) => {
-  const Meal = sequelize.define('Order', {
-  id: {
-    type: Sequelize.INTEGER,
-    autoIncrement: true,
-    allowNull: false,
-    primaryKey: true
-  },
-  order: {
-    type: Sequelize.JSON,
-    allowNull: false
-  },
-  total: {
-    type: Sequelize.INTEGER,
-    allowNull: false
-  },
-  delivery_status: {
-    type: Sequelize.INTEGER,
-    default: 0
-  },
-  catererId: {
-    type: Sequelize.INTEGER,
-    allowNull: false
-  },
-  userId: {
-    type: Sequelize.INTEGER,
-    allowNull: false
-  },
-  deleted: {
-    type: Sequelize.INTEGER,
-    allowNull: true,
-    defaultValue: 0,
-  },
-  createdAt: Sequelize.DATEONLY,
-  updatedAt: Sequelize.DATEONLY
-});
+  const Order = sequelize.define('Order', {
+    meal_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'Meals',
+        key: 'id',
+        as: 'meal_id',
+      },
+    },
+    quantity: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    total: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    delivery_status: {
+      type: DataTypes.INTEGER,
+      default: 0,
+    },
+    caterer_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'Caterers',
+        key: 'id',
+        as: 'caterer_id',
+      },
+    },
+    user_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'Users',
+        key: 'id',
+        as: 'user_id',
+      },
+    },
+    deleted: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+      allowNull: true,
+    },
+    createdAt: DataTypes.DATEONLY,
+    updatedAt: DataTypes.DATEONLY,
+  });
 
-export default Order;
+  Order.associate = (models) => {
+    Order.belongsTo(models.Caterer, {
+      foreignKey: 'caterer_id',
+      as: 'order',
+    });
+    Order.belongsTo(models.User, {
+      foreignKey: 'user_id',
+      as: 'userOrder',
+    });
+  };
+  return Order;
+};
+

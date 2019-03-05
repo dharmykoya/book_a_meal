@@ -5,7 +5,7 @@ export default (sequelize, DataTypes) => {
       defaultValue: 2,
       allowNull: false,
       references: {
-        model: 'User',
+        model: 'Users',
         key: 'id',
         as: 'user_id',
       },

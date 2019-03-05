@@ -6,9 +6,14 @@ module.exports = {
       allowNull: false,
       primaryKey: true,
     },
-    meal: {
+    meal_id: {
       type: Sequelize.INTEGER,
       allowNull: false,
+      references: {
+        model: 'Meals',
+        key: 'id',
+        as: 'meal_id',
+      },
     },
     quantity: {
       type: Sequelize.INTEGER,

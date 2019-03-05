@@ -129,17 +129,26 @@ class UserService {
           // throw new Error('Authentication failed. Wrong password.');
           return callback({ message: 'Authentication failed.Wrong password.' });
         }
-        const username = await foundUser.getCaterer();
+        let username;
+        try {
+          // username = await foundUser.getCaterer();
+          const foundCaterer = await Caterer.findOne({ where: { user_id: foundUser.id } });
+          username = foundCaterer.dataValues.id;
+        } catch (err) {
+          const error = { error_message: 'user is probably not a caterer', err };
+          throw error;
+        }  
         // console.log('damilola', username.id);
         // username.then((caterer) => {
         //   console.log(caterer.id);
         // }).catch(console.log);
         // console.log ('caterer', username);
+      
         let authUser = {};
         if (foundUser.role_id === 2) {
           authUser = {
             user_id: foundUser.id,
-            caterer_id: username.id,
+            caterer_id: username,
             name: foundUser.name,
             role_id: foundUser.role_id,
             authorizations: foundUser.authorizations,

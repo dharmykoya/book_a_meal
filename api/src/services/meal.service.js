@@ -68,7 +68,8 @@ class MealService {
         ...meal,
       });
       if (!createdMeal) {
-        return { err: true, error_message: 'could not create meal' };
+        const error = { err: true, error_message: 'could not create meal' };
+        throw error;
       }
       return { meal: createdMeal, err: false };
     } catch (err) {
