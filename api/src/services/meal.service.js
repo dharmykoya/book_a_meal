@@ -44,7 +44,7 @@ class MealService {
       if (!foundMeals) {
         return { err: true, error_message: 'could not fetch meals' };
       }
-      return { meal: foundMeals, err: false };       
+      return { meal: foundMeals, err: false };
     } catch (err) {
       const error = { error_message: 'something went wrong', err };
       throw error;
@@ -70,7 +70,7 @@ class MealService {
       if (!createdMeal) {
         return { err: true, error_message: 'could not create meal' };
       }
-      return { meal: createdMeal, err: false };       
+      return { meal: createdMeal, err: false };
     } catch (err) {
       const error = { error_message: 'something went wrong', err };
       throw error;
@@ -92,11 +92,11 @@ class MealService {
         meal,
         { where: { id, caterer_id: catererId }, returning: true, plain: true },
       );
-      if (!updateMeal) {        
+      if (!updateMeal) {
         return { err: true, error_message: 'update failed'};
       }
       return { meal: updateMeal, err: false };
-    } catch (err) {     
+    } catch (err) {
       const error = { error_message: 'something went wrong', err };
       throw error;
     }
@@ -113,7 +113,7 @@ class MealService {
   static async deleteMeal(id, catererId) {
     try {
       const destroyedMeal = await Meal.destroy({ where: { id, caterer_id: catererId } });
-      if (!destroyedMeal) {        
+      if (!destroyedMeal) {
         return { err: true, error_message: 'delete failed' };
       }
       return { message: 'Meal deleted', err: false };
@@ -121,7 +121,7 @@ class MealService {
       const error = { error_message: 'something went wrong', err };
       throw error;
     }
-  }   
+  }
 }
 
 export default MealService;

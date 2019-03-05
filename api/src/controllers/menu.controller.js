@@ -14,16 +14,16 @@ class MenuController {
   static async getMenu(req, res) {
     try {
       const { caterer_id } = req.decoded.user;
-      const foundMeals = await MenuService.getMenu(caterer_id);
-      if (foundMeals.err) {
+      const foundMenu = await MenuService.getMenu(caterer_id);
+      if (foundMenu.err) {
         res.status(401).send({
           status: 'error',
-          message: foundMeals,
+          foundMenu,
         });
       } else {
         res.status(200).send({
           status: 'success',
-          meals: foundMeals,
+          foundMenu,
         });
       }
     } catch (err) {
@@ -45,17 +45,16 @@ class MenuController {
     const mealId = req.body;
 
     try {
-      const createdMeal = await MenuService.setupMenu(mealId.meal_id, caterer_id);
-      if (createdMeal.err) {
-        const data = createdMeal.error_message;
+      const createdMenu = await MenuService.setupMenu(mealId.meal_id, caterer_id);
+      if (createdMenu.err) {
         res.status(401).send({
           status: 'failed',
-          data,
+          createdMenu,
         });
       }
       res.status(201).send({
         status: 'success',
-        createdMeal,
+        createdMenu,
       });
     } catch (err) {
       res.status(500).send({

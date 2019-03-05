@@ -57,7 +57,7 @@ class UserService {
         phone_number: user.phone_number,
         password: hashPassword,
         role_id: 2,
-        authorizations: [5, 6, 7, 8, 9],
+        authorizations: [5, 6, 7, 8, 9, 10],
       })
         .then(createdCaterer => Caterer.create({
           user_id: createdCaterer.id,

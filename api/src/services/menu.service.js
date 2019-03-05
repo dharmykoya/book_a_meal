@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 /* eslint-disable max-len */
 /* eslint-disable consistent-return */
-import { Meal, Menu, sequelize } from '../models';
+import { Meal, Menu } from '../models';
 // import { sequelize } from '../models/index';
 
 /**
@@ -33,18 +33,24 @@ class MenuService {
    *
    * @return{json} menu available in the database
    */
-  static getMenu() {
-    return Meal.findAll({})
-      .then((foundMeals) => {
-        if (!foundMeals) {
-          return { message: 'No meals in the system.', err: true };
-        }
-        if (foundMeals.length === 0) {
-          return { message: 'You have bot created any meal.', err: false };
-        }
-        const allMeals = { meals: foundMeals, message: 'All the meals available.', err: false };
-        return allMeals;
-      });
+  static async getMenu(catererId) {
+    try {
+      const today = this.todayDate();
+      const foundMenu = await Menu.findOne({ where: { createdAt: today } });
+      const mealId = foundMenu.dataValues.meals;
+      console.log('id', mealId);
+      try {
+        const foundMenuMeal = await this.getMealById(mealId, catererId);
+        console.log('menu', foundMenuMeal);
+        return { menu: foundMenuMeal, error: false }; 
+      } catch (err) {
+        const error = { error: true, error_message: 'error', err };
+        throw error;
+      }      
+    } catch (err) {
+      const error = { error: true, error_message: 'could not fetch menu', err };
+      throw error;
+    }
   }
 
   /**
@@ -71,7 +77,22 @@ class MenuService {
       const error = { error_message: 'something went wrong', err };
       throw error;
     }
-  }   
+  }
+  
+  static async getMealById(mealId, catererId) {
+    try {
+      const meals = await Meal.findAll({ where: { caterer_id: catererId } });
+      const meal_id = mealId[0].split(',');
+      const singleMealId = meal_id.map(id => Number(id));
+      const mealer = meals.filter(mealed => singleMealId.includes(mealed.dataValues.id));
+      return mealer;
+    } catch (err) {
+      const error = { errorm: true, error_message: 'something went wrong', err };
+      throw error;
+    }
+    // const result = MealData.meals.filter(meal => mealsId.includes(meal.id));
+    // return result;
+  }
 }
 
 export default MenuService;
