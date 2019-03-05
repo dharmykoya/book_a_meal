@@ -17,7 +17,9 @@
     "coverage": "nyc npm run test:travis && npm run generate-lcov && npm run coveralls-coverage && npm run codeclimate-coverage",
     "sequelize": "./node_modules/.bin/babel-node ./node_modules/.bin/sequelize $*",
     "seed": "npm run sequelize db:seed:all",
-    "seed-user": "npm run sequelize db:seed --seed 20190303113530-user"
+    "seed-user": "npm run sequelize db:seed --seed 20190303113530-user",
+    "migrate-test": "NODE_ENV=test npm run sequelize db:migrate",
+    "seed-test": "NODE_ENV=test npm run sequelize db:seed:all"
   },
   "heroku-run-build-script": true,
   "author": "Damilola Adekoya",

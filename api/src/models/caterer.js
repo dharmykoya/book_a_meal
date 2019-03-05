@@ -36,15 +36,19 @@ export default (sequelize, DataTypes) => {
       allowNull: true,
     },
   });
-  // Caterer.associate = (models) => {
-  //   Caterer.hasMany(models.Meal, {
-  //     foreignKey: 'caterer_id',
-  //     as: 'meals',
-  //   });
-  //   Caterer.belongsTo(models.User, {
-  //     foreignKey: 'user_id',
-  //     as: 'user',
-  //   });
-  // };
+  Caterer.associate = (models) => {
+    Caterer.hasMany(models.Meal, {
+      foreignKey: 'caterer_id',
+      as: 'meals',
+    });
+    Caterer.hasMany(models.Menu, {
+      foreignKey: 'caterer_id',
+      as: 'menus',
+    });
+    Caterer.belongsTo(models.User, {
+      foreignKey: 'user_id',
+      as: 'user',
+    });
+  };
   return Caterer;
 };

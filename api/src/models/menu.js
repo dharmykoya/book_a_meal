@@ -1,14 +1,12 @@
-import Meal from './meal';
-
 export default (sequelize, DataTypes) => {
   const Menu = sequelize.define('Menu', {
-    meal_id: {
+    caterer_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'Meal',
+        model: 'Caterers',
         key: 'id',
-        as: 'meal_id',
+        as: 'caterer_id',
       },
       validate: {
         isInt: {
@@ -17,18 +15,27 @@ export default (sequelize, DataTypes) => {
         },
       },
     },
+    meals: {
+      type: DataTypes.ARRAY(DataTypes.INTEGER),
+      allowNull: {
+        args: true,
+        msg: 'Please enter meals',
+      },
+    },
     deleted: {
       type: DataTypes.INTEGER,
       defaultValue: 0,
       allowNull: true,
     },
+    createdAt: DataTypes.DATEONLY,
+    updatedAt: DataTypes.DATEONLY,
   });
-  // Menu.associate = (models) => {
-  //   Menu.hasMany(models.Meal, {
-  //     foreignKey: 'meal_id',
-  //     as: 'Menus',
-  //   });
-  // };
+  Menu.associate = (models) => {
+    Menu.belongsTo(models.Caterer, {
+      foreignKey: 'caterer_id',
+      as: 'menus',
+    });
+  };
   // Menu.hasMany(Meal, {
   //   foreignKey: 'meal_id',
   //   as: 'Menus',
