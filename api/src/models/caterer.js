@@ -49,6 +49,10 @@ export default (sequelize, DataTypes) => {
       foreignKey: 'user_id',
       as: 'user',
     });
+    Caterer.hasMany(models.Order, {
+      foreignKey: 'caterer_id',
+      as: 'orders',
+    });
   };
   return Caterer;
 };

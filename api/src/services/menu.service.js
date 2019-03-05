@@ -79,6 +79,15 @@ class MenuService {
     }
   }
   
+  /**
+   * get all meal by id
+   * @static
+   * @description - Fetches the meal for a day.
+   * @param{Object} mealId - menu id to be created
+   * @param{Object} caterer_id - caterer that owns the menu to be created
+   *
+   * @return{json} menu available in the database
+   */
   static async getMealById(mealId, catererId) {
     try {
       const meals = await Meal.findAll({ where: { caterer_id: catererId } });
