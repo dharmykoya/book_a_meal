@@ -2,24 +2,24 @@
 import Authorizations from '../config/rolesList';
 
 
-const MealMiddleware = {
+const MenuMiddleware = {
 
   /**
-     * @description - check if the user as the right to create meal.
+     * @description - check if the user can setup menu.
      *
      * @param {object} req
      * @param {object} res
      * @param {object} next - moves the request to the next action
      * @returns {object}
      */
-  createMeal(req, res, next) {
+  setupMenu(req, res, next) {
     if (!req.decoded) {
       return res.status(401).send({ message: 'No token provided' });
     }
 
     const { authorizations } = req.decoded.user;
     const superAdmin = authorizations.includes(Authorizations.GLOBAL);
-    const caterer = authorizations.includes(Authorizations.CREATE_MEAL);
+    const caterer = authorizations.includes(Authorizations.CREATE_MENU);
 
     if (!superAdmin && !caterer) {
       return res.status(403).send({ message: 'You don\'t have the authorization or right to perform this action' });
@@ -28,21 +28,21 @@ const MealMiddleware = {
   },
 
   /**
-     * @description - check if the user as the right to get meals option.
+     * @description - check if the user as the right to get MENU option.
      *
      * @param {object} req
      * @param {object} res
      * @param {object} next - moves the request to the next action
      * @returns {object}
      */
-  getMeals(req, res, next) {
+  getMenu(req, res, next) {
     if (!req.decoded) {
       return res.status(401).send({ message: 'No token provided' });
     }
 
     const { authorizations } = req.decoded.user;
     const superAdmin = authorizations.includes(Authorizations.GLOBAL);
-    const caterer = authorizations.includes(Authorizations.READ_MEAL);
+    const caterer = authorizations.includes(Authorizations.READ_MENU);
 
     if (!superAdmin && !caterer) {
       return res.status(403).send({ message: 'You don\'t have the authorization or right to perform this action' });
@@ -51,21 +51,21 @@ const MealMiddleware = {
   },
 
   /**
-     * @description - check if the user as the right to update a meal option.
+     * @description - check if the user as the right to update a MENU option.
      *
      * @param {object} req
      * @param {object} res
      * @param {object} next - moves the request to the next action
      * @returns {object}
      */
-  updateMeal(req, res, next) {
+  updateMenu(req, res, next) {
     if (!req.decoded) {
       return res.status(401).send({ message: 'No token provided' });
     }
 
     const { authorizations } = req.decoded.user;
     const superAdmin = authorizations.includes(Authorizations.GLOBAL);
-    const caterer = authorizations.includes(Authorizations.UPDATE_MEAL);
+    const caterer = authorizations.includes(Authorizations.UPDATE_MENU);
 
     if (!superAdmin && !caterer) {
       return res.status(403).send({ message: 'You don\'t have the authorization or right to perform this action' });
@@ -74,21 +74,21 @@ const MealMiddleware = {
   },
 
   /**
-     * @description - check if the user as the right to delete a meal option.
+     * @description - check if the user as the right to delete a MENU option.
      *
      * @param {object} req
      * @param {object} res
      * @param {object} next - moves the request to the next action
      * @returns {object}
      */
-  deleteMeal(req, res, next) {
+  deleteMenu(req, res, next) {
     if (!req.decoded) {
       return res.status(401).send({ message: 'No token provided' });
     }
 
     const { authorizations } = req.decoded.user;
     const superAdmin = authorizations.includes(Authorizations.GLOBAL);
-    const caterer = authorizations.includes(Authorizations.DELETE_MEAL);
+    const caterer = authorizations.includes(Authorizations.DELETE_MENU);
 
     if (!superAdmin && !caterer) {
       return res.status(403).send({ message: 'You don\'t have the authorization or right to perform this action' });
@@ -97,4 +97,4 @@ const MealMiddleware = {
   },
 };
 
-export default MealMiddleware;
+export default MenuMiddleware;

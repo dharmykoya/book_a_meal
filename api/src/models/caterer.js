@@ -39,13 +39,15 @@ export default (sequelize, DataTypes) => {
   Caterer.associate = (models) => {
     Caterer.hasMany(models.Meal, {
       foreignKey: 'caterer_id',
-      as: 'Meals',
+      as: 'meals',
     });
-  };
-  Caterer.associate = (models) => {
+    Caterer.hasMany(models.Menu, {
+      foreignKey: 'caterer_id',
+      as: 'menus',
+    });
     Caterer.belongsTo(models.User, {
       foreignKey: 'user_id',
-      as: 'User',
+      as: 'user',
     });
   };
   return Caterer;

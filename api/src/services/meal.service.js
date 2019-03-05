@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 /* eslint-disable max-len */
 /* eslint-disable consistent-return */
 import { Meal } from '../models';
@@ -14,19 +15,19 @@ class MealService {
    *
    * @return{json} all meals available in the database
    */
-  static fetchAllMeals() {
-    return Meal.findAll({})
-      .then((foundMeals) => {
-        if (!foundMeals) {
-          return { message: 'No meals in the system.', err: true };
-        }
-        if (foundMeals.length === 0) {
-          return { message: 'You have bot created any meal.', err: false };
-        }
-        const allMeals = { meals: foundMeals, message: 'All the meals available.', err: false };
-        return allMeals;
-      });
-  }
+  // static fetchAllMeals() {
+  //   return Meal.findAll({})
+  //     .then((foundMeals) => {
+  //       if (!foundMeals) {
+  //         return { message: 'No meals in the system.', err: true };
+  //       }
+  //       if (foundMeals.length === 0) {
+  //         return { message: 'You have bot created any meal.', err: false };
+  //       }
+  //       const allMeals = { meals: foundMeals, message: 'All the meals available.', err: false };
+  //       return allMeals;
+  //     });
+  // }
 
   /**
    * get meals by caterer id
@@ -35,19 +36,19 @@ class MealService {
    * @param{Object} caterer_id - id of the caterer that owns the meal.
    * @return{json} all meals available in the database
    */
-  static getMeals(catererId, callback) {
-    return Meal.findAll({
-      where: {
-        caterer_id: catererId,
-      },
-    })
-      .then((foundMeals) => {
-        if (!foundMeals) {
-          return callback({ message: 'No meals in the system for this particular caterer.', err: true });
-        }
-        const allMeals = { meals: foundMeals, message: 'meals returned successfully.', err: false };
-        return callback(allMeals);
+  static async fetchAllMealsByCaterer(caterer_id) {
+    try {
+      const foundMeals = await Meal.findAll({
+        where: { caterer_id },
       });
+      if (!foundMeals) {
+        return { err: true, error_message: 'could not fetch meals' };
+      }
+      return { meal: foundMeals, err: false };
+    } catch (err) {
+      const error = { error_message: 'something went wrong', err };
+      throw error;
+    }
   }
 
   /**
@@ -58,17 +59,22 @@ class MealService {
    * @param{Object} caterer_id - caterer that owns the meal to be created
    * @return{json} the created meal detail
    */
-  static addMeal(meal, catererId) {
-    return Meal.create({
-      caterer_id: catererId,
-      ...meal,
-    })
-      .then((createdMeal, error) => {
-        if (!createdMeal) {
-          return { err: true, error_message: error };
-        }
-        return { meal: createdMeal, err: false };
+  static async addMeal(meal, catererId) {
+    try {
+      // console.log('id', catererId);
+      // console.log('meal', ...meal);
+      const createdMeal = await Meal.create({
+        caterer_id: catererId,
+        ...meal,
       });
+      if (!createdMeal) {
+        return { err: true, error_message: 'could not create meal' };
+      }
+      return { meal: createdMeal, err: false };
+    } catch (err) {
+      const error = { error_message: 'something went wrong', err };
+      throw error;
+    }
   }
 
   /**
@@ -80,17 +86,20 @@ class MealService {
    * @param{Object} meal - the meal option to be updated
    * @return{json} - the details of the updated meal option
    */
-  static updateMeal(id, catererId, meal) {
-    return Meal.update(
-      ...meal,
-      { where: { id, caterer_id: catererId } },
-    )
-      .then((updatedMeal) => {
-        if (!updatedMeal) {
-          return { err: true };
-        }
-        return { meal: updatedMeal, err: false };
-      });
+  static async updateMeal(id, catererId, meal) {
+    try {
+      const updateMeal = await Meal.update(
+        meal,
+        { where: { id, caterer_id: catererId }, returning: true, plain: true },
+      );
+      if (!updateMeal) {
+        return { err: true, error_message: 'update failed'};
+      }
+      return { meal: updateMeal, err: false };
+    } catch (err) {
+      const error = { error_message: 'something went wrong', err };
+      throw error;
+    }
   }
 
   /**
@@ -101,14 +110,17 @@ class MealService {
    * @param{Object} caterer_id - caterer_id of the meal option to be removed
    * @return{json} - A success message
    */
-  static deleteMeal(id, catererId) {
-    return Meal.destroy({ where: { id, caterer_id: catererId } })
-      .then((destroyedMeal) => {
-        if (!destroyedMeal) {
-          return { err: true };
-        }
-        return { message: 'Meal deleted successfully', err: false };
-      });
+  static async deleteMeal(id, catererId) {
+    try {
+      const destroyedMeal = await Meal.destroy({ where: { id, caterer_id: catererId } });
+      if (!destroyedMeal) {
+        return { err: true, error_message: 'delete failed' };
+      }
+      return { message: 'Meal deleted', err: false };
+    } catch (err) {
+      const error = { error_message: 'something went wrong', err };
+      throw error;
+    }
   }
 }
 

@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 /* eslint-disable max-len */
 /* eslint-disable consistent-return */
 import MealService from '../services/meal.service';
@@ -18,39 +19,60 @@ class MealController {
    * @param {object} res
    * @returns {*} - a meal
    */
-  static getMeals(req, res) {
+  // static fetchAllMealsByCaterer(req, res) {
+  //   try {
+  //     const { caterer_id } = req.decoded.user;
+  //     MealService.fetchAllMealsByCaterer(caterer_id, (response) => {
+  //       if (response.err) {
+  //         res.status(401).send({
+  //           status: 'error',
+  //           message: response.message,
+  //         });
+  //       } else {
+  //         res.status(200).send({
+  //           status: 'success',
+  //           meal: response,
+  //         });
+  //       }
+  //     });
+  //   } catch (err) {
+  //     const errMessage = 'try again please';
+  //     res.status(500).send({ errMessage, });
+  //   }
+  //   // .then((meals) => {
+  //   //   if (!meals) {
+  //   //     const data = meals.message;
+  //   //     res.status(401).send({
+  //   //       status: 'error',
+  //   //       data,
+  //   //     });
+  //   //   }
+  //   //   res.status(200).send({
+  //   //     status: 'success',
+  //   //     data: meals,
+  //   //   });
+  //   // });
+  // }
+
+  static async fetchAllMealsByCaterer(req, res) {
     try {
-      const { catererId } = req.decoded.user.user_id;
-      MealService.getMeals(catererId, (response) => {
-        if (response.err) {
-          res.status(401).send({
-            status: 'error',
-            message: response.message,
-          });
-        } else {
-          res.status(200).send({
-            status: 'success',
-            meal: response,
-          });
-        }
-      });
+      const { caterer_id } = req.decoded.user;
+      const foundMeals = await MealService.fetchAllMealsByCaterer(caterer_id);
+      if (foundMeals.err) {
+        res.status(401).send({
+          status: 'error',
+          message: foundMeals,
+        });
+      } else {
+        res.status(200).send({
+          status: 'success',
+          meals: foundMeals,
+        });
+      }
     } catch (err) {
       const errMessage = 'try again please';
-      res.status(500).send({ errMessage });
+      res.status(500).send({ errMessage, err });
     }
-    // .then((meals) => {
-    //   if (!meals) {
-    //     const data = meals.message;
-    //     res.status(401).send({
-    //       status: 'error',
-    //       data,
-    //     });
-    //   }
-    //   res.status(200).send({
-    //     status: 'success',
-    //     data: meals,
-    //   });
-    // });
   }
 
   /**
@@ -61,22 +83,28 @@ class MealController {
    * @param {object} res
    * @returns {*} - created meal
    */
-  static addMeal(req, res) {
-    const { meal } = req.body;
-    MealService.addMeal(meal)
-      .then((createdMeal) => {
-        if (!createdMeal) {
-          const data = createdMeal.error_message;
-          res.status(401).send({
-            status: 'error',
-            data,
-          });
-        }
-        res.status(201).send({
-          status: 'success',
-          data: createdMeal,
+  static async addMeal(req, res) {
+    const { caterer_id } = req.decoded.user;
+    const meal = req.body;
+    try {
+      const createdMeal = await MealService.addMeal(meal, caterer_id);
+      if (createdMeal.err) {
+        const data = createdMeal.error_message;
+        res.status(401).send({
+          status: 'failed',
+          data,
         });
+      }
+      res.status(201).send({
+        status: 'success',
+        createdMeal,
       });
+    } catch (err) {
+      res.status(500).send({
+        status: 'failed',
+        err,
+      });
+    }
   }
 
   /**
@@ -87,22 +115,44 @@ class MealController {
    * @param {object} res
    * @returns {*} - error or succes messgaes
    */
-  static updateMeal(req, res) {
-    const { meal } = req.body;
-    MealService.updateMeal(meal)
-      .then((updatedMeal) => {
-        if (!updatedMeal) {
-          const data = updatedMeal.error_message;
-          res.status(401).send({
-            status: 'error',
-            data,
-          });
-        }
-        res.status(201).send({
-          status: 'success',
-          data: updatedMeal.message,
+  // static updateMeal(req, res) {
+  //   const { meal } = req.body;
+  //   MealService.updateMeal(meal)
+  //     .then((updatedMeal) => {
+  //       if (!updatedMeal) {
+  //         const data = updatedMeal.error_message;
+  //         res.status(401).send({
+  //           status: 'error',
+  //           data,
+  //         });
+  //       }
+  //       res.status(201).send({
+  //         status: 'success',
+  //         data: updatedMeal.message,
+  //       });
+  //     });
+  // }
+  static async updateMeal(req, res) {
+    const { caterer_id } = req.decoded.user;
+    const meal = req.body;   
+    try {
+      const updatedMeal = await MealService.updateMeal(req.params.id, caterer_id, meal);
+      if (updatedMeal.err) {
+        res.status(401).send({
+          status: 'failed',
+          updatedMeal,
         });
+      }
+      res.status(201).send({
+        status: 'success',
+        updatedMeal,
       });
+    } catch (err) {
+      res.status(500).send({
+        status: 'Please try again or contact admin',
+        err,
+      });
+    }
   }
 
   /**
@@ -113,22 +163,27 @@ class MealController {
    * @param {object} res
    * @returns {*} - error or succes messgaes
    */
-  static deleteMeal(req, res) {
-    const { meal } = req.body;
-    MealService.deleteMeal(meal)
-      .then((destroyedMeal) => {
-        if (!destroyedMeal) {
-          const data = destroyedMeal.error_message;
-          res.status(401).send({
-            status: 'error',
-            data,
-          });
-        }
-        res.status(201).send({
-          status: 'success',
-          data: destroyedMeal.message,
+  static async deleteMeal(req, res) {
+    const meal_id = req.params.id;
+    const { caterer_id } = req.decoded.user;
+    try {
+      const destroyedMeal = await MealService.deleteMeal(meal_id, caterer_id);
+      if (destroyedMeal.err) {
+        res.status(401).send({
+          status: 'failed',
+          destroyedMeal,
         });
+      }
+      res.status(201).send({
+        status: 'success',
+        destroyedMeal,
       });
+    } catch (err) {
+      res.status(500).send({
+        status: 'Please try again or contact admin',
+        err,
+      });
+    }
   }
 }
 

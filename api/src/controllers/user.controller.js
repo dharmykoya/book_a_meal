@@ -30,7 +30,7 @@ class UserController {
           if (response.err) {
             res.status(400).send({
               status: 'error',
-              message: response.message,
+              message: response,
             });
           } else {
             res.status(201).send({

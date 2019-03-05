@@ -16,6 +16,7 @@ if (config.use_env_variable) {
     config.database, config.username, config.password, {
       host: 'localhost',
       dialect: 'postgres',
+      timezone: 'Africa/Lagos',
     },
   );
 }
