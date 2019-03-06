@@ -111,7 +111,7 @@ class UserService {
         throw response;
       }
       const hashPassword = Helper.hashPassword(user.password);
-
+      
       if (user.type === 2) {
         let data = {};
         if (!user.restaurant_name || !user.restaurant_logo) {
@@ -164,6 +164,28 @@ class UserService {
           password: hashPassword,
           role_id: 3,
           authorizations: [3, 10, 13, 14, 15],
+        });
+        if (createdUser) {
+          data = createdUser.get({
+            plain: true,
+          });
+          response = { user: data, err: false, message: 'user created successfully' };
+          return response;
+        }
+      } else if (user.type === 1) { 
+        let data = {};
+        const duplicateEmail = await User.findOne({ where: { email: user.email } });
+        if (duplicateEmail) {
+          response = { message: 'You have created an account with this email ', err: true };
+          throw response;
+        }
+        const createdUser = await User.create({
+          name: user.name,
+          email: user.email,
+          phone_number: user.phone_number,
+          password: hashPassword,
+          role_id: 1,
+          authorizations: [1],
         });
         if (createdUser) {
           data = createdUser.get({

@@ -1,26 +1,16 @@
-'use strict';
+/* eslint-disable arrow-body-style */
+import Date from '../services/menu.service';
 
-module.exports = {
-  up: (queryInterface, Sequelize) => {
-    /*
-      Add altering commands here.
-      Return a promise to correctly handle asynchronicity.
-
-      Example:
-      return queryInterface.bulkInsert('People', [{
-        name: 'John Doe',
-        isBetaMember: false
-      }], {});
-    */
+export default {
+  up: (queryInterface) => {
+    return queryInterface.bulkInsert('Menus', [{
+      caterer_id: 1,
+      meals: [1, 2],
+      createdAt: Date.todayDate(),
+    }], {});
   },
 
-  down: (queryInterface, Sequelize) => {
-    /*
-      Add reverting commands here.
-      Return a promise to correctly handle asynchronicity.
-
-      Example:
-      return queryInterface.bulkDelete('People', null, {});
-    */
-  }
+  down: (queryInterface) => {
+    return queryInterface.bulkDelete('Menus', null, {});
+  },
 };
