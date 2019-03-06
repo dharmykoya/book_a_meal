@@ -5,19 +5,22 @@ import OrderController from '../controllers/order.controller';
 
 const router = Router();
 
-// route for getting all meals created by a particular caterer
-// router.get('/', authMiddleware.checkToken, OrderMiddleware.getMenu, OrderController.fetchAllMealsByCaterer);
+// route for getting all order owned by a particular caterer
+router.get('/', authMiddleware.checkToken, OrderMiddleware.getOrders, OrderController.getOrders);
 
-// route for creating a new meal
+// adding a meal to item
 router.post('/', authMiddleware.checkToken, OrderMiddleware.createOrder, OrderController.addOrder);
 
-// route for getting a particular meal with the meal id
+// creating an order
+router.post('/', authMiddleware.checkToken, OrderMiddleware.createOrder, OrderController.createOrder);
+
+// route for getting a particular order with the meal id
 // router.get('/:id', authMiddleware.checkToken, MealMiddleware.getMeal, MealController.getMeal);
 
 // route for deleting a particular meal with the meal id
 // router.delete('/:id', authMiddleware.checkToken, OrderMiddleware.deleteMeal, OrderController.deleteMeal);
 
 // route for updating a meal with the meal id
-// router.put('/:id', authMiddleware.checkToken, OrderMiddleware.updateMenu, OrderController.updateMeal);
+router.put('/:id', authMiddleware.checkToken, OrderMiddleware.updateOrder, OrderController.updateOrder);
 
 export default router;

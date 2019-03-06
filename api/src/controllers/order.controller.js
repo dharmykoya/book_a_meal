@@ -11,7 +11,38 @@ import OrderService from '../services/order.service';
  * @description - handles the request coming from the route and interacts with the mealService class.
  */
 class OrderController {
-   /**
+  /**
+   * @description - Add a order option, only a caterer or an admin can perform this action.
+   * @static
+   * @param {object} req
+   * @memberof MealController
+   * @param {object} res
+   * @returns {*} - created meal
+   */
+  static async createOrder(req, res) {
+    try {
+      const { user_id } = req.decoded.user;
+      const { meals, total, caterer_id } = req.body;
+      const createdOrder = await OrderService.createOrders(meals, user_id, caterer_id, total);
+      if (createdOrder.err) {
+        res.status(401).send({
+          status: 'failed',
+          createdOrder,
+        });
+      }
+      res.status(201).send({
+        status: 'success',
+        createdOrder,
+      });
+    } catch (err) {
+      res.status(500).send({
+        status: 'failed',
+        err,
+      });
+    }
+  }
+
+  /**
    * @description - Add a order option, only a caterer or an admin can perform this action.
    * @static
    * @param {object} req
@@ -20,20 +51,72 @@ class OrderController {
    * @returns {*} - created meal
    */
   static async addOrder(req, res) {
-    const { user_id, caterer_id } = req.decoded.user;
-    const { orders } = req.body;
     try {
-      const createdMeal = await OrderService.addOrder(orders, user_id, caterer_id);
-      if (createdMeal.err) {
-        const data = createdMeal.error_message;
+      const { user_id } = req.decoded.user;
+      const { meal_id, quantity } = req.body;
+      // console.log('user_id', user_id);
+      // console.log('meal_id', meal_id);
+      // console.log('quantity', quantity)
+      const createdOrder = await OrderService.addToOrder(meal_id, user_id, quantity);
+      if (createdOrder.err) {
         res.status(401).send({
           status: 'failed',
-          data,
+          createdOrder,
         });
       }
       res.status(201).send({
         status: 'success',
-        createdMeal,
+        createdOrder,
+      });
+    } catch (err) {
+      res.status(500).send({
+        status: 'failed',
+        err,
+      });
+    }
+  }
+
+  /**
+   * @description - get a orders option, only a caterer or an admin can perform this action.
+   * @static
+   * @param {object} req
+   * @memberof MealController
+   * @param {object} res
+   * @returns {*} - order details
+   */
+  static async getOrders(req, res) {
+    try {
+      const { caterer_id } = req.decoded.user;
+      const orders = await OrderService.getOrders(caterer_id);
+      res.status(201).send({
+        status: 'success',
+        orders,
+      });
+    } catch (err) {
+      res.status(500).send({
+        status: 'failed',
+        err,
+      });
+    }
+  }
+
+  /**
+   * @description - update a orders option, only a caterer or an admin can perform this action.
+   * @static
+   * @param {object} req
+   * @memberof MealController
+   * @param {object} res
+   * @returns {*} - order details
+   */
+  static async updateOrder(req, res) {
+    try {
+      const { user_id } = req.decoded.user;
+      const { action } = req.body;
+      const { id } = req.params;
+      const updatedOrders = await OrderService.updateOrder(id, user_id, action);
+      res.status(201).send({
+        status: 'success',
+        data: updatedOrders,
       });
     } catch (err) {
       res.status(500).send({

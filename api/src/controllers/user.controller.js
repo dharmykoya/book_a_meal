@@ -16,30 +16,40 @@ class UserController {
    * @param {object} res
    * @returns {*} createUser
    */
-  static signup(req, res) {
+  // static signup(req, res) {
+  //   const user = req.body;
+  //   return UserService.emailExist(req.body.email || '')
+  //     .then((exist) => {
+  //       if (exist.length > 0) {
+  //         return res.send({
+  //           status: 'failed',
+  //           message: 'Registration failed. User with this email already registered.',
+  //         });
+  //       }
+  //       UserService.signup(user, (response) => {
+  //         if (response.err) {
+  //           res.status(400).send({
+  //             status: 'error',
+  //             message: response,
+  //           });
+  //         } else {
+  //           res.status(201).send({
+  //             status: 'success',
+  //             user: response.data,
+  //             message: 'please login with your details',
+  //           });
+  //         }
+  //       });
+  //     });
+  // }
+  static async signUp(req, res) {
     const user = req.body;
-    return UserService.emailExist(req.body.email || '')
-      .then((exist) => {
-        if (exist.length > 0) {
-          return res.send({
-            status: 'failed',
-            message: 'Registration failed. User with this email already registered.',
-          });
-        }
-        UserService.signup(user, (response) => {
-          if (response.err) {
-            res.status(400).send({
-              status: 'error',
-              message: response,
-            });
-          } else {
-            res.status(201).send({
-              status: 'success',
-              user: response.data,
-            });
-          }
-        });
-      });
+    try {
+      const createdUser = await UserService.addUser(user);
+      res.status(201).send({ createdUser });
+    } catch (error) {
+      res.status(400).send({ error });
+    }
   }
 
   /**
@@ -50,32 +60,14 @@ class UserController {
    * @returns {Object} loginUser
    * @memberof userController
    */
-  static login(req, res) {
-    return UserService.login(req.body, (response) => {
-      if (response.err) {
-        res.status(400).send({
-          status: 'error',
-          message: response.message,
-        });
-      } else {
-        res.status(200).send({
-          status: 'success',
-          user: response,
-        });
-      }
-    });
-      // .then((user) => {
-      //   res.send({
-      //     status: 'success',
-      //     user,
-      //   });
-      // });
-    // .catch((err) = {
-    //   res.send({
-    //     status: 'failed',
-    //     message: err.message
-    //   })
-    // })
+  static async login(req, res) {
+    const user = req.body;
+    try {
+      const userLogin = await UserService.login(user);
+      res.status(200).send({ userLogin });
+    } catch (error) {
+      res.status(400).send({ error });
+    }
   }
 }
 

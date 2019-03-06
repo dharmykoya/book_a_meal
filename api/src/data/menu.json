@@ -1,0 +1,16 @@
+{
+	"newMenu": {
+		"name": "Supper",
+		"description": "Enjoy our dinner",
+		"image_url": "https://image1.com",
+		"meals": [1,2],
+		"date": "2019-03-06"
+	  },
+	  "updateMenu": {
+		"name": "Update Menu",
+		"description": "Enjoy our dinner",
+		"image_url": "https://image1.com",
+		"meals": [1],
+		"date": "2019-03-06"
+	  }
+}

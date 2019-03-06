@@ -58,20 +58,12 @@ class MealController {
     try {
       const { caterer_id } = req.decoded.user;
       const foundMeals = await MealService.fetchAllMealsByCaterer(caterer_id);
-      if (foundMeals.err) {
-        res.status(401).send({
-          status: 'error',
-          message: foundMeals,
-        });
-      } else {
-        res.status(200).send({
-          status: 'success',
-          meals: foundMeals,
-        });
-      }
-    } catch (err) {
-      const errMessage = 'try again please';
-      res.status(500).send({ errMessage, err });
+      res.status(200).send({
+        status: 'success',
+        meals: foundMeals,
+      });
+    } catch (error) {
+      res.status(500).send({ error });
     }
   }
 
@@ -134,21 +126,15 @@ class MealController {
   // }
   static async updateMeal(req, res) {
     const { caterer_id } = req.decoded.user;
-    const meal = req.body;   
+    const meal = req.body;
     try {
       const updatedMeal = await MealService.updateMeal(req.params.id, caterer_id, meal);
-      if (updatedMeal.err) {
-        res.status(401).send({
-          status: 'failed',
-          updatedMeal,
-        });
-      }
-      res.status(201).send({
+      res.status(202).send({
         status: 'success',
         updatedMeal,
       });
     } catch (err) {
-      res.status(500).send({
+      res.status(400).send({
         status: 'Please try again or contact admin',
         err,
       });
@@ -168,19 +154,13 @@ class MealController {
     const { caterer_id } = req.decoded.user;
     try {
       const destroyedMeal = await MealService.deleteMeal(meal_id, caterer_id);
-      if (destroyedMeal.err) {
-        res.status(401).send({
-          status: 'failed',
-          destroyedMeal,
-        });
-      }
-      res.status(201).send({
+      res.status(202).send({
         status: 'success',
         destroyedMeal,
       });
     } catch (err) {
-      res.status(500).send({
-        status: 'Please try again or contact admin',
+      res.status(400).send({
+        status: 'false',
         err,
       });
     }

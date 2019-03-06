@@ -1,16 +1,16 @@
 export default (sequelize, DataTypes) => {
   const Order = sequelize.define('Order', {
-    meal_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'Meals',
-        key: 'id',
-        as: 'meal_id',
-      },
-    },
-    quantity: {
-      type: DataTypes.INTEGER,
+    // meal_id: {
+    //   type: DataTypes.INTEGER,
+    //   allowNull: false,
+    //   references: {
+    //     model: 'Meals',
+    //     key: 'id',
+    //     as: 'meal_id',
+    //   },
+    // },
+    order: {
+      type: DataTypes.JSON,
       allowNull: false,
     },
     total: {
@@ -19,7 +19,7 @@ export default (sequelize, DataTypes) => {
     },
     delivery_status: {
       type: DataTypes.INTEGER,
-      default: 0,
+      defaultValue: 0,
     },
     caterer_id: {
       type: DataTypes.INTEGER,
@@ -27,7 +27,7 @@ export default (sequelize, DataTypes) => {
       references: {
         model: 'Caterers',
         key: 'id',
-        as: 'caterer_id',
+        as: 'caterers',
       },
     },
     user_id: {
@@ -51,11 +51,11 @@ export default (sequelize, DataTypes) => {
   Order.associate = (models) => {
     Order.belongsTo(models.Caterer, {
       foreignKey: 'caterer_id',
-      as: 'order',
+      as: 'caterer',
     });
     Order.belongsTo(models.User, {
       foreignKey: 'user_id',
-      as: 'userOrder',
+      as: 'user',
     });
   };
   return Order;

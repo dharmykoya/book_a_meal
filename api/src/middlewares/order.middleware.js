@@ -28,7 +28,7 @@ const OrderMiddleware = {
   },
 
   /**
-     * @description - check if the user as the right to get meals option.
+     * @description - check if the user as the right to get order option.
      *
      * @param {object} req
      * @param {object} res
@@ -42,7 +42,7 @@ const OrderMiddleware = {
 
     const { authorizations } = req.decoded.user;
     const superAdmin = authorizations.includes(Authorizations.GLOBAL);
-    const caterer = authorizations.includes(Authorizations.READ_MENU);
+    const caterer = authorizations.includes(Authorizations.READ_ORDER);
 
     if (!superAdmin && !caterer) {
       return res.status(403).send({ message: 'You don\'t have the authorization or right to perform this action' });

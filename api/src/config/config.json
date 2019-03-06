@@ -5,8 +5,7 @@
     "database": "bookmeal",
     "host": "127.0.0.1",
     "port": 5432,
-    "dialect": "postgres",
-    "timezone": "Africa/Lagos"
+    "dialect": "postgres"
   },
   "test": {
     "username": "postgres",
@@ -14,15 +13,13 @@
     "database": "bookmeal",
     "host": "127.0.0.1",
     "port": 5432,
-    "dialect": "postgres",
-    "timezone": "Africa/Lagos"
+    "dialect": "postgres"
   },
   "production": { 
     "username": "postgres", 
     "password": "postgres", 
     "database": "bookmeal", 
     "host": "127.0.0.1", 
-    "dialect": "postgres" ,
-    "timezone": "Africa/Lagos"
+    "dialect": "postgres" 
   }
 }
