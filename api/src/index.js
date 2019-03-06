@@ -1,4 +1,8 @@
+/* eslint-disable import/first */
 import '@babel/polyfill';
+
+require('dotenv').config();
+
 import express from 'express';
 import bodyParser from 'body-parser';
 import MealsRoute from './routes/meal.route';

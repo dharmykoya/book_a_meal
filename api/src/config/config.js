@@ -1,20 +1,53 @@
-export default {
+require('dotenv').config();
+
+// export default {
+//   development: {
+//     username: 'postgres',
+//     password: 'postgres',
+//     database: 'bookmeal',
+//     host: '127.0.0.1',
+//     port: '5432',
+//     dialect: 'postgres',
+//     timezone: 'Africa/Lagos',
+//   },
+//   test: {
+//     username: 'postgres',
+//     password: 'postgres',
+//     database: 'bookmeal',
+//     host: '127.0.0.1',
+//     port: 5432,
+//     dialect: 'postgres',
+//     timezone: 'Africa/Lagos',
+//   },
+// };
+
+module.exports = {
   development: {
-    username: 'postgres',
-    password: 'postgres',
-    database: 'bookmeal',
-    host: '127.0.0.1',
-    port: '5432',
+    username: process.env.DB_USER,
+    password: process.env.DB_PASS,
+    database: process.env.DB_NAME,
+    host: process.env.DB_HOST,
     dialect: 'postgres',
-    timezone: 'Africa/Lagos',
   },
   test: {
     username: 'postgres',
     password: 'postgres',
     database: 'bookmeal',
     host: '127.0.0.1',
-    port: 5432,
     dialect: 'postgres',
-    timezone: 'Africa/Lagos',
+  },
+  production: {
+    username: process.env.POSTGRES_USERNAME,
+    password: process.env.POSTGRES_PASSWORD,
+    database: process.env.POSTGRES_DATABASE,
+    host: process.env.POSTGRES_HOST,
+    dialect: 'postgres',
+  },
+  travis: {
+    username: 'postgres',
+    password: 'postgres',
+    database: 'travis',
+    host: 'localhost',
+    dialect: 'postgres',
   },
 };
