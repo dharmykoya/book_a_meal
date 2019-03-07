@@ -76,7 +76,10 @@ const Sequelize = require('sequelize');
 
 const basename = path.basename(module.filename);
 const env = process.env.NODE_ENV || 'development';
-const config = require(`${__dirname}/../config/config.js`)[env];
+//const config = require(`${__dirname}/../config/config.js`)[env];
+
+// eslint-disable-next-line import/no-dynamic-require
+const config = require(__dirname + '/../config/config.js')[env];
 const db = {};
 
 // console.log('environment', env);
@@ -103,33 +106,40 @@ let sequelize;
 //     },
 //   );
 // }
+// if (config.use_env_variable) {
+//   //sequelize = new Sequelize(process.env[config.use_env_variable]);
+//   console.log('damiola', process.env.DATABASE_URL);
+//   sequelize = new Sequelize(
+//     process.env.DB_NAME,
+//     process.env.DB_USER,
+//     process.env.DB_PASS,
+//     {
+//       connectionString: process.env.DATABASE_URL,
+//       // port: process.env.DB_PORT,
+//       dialect: 'postgres',
+//       dialectOption: {
+//         ssl: true,
+//         native: true,
+//       },
+//       logging: true,
+//     },
+//   );
+// } else {
+//   sequelize = new Sequelize(
+//     //   config.database, config.username, config.password, config, config.dialect,
+//     config.database, config.username, config.password, {
+//       host: 'localhost',
+//       dialect: 'postgres',
+//       timezone: 'Africa/Lagos',
+//     },
+//   );
+// }
+
 if (config.use_env_variable) {
-  //sequelize = new Sequelize(process.env[config.use_env_variable]);
-  console.log('damiola', process.env.DATABASE_URL);
-  sequelize = new Sequelize(
-    process.env.DB_NAME,
-    process.env.DB_USER,
-    process.env.DB_PASS,
-    {
-      connectionString: process.env.DATABASE_URL,
-      // port: process.env.DB_PORT,
-      dialect: 'postgres',
-      dialectOption: {
-        ssl: true,
-        native: true,
-      },
-      logging: true,
-    },
-  );
+  sequelize = new Sequelize(process.env[config.use_env_variable], config);  
 } else {
-  sequelize = new Sequelize(
-    //   config.database, config.username, config.password, config, config.dialect,
-    config.database, config.username, config.password, {
-      host: 'localhost',
-      dialect: 'postgres',
-      timezone: 'Africa/Lagos',
-    },
-  );
+  // eslint-disable-next-line max-len
+  sequelize = new Sequelize(config.database, config.username, config.password, config, config.dialect);
 }
 
 fs
