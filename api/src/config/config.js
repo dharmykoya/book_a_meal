@@ -42,7 +42,8 @@ module.exports = {
     // database: process.env.POSTGRES_DATABASE,
     // host: process.env.POSTGRES_HOST,
     dialect: 'postgres',
-    use_env_variable: process.env.DATABASE_URL,
+    // use_env_variable: process.env.DATABASE_URL,
+    DATABASE_URL: process.env.DATABASE_URL,
   },
   travis: {
     username: 'postgres',
