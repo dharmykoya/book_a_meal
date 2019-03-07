@@ -136,6 +136,7 @@ let sequelize;
 // }
 
 if (config.use_env_variable) {
+  console.log('Damilola Adekoya');
   sequelize = new Sequelize(process.env[config.use_env_variable], config);  
 } else {
   // eslint-disable-next-line max-len
