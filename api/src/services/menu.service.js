@@ -18,11 +18,15 @@ class MenuService {
    */
  
   static todayDate() {
+    // const date = new Date();
+    // const month = `${date.getMonth() + 1}`;
+    // const day = date.getDate();
+    // const today = `${date.getFullYear()}-${month.padStart(2, '0')}-0${day}`;
+    // const today = `${date.getFullYear()}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;    
     const date = new Date();
     const month = `${date.getMonth() + 1}`;
-    const day = date.getDate();
-    const today = `${date.getFullYear()}-${month.padStart(2, '0')}-0${day}`;
-    // const today = `${date.getFullYear()}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+    const day = date.getDate().toString().length < 2 ? "0"+date.getDate() : date.getDate();
+    const today = `${date.getFullYear()}-${month.padStart(2, '0')}-${day}`;
     return today;
   }
 
