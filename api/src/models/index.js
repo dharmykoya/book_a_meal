@@ -107,9 +107,9 @@ if (config.use_env_variable) {
   //sequelize = new Sequelize(process.env[config.use_env_variable]);
   console.log('damiola', process.env.DATABASE_URL);
   sequelize = new Sequelize(
-    // process.env.DB_NAME,
-    // process.env.DB_USER,
-    // process.env.DB_PASS,
+    process.env.DB_NAME,
+    process.env.DB_USER,
+    process.env.DB_PASS,
     {
       connectionString: process.env.DATABASE_URL,
       // port: process.env.DB_PORT,
