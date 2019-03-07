@@ -87,6 +87,7 @@ let sequelize;
 if (config.environment === 'production') {
   // This block will run only on production and use the environment variable set in the .env file
   // sequelize = new Sequelize(process.env[config.use_env_variable]);
+  console.log('damilola adekoya');
   sequelize = new Sequelize(
     process.env.DB_NAME,
     process.env.DB_USER,
@@ -103,7 +104,22 @@ if (config.environment === 'production') {
   );
 }
 if (config.use_env_variable) {
-  sequelize = new Sequelize(process.env[config.use_env_variable]);
+  //sequelize = new Sequelize(process.env[config.use_env_variable]);
+  console.log('damilola adekoya');
+  sequelize = new Sequelize(
+    process.env.DB_NAME,
+    process.env.DB_USER,
+    process.env.DB_PASS, {
+      connectionString: process.env.DATABASE_URL,
+      // port: process.env.DB_PORT,
+      dialect: 'postgres',
+      dialectOption: {
+        ssl: true,
+        native: true,
+      },
+      logging: true,
+    },
+  );
 } else {
   sequelize = new Sequelize(
     //   config.database, config.username, config.password, config, config.dialect,
