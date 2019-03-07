@@ -87,7 +87,7 @@ let sequelize;
 if (config.environment === 'production') {
   // This block will run only on production and use the environment variable set in the .env file
   // sequelize = new Sequelize(process.env[config.use_env_variable]);
-  console.log('damilola adekoya');
+  console.log('damilola');
   sequelize = new Sequelize(
     process.env.DB_NAME,
     process.env.DB_USER,
