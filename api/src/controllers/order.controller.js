@@ -24,12 +24,6 @@ class OrderController {
       const { user_id } = req.decoded.user;
       const { meals, total, caterer_id } = req.body;
       const createdOrder = await OrderService.createOrders(meals, user_id, caterer_id, total);
-      if (createdOrder.err) {
-        res.status(401).send({
-          status: 'failed',
-          createdOrder,
-        });
-      }
       res.status(201).send({
         status: 'success',
         createdOrder,
@@ -50,20 +44,11 @@ class OrderController {
    * @param {object} res
    * @returns {*} - created meal
    */
-  static async addOrder(req, res) {
+  static async addToOrder(req, res) {
     try {
       const { user_id } = req.decoded.user;
       const { meal_id, quantity } = req.body;
-      // console.log('user_id', user_id);
-      // console.log('meal_id', meal_id);
-      // console.log('quantity', quantity)
       const createdOrder = await OrderService.addToOrder(meal_id, user_id, quantity);
-      if (createdOrder.err) {
-        res.status(401).send({
-          status: 'failed',
-          createdOrder,
-        });
-      }
       res.status(201).send({
         status: 'success',
         createdOrder,
@@ -125,6 +110,32 @@ class OrderController {
       });
     }
   }
+
+  // /**
+  //  * @description - update a orders option, only a caterer or an admin can perform this action.
+  //  * @static
+  //  * @param {object} req
+  //  * @memberof MealController
+  //  * @param {object} res
+  //  * @returns {*} - order details
+  //  */
+  // static async getOrderItems(req, res) {
+  //   try {
+  //     const { user_id } = req.decoded.user;
+  //     const { action } = req.body;
+  //     const { id } = req.params;
+  //     const updatedOrders = await OrderService.updateOrder(id, user_id, action);
+  //     res.status(201).send({
+  //       status: 'success',
+  //       data: updatedOrders,
+  //     });
+  //   } catch (err) {
+  //     res.status(500).send({
+  //       status: 'failed',
+  //       err,
+  //     });
+  //   }
+  // }
 }
 
 export default OrderController;

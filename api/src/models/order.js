@@ -10,7 +10,7 @@ export default (sequelize, DataTypes) => {
     //   },
     // },
     order: {
-      type: DataTypes.JSON,
+      type: DataTypes.ARRAY(DataTypes.INTEGER),
       allowNull: false,
     },
     total: {

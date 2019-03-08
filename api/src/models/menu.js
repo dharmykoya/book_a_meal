@@ -17,6 +17,7 @@ export default (sequelize, DataTypes) => {
     },
     meals: {
       type: DataTypes.ARRAY(DataTypes.INTEGER),
+      defaultValue: [],
       allowNull: {
         args: true,
         msg: 'Please enter meals',

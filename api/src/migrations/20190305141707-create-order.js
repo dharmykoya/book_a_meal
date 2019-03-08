@@ -7,7 +7,7 @@ module.exports = {
       primaryKey: true,
     },
     order: {
-      type: Sequelize.JSON,
+      type: Sequelize.ARRAY(Sequelize.INTEGER),
       allowNull: false,
     },
     total: {

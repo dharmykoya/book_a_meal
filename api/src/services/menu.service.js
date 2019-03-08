@@ -16,17 +16,17 @@ class MenuService {
    *
    * @return{json} all meals available in the database
    */
- 
+
   static todayDate() {
-    const date = new Date();
-    const month = `${date.getMonth() + 1}`;
-    const day = date.getDate();
-    const today = `${date.getFullYear()}-${month.padStart(2, '0')}-0${day}`;
-    // const today = `${date.getFullYear()}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;    
     // const date = new Date();
     // const month = `${date.getMonth() + 1}`;
-    // const day = date.getDate().toString().length < 2 ? "0"+ date.getDate() : date.getDate();
-    // const today = `${date.getFullYear()}-${month.padStart(2, '0')}-${day}`;
+    // const day = date.getDate();
+    // const today = `${date.getFullYear()}-${month.padStart(2, '0')}-0${day}`;
+    // const today = `${date.getFullYear()}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+    const date = new Date();
+    const month = `${date.getMonth() + 1}`;
+    const day = date.getDate().toString().length < 2 ? '0' + date.getDate() : date.getDate();
+    const today = `${date.getFullYear()}-${month.padStart(2, '0')}-${day}`;
     return today;
   }
 
@@ -37,20 +37,60 @@ class MenuService {
    *
    * @return{json} menu available in the database
    */
-  static async getMenu(catererId) {
+  static async getCatererMenu(catererId) {
     try {
+      let response = {};
       const today = this.todayDate();
-      const foundMenu = await Menu.findOne({ where: { createdAt: today } });
+      const foundMenu = await Menu.findOne({
+        where: { caterer_id: catererId, createdAt: today },
+      }).catch((e) => {
+        response = { err: e, message: 'this caterer has no menu set' };
+        throw response;
+      });
+      console.log(foundMenu);
       const mealId = foundMenu.dataValues.meals;
-      console.log('id', mealId);
-      try {
-        const foundMenuMeal = await this.getMealById(mealId, catererId);
-        console.log('menu', foundMenuMeal);
-        return { menu: foundMenuMeal, error: false }; 
-      } catch (err) {
-        const error = { error: true, error_message: 'error', err };
-        throw error;
-      }      
+      const foundMenuMeal = await this.getMealById(mealId, catererId);
+      response = { menu: foundMenuMeal, error: false };
+      return response;
+    } catch (err) {
+      const error = { error: true, error_message: 'could not fetch menu', err };
+      throw error;
+    }
+  }
+
+  /**
+   * get all menu
+   * @static
+   * @description - Fetches the menu for a day.
+   *
+   * @return{json} menu available in the database
+   */
+  static async getMenu() {
+    try {
+      let response = {};
+      const today = this.todayDate();
+      await Menu.findAll({
+        where: { createdAt: today },
+      }).then(async (menus) => {
+        const foundMenuMeal = await menus.map(async (menu) => {
+          console.log(menu.meals);
+          await this.getMealById(menu.meals);
+        });
+        response = { menu: foundMenuMeal, error: false };
+        return response;
+      }).catch((e) => {
+        response = { err: e.message };
+        throw response;
+      });
+      // .catch((e) => {
+      //   response = { err: e.message, message: 'this caterer has no menu set' };
+      //   throw response;
+      // });
+      // console.log(foundMenus);
+      // const mealId = foundMenus.dataValues.meals;
+      // const foundMenuMeal = await this.getMealById(mealId);
+      // response = { menu: foundMenuMeal, error: false };
+      return response;
     } catch (err) {
       const error = { error: true, error_message: 'could not fetch menu', err };
       throw error;
@@ -68,21 +108,31 @@ class MenuService {
   static async setupMenu(mealId, catererId) {
     try {
       const today = this.todayDate();
-      const menu = await Menu.findAll({ where: { caterer_id: catererId, createdAt: today }, returning: true, plain: true });
-      if (menu === null) {
+      const menu = await Menu.findAll({
+        where: { caterer_id: catererId, createdAt: today },
+        returning: true,
+        plain: true,
+      }).catch((e) => {
+        const response = { err: e.message };
+        throw response;
+      });
+      if (!menu) {
         const createdMenu = await Menu.create({
           caterer_id: catererId,
-          meals: [mealId],
+          meals: mealId,
+        }).catch((e) => {
+          const response = { err: e.message };
+          throw response;
         });
         return { createdMenu, err: false, message: 'Menu set successfully' };
       }
-      return { menu, err: true, error_message: 'Menu set already' }; 
+      return { menu, err: true, error_message: 'Menu set already' };
     } catch (err) {
       const error = { error_message: 'something went wrong', err };
       throw error;
     }
   }
-  
+
   /**
    * get all meal by id
    * @static
@@ -94,17 +144,45 @@ class MenuService {
    */
   static async getMealById(mealId, catererId) {
     try {
-      const meals = await Meal.findAll({ where: { caterer_id: catererId } });
-      const meal_id = mealId[0].split(',');
-      const singleMealId = meal_id.map(id => Number(id));
-      const mealer = meals.filter(mealed => singleMealId.includes(mealed.dataValues.id));
-      return mealer;
+      let response = {};
+      let meals;
+      // const today = new Date();
+      if (!catererId) {
+        console.log('dami');
+        await Meal.findAll()
+          .then((meal) => {
+            // console.log(meal);
+          // // const meal_id = mealId[0].split(',');
+          const singleMealId = meal.map(id => Number(id.id));
+          // console.log('meal_id', singleMealId);
+          response = meal.filter(mealed => singleMealId.includes(mealed.dataValues.id));
+          console.log('dddddd', response.dataValues);
+          return response;
+          }).catch((e) => {
+            response = { err: e.message };
+            throw response;
+          });
+      } else {
+        console.log('doyin');
+        meals = await Meal.findAll({
+          where: { caterer_id: catererId },
+        }).catch((e) => {
+          response = { err: e.message };
+          throw response;
+        });
+      }      
+      if (meals.length === 0) {
+        response = { error: true, error_message: 'no meal found for this caterer' };
+        throw response;
+      }
+      // const meal_id = mealId[0].split(',');
+      const singleMealId = mealId.map(id => Number(id));
+      response = meals.filter(mealed => singleMealId.includes(mealed.dataValues.id));
+      return response;
     } catch (err) {
-      const error = { errorm: true, error_message: 'something went wrong', err };
-      throw error;
+      const response = { error: true, error_message: 'something went wrong', err };
+      throw response;
     }
-    // const result = MealData.meals.filter(meal => mealsId.includes(meal.id));
-    // return result;
   }
 }
 

@@ -96,7 +96,8 @@ class MealService {
         meal,
         { where: { id, caterer_id: catererId }, returning: true, plain: true },
       );
-      if (!updateMeal) {
+      if (updateMeal === null) {
+        console.log(updateMeal);
         response = { err: true, error_message: 'update failed'};
         throw response;
       }
@@ -118,7 +119,7 @@ class MealService {
    */
   static async deleteMeal(id, catererId) {
     try {
-      let response = {}
+      let response = {};
       const destroyedMeal = await Meal.destroy({ where: { id, caterer_id: catererId } });
       if (!destroyedMeal) {
         response = { err: true, message: 'delete failed' };

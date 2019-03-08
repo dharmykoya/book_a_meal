@@ -76,9 +76,14 @@ class MealController {
    * @returns {*} - created meal
    */
   static async addMeal(req, res) {
-    const { caterer_id } = req.decoded.user;
+    const { caterer_id } = req.decoded.user;    
+    const { name, price } = req.body;    
     const meal = req.body;
     try {
+      if (!name || !price) {
+        const response = 'missing fields';
+        throw response;
+      }
       const createdMeal = await MealService.addMeal(meal, caterer_id);
       if (createdMeal.err) {
         const data = createdMeal.error_message;

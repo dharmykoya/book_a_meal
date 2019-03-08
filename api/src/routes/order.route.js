@@ -8,11 +8,14 @@ const router = Router();
 // route for getting all order owned by a particular caterer
 router.get('/', authMiddleware.checkToken, OrderMiddleware.getOrders, OrderController.getOrders);
 
+// route for getting all order owned by a particular user
+//router.get('/:user_id', authMiddleware.checkToken, OrderMiddleware.getOrders, OrderController.getOrderItems);
+
 // adding a meal to item
-router.post('/', authMiddleware.checkToken, OrderMiddleware.createOrder, OrderController.addOrder);
+router.post('/', authMiddleware.checkToken, OrderMiddleware.createOrder, OrderController.addToOrder);
 
 // creating an order
-router.post('/', authMiddleware.checkToken, OrderMiddleware.createOrder, OrderController.createOrder);
+router.post('/confirm', authMiddleware.checkToken, OrderMiddleware.createOrder, OrderController.createOrder);
 
 // route for getting a particular order with the meal id
 // router.get('/:id', authMiddleware.checkToken, MealMiddleware.getMeal, MealController.getMeal);

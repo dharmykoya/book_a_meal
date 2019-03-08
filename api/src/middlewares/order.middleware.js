@@ -19,7 +19,7 @@ const OrderMiddleware = {
 
     const { authorizations } = req.decoded.user;
     const superAdmin = authorizations.includes(Authorizations.GLOBAL);
-    const caterer = authorizations.includes(Authorizations.CREATE_MENU);
+    const caterer = authorizations.includes(Authorizations.CREATE_ORDER);
 
     if (!superAdmin && !caterer) {
       return res.status(403).send({ message: 'You don\'t have the authorization or right to perform this action' });

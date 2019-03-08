@@ -37,5 +37,11 @@ export default (sequelize, DataTypes) => {
       as: 'user',
     });
   };
+  Item.associate = (models) => {
+    Item.belongsTo(models.Meal, {
+      foreignKey: 'meal_id',
+      as: 'meal',
+    });
+  };
   return Item;
 };

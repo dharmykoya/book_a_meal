@@ -22,19 +22,16 @@ class OrderService {
       // console.log(mealId, userId, quantity);
       let response;
       const orderItem = await Item.findOne({ where: { meal_id: mealId, user_id: userId } });
-      console.log(orderItem);
       if (orderItem) {
-        console.log('failed');
         response = {
           err: true,
           status: 'existing',
           message: 'Order exist Already',
           orderItem,
         };
-        return response;
-      } 
+        throw response;
+      }
       if (orderItem === null) {
-        console.log('success');
         const newOrderItem = await Item.create({
           meal_id: mealId,
           quantity,
@@ -127,18 +124,26 @@ class OrderService {
    * @param{Object} userId - user that created the order.
    * @param{Object} caterer_id - caterer that owns the meal to be created
    *
-   */ 
+   */
 
   static async updateOrder(orderId, userId, action) {
     try {
       const orderItem = await Item.findOne({
         where: { id: orderId, user_id: userId },
-        include: [Meal],
+        include: [{ 
+          model: Meal,
+          as: 'meal',
+        }],
         raw: true,
       });
+      // console.log('name', orderItem);
       if (action === 'increase') {
-        orderItem.quantity += 1;        
-        await Item.update({ quantity: orderItem.quantity }, { where: { id: orderItem.id } });
+        orderItem.quantity += 1;
+        await Item.update({ quantity: orderItem.quantity }, { where: { id: orderItem.id } })
+          .catch((err) => {
+            const response = { err };
+            throw response;
+          });
       } else if (action === 'decrease') {
         orderItem.quantity -= 1;
         if (orderItem.quantity === 0) {
@@ -175,7 +180,7 @@ class OrderService {
   static async createOrders(meals, userId, catererId, orderTotal) {
     try {
       const createdOrder = await Order.create({
-        order: JSON.stringify(meals),
+        order: [meals],
         total: orderTotal,
         caterer_id: catererId,
         user_id: userId,
@@ -187,8 +192,9 @@ class OrderService {
         data: createdOrder,
       };
       return response;
-    } catch (err) {
-      throw new Error(err.message);
+    } catch (error) {
+      const response = { message: error.message, err: true };
+      throw response;
     }
   }
 }

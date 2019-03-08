@@ -27,14 +27,10 @@ module.exports = {
     createdAt: {
       allowNull: false,
       type: Sequelize.DATEONLY,
-      dateStrings: true,
-      typeCast: true,
     },
     updatedAt: {
       allowNull: false,
       type: Sequelize.DATEONLY,
-      dateStrings: true,
-      typeCast: true,
     },
   }),
   down: queryInterface => queryInterface.dropTable('Menus'),

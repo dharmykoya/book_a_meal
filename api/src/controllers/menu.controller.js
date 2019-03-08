@@ -11,21 +11,47 @@ import MenuService from '../services/menu.service';
  * @description - handles the request coming from the route and interacts with the MenuService class.
  */
 class MenuController {
+  /**
+   * @description - Add a menu option, only a caterer or an admin can perform this action.
+   * @static
+   * @param {object} req
+   * @memberof MealController
+   * @param {object} res
+   * @returns {*} - created meal
+   */
+  static async getCatererMenu(req, res) {
+    try {
+      const { catererId } = req.params;
+      if (!catererId) {
+        const response = 'please select a caterer to check their menu';
+        throw response;
+      }
+      const foundMenu = await MenuService.getCatererMenu(catererId);
+      res.status(200).send({
+        status: 'success',
+        foundMenu,
+      });
+    } catch (err) {
+      const errMessage = 'try again please';
+      res.status(500).send({ errMessage, err });
+    }
+  }
+
+  /**
+   * @description - Add a menu option, only a caterer or an admin can perform this action.
+   * @static
+   * @param {object} req
+   * @memberof MealController
+   * @param {object} res
+   * @returns {*} - created meal
+   */
   static async getMenu(req, res) {
     try {
-      const { caterer_id } = req.decoded.user;
-      const foundMenu = await MenuService.getMenu(caterer_id);
-      if (foundMenu.err) {
-        res.status(401).send({
-          status: 'error',
-          foundMenu,
-        });
-      } else {
-        res.status(200).send({
-          status: 'success',
-          foundMenu,
-        });
-      }
+      const foundMenu = await MenuService.getMenu();
+      res.status(200).send({
+        status: 'success',
+        foundMenu,
+      });
     } catch (err) {
       const errMessage = 'try again please';
       res.status(500).send({ errMessage, err });
@@ -43,15 +69,12 @@ class MenuController {
   static async setupMenu(req, res) {
     const { caterer_id } = req.decoded.user;
     const mealId = req.body;
-
     try {
-      const createdMenu = await MenuService.setupMenu(mealId.meal_id, caterer_id);
-      if (createdMenu.err) {
-        res.status(401).send({
-          status: 'failed',
-          createdMenu,
-        });
+      if (!mealId) {
+        const response = 'please select a meal';
+        throw response;
       }
+      const createdMenu = await MenuService.setupMenu(mealId.meal_id, caterer_id);
       res.status(201).send({
         status: 'success',
         createdMenu,

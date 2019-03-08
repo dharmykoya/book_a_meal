@@ -43,13 +43,13 @@ export default (sequelize, DataTypes) => {
     });
   };
   Meal.associate = (models) => {
-    Meal.hasMany(models.Order, {
+    Meal.hasMany(models.Item, {
       foreignKey: 'meal_id',
       as: 'meals',
     });
   };
-  // User.associate = (models) => {
-  //   User.hasMany(models.Order, {
+  // Meal.associate = (models) => {
+  //   Meal.hasMany(models.Order, {
   //     foreignKey: 'user_id',
   //     as: 'orders',
   //   });
