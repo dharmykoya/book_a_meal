@@ -24,7 +24,7 @@ export default (sequelize, DataTypes) => {
         },
       },
     },
-    phoneNumber: {
+    phone_number: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -44,13 +44,23 @@ export default (sequelize, DataTypes) => {
     },
     role_id: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      defaultValue: 3,
+      allowNull: {
+        args: false,
+        msg: 'Please enter the role',
+      },
+      validate: {
+        isInt: {
+          args: true,
+          msg: 'Please enter a valid number',
+        },
+      },
     },
   });
   User.associate = (models) => {
     User.hasMany(models.Meal, {
       foreignKey: 'user_id',
     });
-    return User;
   };
+  return User;
 };

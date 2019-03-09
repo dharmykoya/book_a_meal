@@ -1,30 +1,28 @@
 module.exports = {
-  up: (queryInterface, Sequelize) => queryInterface.createTable('Users', {
+  up: (queryInterface, Sequelize) => queryInterface.createTable('Caterers', {
     id: {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
       type: Sequelize.INTEGER,
     },
-    name: {
+    user_id: {
+      type: Sequelize.STRING,
+      allowNull: false,
+      unique: true,
+      references: {
+        model: 'Users',
+        key: 'id',
+        as: 'user_id',
+      },
+    },
+    restaurant_name: {
       type: Sequelize.STRING,
       allowNull: false,
     },
-    email: {
+    restaurant_logo: {
       type: Sequelize.STRING,
-      allowNull: false,
-    },
-    phone_number: {
-      type: Sequelize.STRING,
-      allowNull: false,
-    },
-    password: {
-      type: Sequelize.STRING,
-      allowNull: false,
-    },
-    role_id: {
-      type: Sequelize.INTEGER,
-      defaultValue: 3,
+      allowNull: true,
     },
     createdAt: {
       allowNull: false,
@@ -35,5 +33,5 @@ module.exports = {
       type: Sequelize.DATE,
     },
   }),
-  down: queryInterface => queryInterface.dropTable('Users'),
+  down: queryInterface => queryInterface.dropTable('Caterers'),
 };

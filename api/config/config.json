@@ -14,5 +14,12 @@
     "host": "127.0.0.1",
     "port": 5432,
     "dialect": "postgres"
+  },
+  "production": { 
+    "username": "postgres", 
+    "password": "postgres", 
+    "database": "bookmeal", 
+    "host": "127.0.0.1", 
+    "dialect": "postgres" 
   }
 }
