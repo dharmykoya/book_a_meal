@@ -31,7 +31,12 @@
   },
   "keywords": [
     "Book-a-Meal",
-    "Andela"
+    "Andela",
+    "JWT",
+    "Sequelize",
+    "PostgreSQL",
+    "Authentication",
+    "Single Repository Pattern"
   ],
   "bugs": {
     "url": "https://github.com/dharmykoya/book_a_meal/issues"

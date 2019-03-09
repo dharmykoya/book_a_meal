@@ -6,8 +6,17 @@ module.exports = {
       primaryKey: true,
       type: Sequelize.INTEGER,
     },
+    caterer_id: {
+      type: Sequelize.INTEGER,
+      references: {
+        model: 'Caterers',
+        key: 'id',
+        as: 'caterer_id',
+      },
+    },
     name: {
       type: Sequelize.STRING,
+      unique: true,
       allowNull: false,
     },
     size: {
@@ -21,14 +30,6 @@ module.exports = {
     image: {
       type: Sequelize.STRING,
       allowNull: false,
-    },
-    user_id: {
-      type: Sequelize.INTEGER,
-      references: {
-        model: 'Users',
-        key: 'id',
-        as: 'user_id',
-      },
     },
     createdAt: {
       allowNull: false,

@@ -17,10 +17,31 @@ const UserController = {
             message: 'Registration failed. User with this email already registered.',
           });
         }
-        UserService.signup(user)
-          .then(() => res.status(201).send({
-            status: 'success',
-          }));
+        UserService.signup(user, (response) => {
+          if (response.err) {
+            res.status(400).send({
+              status: 'error',
+              message: response.message,
+            });
+          } else {
+            res.status(201).send({
+              status: 'success',
+            });
+          }
+        });
+        // .then((createdUser) => {
+        //   console.log('created user', createdUser);
+        //   if (createdUser) {
+        //     res.status(201).send({
+        //       status: 'success',
+        //     });
+        //   } else {
+        //     res.status(200).send({
+        //       status: 'hello',
+        //       message: result.response,
+        //     });
+        //   }
+        // });
       });
   },
   /**
