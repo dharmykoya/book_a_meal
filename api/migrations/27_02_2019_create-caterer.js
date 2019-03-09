@@ -9,12 +9,12 @@ module.exports = {
     user_id: {
       type: Sequelize.STRING,
       allowNull: false,
-      unique: true,      
+      unique: true,
       references: {
         model: 'Users',
         key: 'id',
         as: 'user_id',
-      }
+      },
     },
     restaurant_name: {
       type: Sequelize.STRING,
