@@ -1,0 +1,12 @@
+{
+  "newMeal": {
+    "name": "eba and egusi",
+    "image": "abc.xyz",
+    "price": "600"
+  },
+  "updateMeal": {
+    "name": "eba and egusi",
+    "image": "abc.xyz",
+    "price": "600"
+  }
+}

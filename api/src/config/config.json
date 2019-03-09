@@ -1,12 +1,11 @@
 {
   "development": {
-    "username": "postgres",
-    "password": "postgres",
-    "database": "bookmeal",
-    "host": "127.0.0.1",
+    "username": "DB_USER",
+    "password": "DB_PASS",
+    "database": "DB_NAME",
+    "host": "DB_HOST",
     "port": 5432,
-    "dialect": "postgres",
-    "timezone": "Africa/Lagos"
+    "dialect": "postgres"
   },
   "test": {
     "username": "postgres",
@@ -14,15 +13,21 @@
     "database": "bookmeal",
     "host": "127.0.0.1",
     "port": 5432,
-    "dialect": "postgres",
-    "timezone": "Africa/Lagos"
+    "dialect": "postgres"
   },
   "production": { 
+    "use_env_variable": "DATABASE_URL",
     "username": "postgres", 
     "password": "postgres", 
     "database": "bookmeal", 
     "host": "127.0.0.1", 
-    "dialect": "postgres" ,
-    "timezone": "Africa/Lagos"
+    "dialect": "postgres" 
+  },
+  "travis": { 
+    "username": "postgres", 
+    "password": "postgres", 
+    "database": "bookmeal", 
+    "host": "127.0.0.1", 
+    "dialect": "postgres" 
   }
 }

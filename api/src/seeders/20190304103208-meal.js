@@ -1,26 +1,27 @@
-'use strict';
+/* eslint-disable arrow-body-style */
+const now = new Date();
 
-module.exports = {
-  up: (queryInterface, Sequelize) => {
-    /*
-      Add altering commands here.
-      Return a promise to correctly handle asynchronicity.
-
-      Example:
-      return queryInterface.bulkInsert('People', [{
-        name: 'John Doe',
-        isBetaMember: false
-      }], {});
-    */
+export default {
+  up: (queryInterface) => {
+    return queryInterface.bulkInsert('Meals', [{  
+      caterer_id: 1,
+      name: 'Rice and beans with two beefs',
+      image: 'rice.png',
+      price: 800,
+      createdAt: now,
+      updatedAt: now,
+    },
+    {
+      caterer_id: 1,
+      name: 'bread and beans',
+      image: 'beans.png',
+      price: 200,
+      createdAt: now,
+      updatedAt: now,
+    }], {});
   },
 
-  down: (queryInterface, Sequelize) => {
-    /*
-      Add reverting commands here.
-      Return a promise to correctly handle asynchronicity.
-
-      Example:
-      return queryInterface.bulkDelete('People', null, {});
-    */
-  }
+  down: (queryInterface) => {
+    return queryInterface.bulkDelete('Meals', null, {});
+  },
 };

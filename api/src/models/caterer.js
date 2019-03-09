@@ -5,7 +5,7 @@ export default (sequelize, DataTypes) => {
       defaultValue: 2,
       allowNull: false,
       references: {
-        model: 'User',
+        model: 'Users',
         key: 'id',
         as: 'user_id',
       },
@@ -48,6 +48,10 @@ export default (sequelize, DataTypes) => {
     Caterer.belongsTo(models.User, {
       foreignKey: 'user_id',
       as: 'user',
+    });
+    Caterer.hasMany(models.Order, {
+      foreignKey: 'caterer_id',
+      as: 'orders',
     });
   };
   return Caterer;

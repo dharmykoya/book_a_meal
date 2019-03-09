@@ -6,6 +6,7 @@ import MenuController from '../controllers/menu.controller';
 
 const router = Router();
 
+router.get('/:catererId', authMiddleware.checkToken, MenuMiddleware.getMenu, MenuController.getCatererMenu);
 router.get('/', authMiddleware.checkToken, MenuMiddleware.getMenu, MenuController.getMenu);
 router.post('/', authMiddleware.checkToken, MenuMiddleware.setupMenu, MenuController.setupMenu);
 
