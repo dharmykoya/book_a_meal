@@ -11,7 +11,7 @@ class OrderService {
   /**
    * add a new order
    * @static
-   * @description - Creates a new meal in the app.
+   * @description - adds a new order to the item in the app.
    * @param{Object} orders - meal to be created
    * @param{Object} userId - user that created the order.
    * @param{Object} caterer_id - caterer that owns the meal to be created

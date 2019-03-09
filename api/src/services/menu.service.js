@@ -157,11 +157,11 @@ class MenuService {
           // console.log('meal_id', singleMealId);
           response = meal.filter(mealed => singleMealId.includes(mealed.dataValues.id));
           console.log('dddddd', response.dataValues);
-          return response;
-          }).catch((e) => {
-            response = { err: e.message };
-            throw response;
-          });
+          // return response;
+          // }).catch((e) => {
+          //   response = { err: e.message };
+          //   throw response;
+          // });
       } else {
         console.log('doyin');
         meals = await Meal.findAll({
