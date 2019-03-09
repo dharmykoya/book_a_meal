@@ -5,6 +5,8 @@ require('dotenv').config();
 
 import express from 'express';
 import bodyParser from 'body-parser';
+import swaggerUi from 'swagger-ui-express';
+import swaggerDocument from '../swagger.json';
 import MealsRoute from './routes/meal.route';
 import MenuRoute from './routes/menu.route';
 import OrdersRoute from './routes/order.route';
@@ -16,6 +18,10 @@ export const app = express();
 const PORT = process.env.PORT || 8080;
 
 app.use(bodyParser.json());
+
+
+app.use('/api/v1/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+// app.use('/api/v1', router);
 
 // rout for the landing page or home page
 app.get('/', (req, res) => res.send('Welcome to meal app'));

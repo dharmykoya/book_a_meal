@@ -15,7 +15,7 @@ router.get('/', authMiddleware.checkToken, OrderMiddleware.getOrders, OrderContr
 router.post('/', authMiddleware.checkToken, OrderMiddleware.createOrder, OrderController.addToOrder);
 
 // creating an order
-router.post('/confirm', authMiddleware.checkToken, OrderMiddleware.createOrder, OrderController.createOrder);
+router.post('/checkout', authMiddleware.checkToken, OrderMiddleware.createOrder, OrderController.createOrder);
 
 // route for getting a particular order with the meal id
 // router.get('/:id', authMiddleware.checkToken, MealMiddleware.getMeal, MealController.getMeal);
