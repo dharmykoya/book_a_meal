@@ -1,41 +1,189 @@
-import Menu from '../models/menu.model';
-import MenuData from '../data/menuData';
-import MealData from '../data/mealData';
+/* eslint-disable camelcase */
+/* eslint-disable max-len */
+/* eslint-disable consistent-return */
+import { Meal, Menu } from '../models';
+// import { sequelize } from '../models/index';
 
-const MenuService = {
-  addMenu(menu) {
-    const menuLength = MenuData.menu.length;
-    const lastId = MenuData.menu[menuLength - 1].id;
-    const id = lastId + 1;
-    const newMenu = { id, ...menu };
-    MenuData.menu = [...MenuData.menu, newMenu];
-    return MenuData.menu;
-  },
+/**
+ * @class MenuService
+ * @description - Describes the Meals behaviour of the app, basic CRUD operations etc and can only be accessed if user have the authorization.
+ */
+class MenuService {
+  /**
+   * get today date
+   * @static
+   * @description - get today date to look like what we have in the database
+   *
+   * @return{json} all meals available in the database
+   */
 
-  getMenu() {
-    const today = this.getDate();
-    const singleMenu = MenuData.menu.filter(data => data.date === today);
-    const todayMenu = new Menu();
-    todayMenu.id = singleMenu[0].id;
-    todayMenu.user_id = singleMenu[0].user_id;
-    todayMenu.meal_id = this.getMealById(singleMenu[0].meal_id);
-    todayMenu.date = singleMenu[0].date;
-    return todayMenu;
-  },
-
-  getDate() {
+  static todayDate() {
+    // const date = new Date();
+    // const month = `${date.getMonth() + 1}`;
+    // const day = date.getDate();
+    // const today = `${date.getFullYear()}-${month.padStart(2, '0')}-0${day}`;
+    // const today = `${date.getFullYear()}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
     const date = new Date();
-    const year = date.getFullYear();
-    const month = date.getMonth() + 1;
-    const day = date.getDate();
-
-    const today = `${day}-${month}-${year}`;
+    const month = `${date.getMonth() + 1}`;
+    const day = date.getDate().toString().length < 2 ? '0' + date.getDate() : date.getDate();
+    const today = `${date.getFullYear()}-${month.padStart(2, '0')}-${day}`;
     return today;
-  },
-  getMealById(mealsId) {
-    const result = MealData.meals.filter(meal => mealsId.includes(meal.id));
-    return result;
-  },
-};
+  }
+
+  /**
+   * get all menu
+   * @static
+   * @description - Fetches the menu for a day.
+   *
+   * @return{json} menu available in the database
+   */
+  static async getCatererMenu(catererId) {
+    try {
+      let response = {};
+      const today = this.todayDate();
+      const foundMenu = await Menu.findOne({
+        where: { caterer_id: catererId, createdAt: today },
+      }).catch((e) => {
+        response = { err: e, message: 'this caterer has no menu set' };
+        throw response;
+      });
+      console.log(foundMenu);
+      const mealId = foundMenu.dataValues.meals;
+      const foundMenuMeal = await this.getMealById(mealId, catererId);
+      response = { menu: foundMenuMeal, error: false };
+      return response;
+    } catch (err) {
+      const error = { error: true, error_message: 'could not fetch menu', err };
+      throw error;
+    }
+  }
+
+  /**
+   * get all menu
+   * @static
+   * @description - Fetches the menu for a day.
+   *
+   * @return{json} menu available in the database
+   */
+  static async getMenu() {
+    try {
+      let response = {};
+      const today = this.todayDate();
+      await Menu.findAll({
+        where: { createdAt: today },
+      }).then(async (menus) => {
+        const foundMenuMeal = await menus.map(async (menu) => {
+          console.log(menu.meals);
+          await this.getMealById(menu.meals);
+        });
+        response = { menu: foundMenuMeal, error: false };
+        return response;
+      }).catch((e) => {
+        response = { err: e.message };
+        throw response;
+      });
+      // .catch((e) => {
+      //   response = { err: e.message, message: 'this caterer has no menu set' };
+      //   throw response;
+      // });
+      // console.log(foundMenus);
+      // const mealId = foundMenus.dataValues.meals;
+      // const foundMenuMeal = await this.getMealById(mealId);
+      // response = { menu: foundMenuMeal, error: false };
+      return response;
+    } catch (err) {
+      const error = { error: true, error_message: 'could not fetch menu', err };
+      throw error;
+    }
+  }
+
+  /**
+   * setupMenu
+   * @static
+   * @description - Creates a new menu or returns an existing menu for a day in the app.
+   * @param{Object} mealId - menu id to be created
+   * @param{Object} caterer_id - caterer that owns the menu to be created
+   * @return{json} the created menu detail
+   */
+  static async setupMenu(mealId, catererId) {
+    try {
+      const today = this.todayDate();
+      const menu = await Menu.findAll({
+        where: { caterer_id: catererId, createdAt: today },
+        returning: true,
+        plain: true,
+      }).catch((e) => {
+        const response = { err: e.message };
+        throw response;
+      });
+      if (!menu) {
+        const createdMenu = await Menu.create({
+          caterer_id: catererId,
+          meals: mealId,
+        }).catch((e) => {
+          const response = { err: e.message };
+          throw response;
+        });
+        return { createdMenu, err: false, message: 'Menu set successfully' };
+      }
+      return { menu, err: true, error_message: 'Menu set already' };
+    } catch (err) {
+      const error = { error_message: 'something went wrong', err };
+      throw error;
+    }
+  }
+
+  /**
+   * get all meal by id
+   * @static
+   * @description - Fetches the meal for a day.
+   * @param{Object} mealId - menu id to be created
+   * @param{Object} caterer_id - caterer that owns the menu to be created
+   *
+   * @return{json} menu available in the database
+   */
+  static async getMealById(mealId, catererId) {
+    try {
+      let response = {};
+      let meals;
+      // const today = new Date();
+      if (!catererId) {
+        console.log('dami');
+        await Meal.findAll()
+          .then((meal) => {
+            // console.log(meal);
+          // // const meal_id = mealId[0].split(',');
+          const singleMealId = meal.map(id => Number(id.id));
+          // console.log('meal_id', singleMealId);
+          response = meal.filter(mealed => singleMealId.includes(mealed.dataValues.id));
+          console.log('dddddd', response.dataValues);
+          return response;
+          }).catch((e) => {
+            response = { err: e.message };
+            throw response;
+          });
+      } else {
+        console.log('doyin');
+        meals = await Meal.findAll({
+          where: { caterer_id: catererId },
+        }).catch((e) => {
+          response = { err: e.message };
+          throw response;
+        });
+      }      
+      if (meals.length === 0) {
+        response = { error: true, error_message: 'no meal found for this caterer' };
+        throw response;
+      }
+      // const meal_id = mealId[0].split(',');
+      const singleMealId = mealId.map(id => Number(id));
+      response = meals.filter(mealed => singleMealId.includes(mealed.dataValues.id));
+      return response;
+    } catch (err) {
+      const response = { error: true, error_message: 'something went wrong', err };
+      throw response;
+    }
+  }
+}
 
 export default MenuService;

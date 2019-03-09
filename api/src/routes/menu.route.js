@@ -1,10 +1,13 @@
 import { Router } from 'express';
+import authMiddleware from '../middlewares/auth';
+import MenuMiddleware from '../middlewares/menu.middleware';
 import MenuController from '../controllers/menu.controller';
 
 
 const router = Router();
 
-router.get('/', MenuController.getMenu);
-router.post('/', MenuController.addMenu);
+router.get('/:catererId', authMiddleware.checkToken, MenuMiddleware.getMenu, MenuController.getCatererMenu);
+router.get('/', authMiddleware.checkToken, MenuMiddleware.getMenu, MenuController.getMenu);
+router.post('/', authMiddleware.checkToken, MenuMiddleware.setupMenu, MenuController.setupMenu);
 
 export default router;

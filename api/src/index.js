@@ -1,8 +1,16 @@
+/* eslint-disable import/first */
+import '@babel/polyfill';
+
+require('dotenv').config();
+
 import express from 'express';
 import bodyParser from 'body-parser';
+import swaggerUi from 'swagger-ui-express';
+import swaggerDocument from '../swagger.json';
 import MealsRoute from './routes/meal.route';
 import MenuRoute from './routes/menu.route';
 import OrdersRoute from './routes/order.route';
+import UsersRoute from './routes/user.route';
 
 export const app = express();
 
@@ -11,13 +19,22 @@ const PORT = process.env.PORT || 8080;
 
 app.use(bodyParser.json());
 
+
+app.use('/api/v1/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+// app.use('/api/v1', router);
+
+// rout for the landing page or home page
 app.get('/', (req, res) => res.send('Welcome to meal app'));
+
+// route for user authentication both sigup and login
+app.use('/api/v1/auth', UsersRoute);
 
 app.use('/api/v1/meals', MealsRoute);
 
 app.use('/api/v1/menu', MenuRoute);
 
 app.use('/api/v1/orders', OrdersRoute);
+
 
 // app.use((req, res) => {
 //   const error = new Error('Not found');
@@ -39,7 +56,7 @@ app.use('/api/v1/orders', OrdersRoute);
 // });
 
 // export const server = app.listen(PORT, () => (`Server is running at ${PORT}`));
-app.listen(PORT, () => (`Server is running at ${PORT}`));
+app.listen(PORT, () => console.log(`Server is running at ${PORT}`));
 
 // module.exports.app = app;
 // export default app;

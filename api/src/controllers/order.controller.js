@@ -1,71 +1,141 @@
+/* eslint-disable camelcase */
+/* eslint-disable max-len */
+/* eslint-disable consistent-return */
 import OrderService from '../services/order.service';
 
-const OrderController = {
-  fetchOrders(req, res) {
-    const allOrders = OrderService.getAllOrders();
-    return res.status(200).json({
-      status: 'success',
-      data: allOrders,
-    });
-  },
 
-  addOrder(req, res) {
-    /*
-      Expect json of format
-      {
-        'user_name: 'customer_name'
-        'user_id: 'customer_id'
-        'meals: '[]'
-        'address: 'address'
-        'phone_no: 'phone_no'
-        'total_cost: 'total_cost'
-      }
-    */
-    const newOrder = req.body;
-    const addedOrder = OrderService.addNewOrder(newOrder);
-    return res.status(201).json({
-      status: 'success',
-      data: addedOrder,
-    });
-  },
-
-  updateOrder(req, res) {
-    /*
-      Expect json of format
-      {
-        'user_name: 'customer_name'
-        'user_id: 'customer_id'
-        'meals: '[]'
-        'address: 'address'
-        'phone_no: 'phone_no'
-        'total_cost: 'total_cost'
-      }
-    */
-    const { id } = req.params;
-    const entry = req.body;
-    const result = OrderService.updateOrder(id, entry);
-    let response = {};
-    let status = 0;
-    if (result.foundId) {
-      response = {
-        ...response,
+/**
+ *
+ *
+ * @class OrderController
+ * @description - handles the request coming from the route and interacts with the mealService class.
+ */
+class OrderController {
+  /**
+   * @description - Add a order option, only a caterer or an admin can perform this action.
+   * @static
+   * @param {object} req
+   * @memberof MealController
+   * @param {object} res
+   * @returns {*} - created meal
+   */
+  static async createOrder(req, res) {
+    try {
+      const { user_id } = req.decoded.user;
+      const { meals, total, caterer_id } = req.body;
+      const createdOrder = await OrderService.createOrders(meals, user_id, caterer_id, total);
+      res.status(201).send({
         status: 'success',
-        message: `Order with id: ${id} edited successfully.`,
-        data: result.editedOrder,
-      };
-      status = 202;
-    } else {
-      response = {
-        ...response,
-        status: 'error',
-        message: `Order with id: ${id} not found.`,
-      };
-      status = 404;
+        createdOrder,
+      });
+    } catch (err) {
+      res.status(500).send({
+        status: 'failed',
+        err,
+      });
     }
-    return res.status(status).json({
-      response,
-    });
-  },
-};
+  }
+
+  /**
+   * @description - Add a order option, only a caterer or an admin can perform this action.
+   * @static
+   * @param {object} req
+   * @memberof MealController
+   * @param {object} res
+   * @returns {*} - created meal
+   */
+  static async addToOrder(req, res) {
+    try {
+      const { user_id } = req.decoded.user;
+      const { meal_id, quantity } = req.body;
+      const createdOrder = await OrderService.addToOrder(meal_id, user_id, quantity);
+      res.status(201).send({
+        status: 'success',
+        createdOrder,
+      });
+    } catch (err) {
+      res.status(500).send({
+        status: 'failed',
+        err,
+      });
+    }
+  }
+
+  /**
+   * @description - get a orders option, only a caterer or an admin can perform this action.
+   * @static
+   * @param {object} req
+   * @memberof MealController
+   * @param {object} res
+   * @returns {*} - order details
+   */
+  static async getOrders(req, res) {
+    try {
+      const { caterer_id } = req.decoded.user;
+      const orders = await OrderService.getOrders(caterer_id);
+      res.status(201).send({
+        status: 'success',
+        orders,
+      });
+    } catch (err) {
+      res.status(500).send({
+        status: 'failed',
+        err,
+      });
+    }
+  }
+
+  /**
+   * @description - update a orders option, only a caterer or an admin can perform this action.
+   * @static
+   * @param {object} req
+   * @memberof MealController
+   * @param {object} res
+   * @returns {*} - order details
+   */
+  static async updateOrder(req, res) {
+    try {
+      const { user_id } = req.decoded.user;
+      const { action } = req.body;
+      const { id } = req.params;
+      const updatedOrders = await OrderService.updateOrder(id, user_id, action);
+      res.status(201).send({
+        status: 'success',
+        data: updatedOrders,
+      });
+    } catch (err) {
+      res.status(500).send({
+        status: 'failed',
+        err,
+      });
+    }
+  }
+
+  // /**
+  //  * @description - update a orders option, only a caterer or an admin can perform this action.
+  //  * @static
+  //  * @param {object} req
+  //  * @memberof MealController
+  //  * @param {object} res
+  //  * @returns {*} - order details
+  //  */
+  // static async getOrderItems(req, res) {
+  //   try {
+  //     const { user_id } = req.decoded.user;
+  //     const { action } = req.body;
+  //     const { id } = req.params;
+  //     const updatedOrders = await OrderService.updateOrder(id, user_id, action);
+  //     res.status(201).send({
+  //       status: 'success',
+  //       data: updatedOrders,
+  //     });
+  //   } catch (err) {
+  //     res.status(500).send({
+  //       status: 'failed',
+  //       err,
+  //     });
+  //   }
+  // }
+}
 
 export default OrderController;

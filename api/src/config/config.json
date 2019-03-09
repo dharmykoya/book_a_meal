@@ -1,0 +1,33 @@
+{
+  "development": {
+    "username": "DB_USER",
+    "password": "DB_PASS",
+    "database": "DB_NAME",
+    "host": "DB_HOST",
+    "port": 5432,
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "postgres",
+    "password": "postgres",
+    "database": "bookmeal",
+    "host": "127.0.0.1",
+    "port": 5432,
+    "dialect": "postgres"
+  },
+  "production": { 
+    "use_env_variable": "DATABASE_URL",
+    "username": "postgres", 
+    "password": "postgres", 
+    "database": "bookmeal", 
+    "host": "127.0.0.1", 
+    "dialect": "postgres" 
+  },
+  "travis": { 
+    "username": "postgres", 
+    "password": "postgres", 
+    "database": "bookmeal", 
+    "host": "127.0.0.1", 
+    "dialect": "postgres" 
+  }
+}
