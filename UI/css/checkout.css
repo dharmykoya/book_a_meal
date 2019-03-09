@@ -1,0 +1,251 @@
+/** {box-sizing: border-box}*/
+body {
+  /*font-family: "Roboto", sans-serif;*/
+  font-family: "Comic Sans MS";
+}
+
+h2 {
+  text-align: center;
+}
+
+
+.order-header {
+  display: grid;
+  justify-content: space-around;
+  grid-template-columns: auto auto;
+  /*align-content: center;*/
+}
+
+
+/*
+styling for table*/
+
+
+table {
+  border-collapse: collapse;
+  /* width: 450px; */
+}
+
+th, td {
+  padding: 8px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+.input-quantity {
+  width: 70px;
+  height: 30px;
+  border-radius: 5px;
+  text-align: center;
+}
+.tr-hover:hover {background-color: #dd4f05;}
+
+
+
+
+/* design for the checkout modal form */
+
+.form {
+  display: grid;
+  grid-template-columns: auto auto;
+}
+
+.col-25,
+.col-50,
+.col-75 {
+  padding: 0 16px;
+}
+
+.container {
+  background-color: #f2f2f2;
+  padding: 5px 20px 15px 20px;
+  border: 1px solid lightgrey;
+  border-radius: 3px;
+}
+
+input[type=text] {
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+
+.card-details {
+    display: grid;
+    grid-template-columns: 150px 100px 100px;
+    justify-content: space-between;
+}
+
+label {
+  margin-bottom: 10px;
+  display: block;
+}
+
+.icon-container {
+  margin-bottom: 20px;
+  padding: 7px 0;
+  font-size: 24px;
+}
+
+.btn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px;
+  margin: 10px 0;
+  border: none;
+  width: 100%;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 17px;
+}
+
+.btn:hover {
+  background-color: #45a049;
+}
+
+span.price {
+  float: right;
+  color: grey;
+}
+
+/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other (and change the direction - make the "cart" column go on top) */
+@media (max-width: 800px) {
+  .row {
+    flex-direction: column-reverse;
+  }
+  .col-25 {
+    margin-bottom: 20px;
+  }
+}
+
+/* design for the modal  */
+
+/* The Modal (background) */
+  
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  /*width: 50%;  Full width */
+  height: auto; /* Full height */
+  margin: auto;
+  left: 0;
+  right: 0;
+  top: 0;
+  overflow: auto;
+}
+  
+.modal-content {
+  background-color: #fefefe;
+  width: 50%; /* Could be more or less, depending on screen size */
+  margin: auto;
+  overflow-x: auto;
+  overflow-y: auto;
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+/* Extra small devices (phones, 600px and down) */
+@media(max-width: 600px) {
+  .order-header {
+      display: grid;
+      justify-content: space-between;
+      grid-template-columns: auto;
+      align-content: center;
+  }
+
+  .order-header-item-1 {
+      width: 100%;
+      display: grid;
+      margin:auto;
+      grid-template-columns: auto auto;
+      grid-row-gap: 20px;
+  }
+
+  .order-header-item-2 {
+      margin-top: 20px;
+  }
+
+  .modal-content {
+      background-color: #fefefe;
+      margin: auto;
+      overflow-x: auto;
+      overflow-y: auto;
+      max-height: 100%;
+  }
+
+  .form {
+      overflow-y: auto;
+      font-size: 10px;
+  }
+
+  .col-25,
+  .col-50,
+  .col-75 {
+  padding: 0px;
+}
+
+label {
+  margin-bottom: 5px;
+  display: block;
+}
+
+input[type="text"] {
+  margin-bottom: 10px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  width: 90%
+  }
+
+  .card-details {
+      display: block;
+      justify-content: space-between;
+  }
+}
+
+
+@media (min-width: 601px) and (max-width: 968px) {
+  .order-header-item-1 {
+      max-width: 100%;
+      display: grid;
+      margin: auto 0px;
+      grid-template-columns: auto auto;
+      grid-row-gap: 20px;
+  }
+
+  .modal-content {
+      background-color: #fefefe;
+      width: 70%;
+      margin: auto;
+      overflow-x: auto;
+      overflow-y: auto;    
+  }
+
+  .form {
+      display: grid;
+      grid-template-columns: 200px 250px;    
+  }
+
+  .card-details {
+      display: grid;
+      grid-template-columns: 150px 100px;
+      justify-content: space-between;    
+  }
+}

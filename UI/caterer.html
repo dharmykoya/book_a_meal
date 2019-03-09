@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Select restaurant</title>
-    <link rel="stylesheet" href="caterer.css">
-    <link rel="stylesheet" href="navbar.css">
+    <link rel="stylesheet" href="css/caterer.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    
 
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -14,68 +15,58 @@
 
 </head>
 <body>
-<nav class="topnav">
-    <a class="dropbtn" href="#home">Home</a>
-    <a href="#contact" class="dropbtn">Contact</a>
-
-    <div class="dropdown">
-        <button onclick="myFunction()" class="dropbtn">Actions</button>
-        <div id="myDropdown" class="dropdown-content">
-            <a href="#">Link 1</a>
-            <a href="#">Link 2</a>
-            <a href="#">Link 3</a>
+    <div class="topnav" id="myTopnav">
+        <a href="#home" class="active">Home</a>
+        <a href="manage_order.html">Order History</a>
+        <a href="dashboard.html">dashboard</a>
+        <a class="icon" onclick="navToggle()">
+            <i class="fa fa-bars"></i>
+        </a>
+        <div class="right">
+            <a href="index.html">Logout</a>
         </div>
     </div>
-
-    <div class="login-container">
-        <form action="/action_page.php">
-            <input type="text" placeholder="Username" name="username">
-            <input type="text" placeholder="Password" name="psw">
-            <button type="submit">Login</button>
-        </form>
-    </div>
-</nav>
 
 <main>
     <h2>Select a Restaurant</h2>
     <div class="caterer-container">
         <div class="caterer-container-item-1">
-            <a href="">
+            <a href="order.html">
                 <img src="images/mr_bigs.jpg">
                 <p>Mr Bigs</p>
                 <p><small>delivery time</small> 25 - 30 mins</p>
             </a>
         </div>
         <div class="caterer-container-item-2">
-            <a href="">
+            <a href="order.html">
                 <img src="images/sweet.png">
                 <p>Sweet Sensation</p>
                 <p><small>delivery time</small> 25 - 30 mins</p>
             </a>
         </div>
         <div class="caterer-container-item-3">
-            <a href="">
+            <a href="order.html">
                 <img src="images/kfc.png">
                 <p>KFC</p>
                 <p><small>delivery time</small> 25 - 30 mins</p>
             </a>
         </div>
         <div class="caterer-container-item-4">
-            <a href="">
+            <a href="order.html">
                 <img src="images/mavise.jpg">
                 <p>Mavise</p>
                 <p><small>delivery time</small> 25 - 30 mins</p>
             </a>
         </div>
         <div class="caterer-container-item-5">
-            <a href="">
+            <a href="order.html">
                 <img src="images/glam.jpg">
                 <p>Glamour's rare bite</p>
                 <p><small>delivery time</small> 25 - 30 mins</p>
             </a>
         </div>
         <div class="caterer-container-item-6">
-            <a href="">
+            <a href="order.html">
                 <img src="images/jesus.jpg">
                 <p>Jesus Embassy</p>
                 <p><small>delivery time</small> 25 - 30 mins</p>
@@ -83,5 +74,6 @@
         </div>
     </div>
 </main>
+<script src="js/navbar.js"></script>
 </body>
 </html>
