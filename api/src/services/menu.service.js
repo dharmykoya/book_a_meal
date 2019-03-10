@@ -72,13 +72,18 @@ class MenuService {
       const foundMenu = await Menu.findAll({
         where: { createdAt: today },
       });
+      if (foundMenu[0] === 0) {
+        console.log('no menu');
+        response = { messgae: 'No menu has been set for today'};
+        return response;
+      }
       console.log('meals id', foundMenu.meals);
 
       await this.getMealById(foundMenu.meals);
-        
+
       response = { menu: foundMenu, error: false };
       return response;
-      
+
       // .catch((e) => {
       //   response = { err: e.message, message: 'this caterer has no menu set' };
       //   throw response;
@@ -151,11 +156,11 @@ class MenuService {
           .then((meal) => {
             // console.log(meal);
           // // const meal_id = mealId[0].split(',');
-          const singleMealId = meal.map(id => Number(id.id));
-          // console.log('meal_id', singleMealId);
-          response = meal.filter(mealed => singleMealId.includes(mealed.dataValues.id));
-          console.log('dddddd', response.dataValues);
-          return response;
+            const singleMealId = meal.map(id => Number(id.id));
+            // console.log('meal_id', singleMealId);
+            response = meal.filter(mealed => singleMealId.includes(mealed.dataValues.id));
+            console.log('dddddd', response.dataValues);
+            return response;
           }).catch((e) => {
             response = { err: e.message };
             throw response;
@@ -168,7 +173,7 @@ class MenuService {
           response = { err: e.message };
           throw response;
         });
-      }      
+      }
       if (meals.length === 0) {
         response = { error: true, error_message: 'no meal found for this caterer' };
         throw response;
