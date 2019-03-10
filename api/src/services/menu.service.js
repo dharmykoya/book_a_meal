@@ -69,19 +69,16 @@ class MenuService {
     try {
       let response = {};
       const today = this.todayDate();
-      await Menu.findAll({
+      const foundMenu = await Menu.findAll({
         where: { createdAt: today },
-      }).then(async (menus) => {
-        const foundMenuMeal = await menus.map(async (menu) => {
-          console.log(menu.meals);
-          await this.getMealById(menu.meals);
-        });
-        response = { menu: foundMenuMeal, error: false };
-        return response;
-      }).catch((e) => {
-        response = { err: e.message };
-        throw response;
       });
+      console.log('meals id', foundMenu.meals);
+
+      await this.getMealById(foundMenu.meals);
+        
+      response = { menu: foundMenu, error: false };
+      return response;
+      
       // .catch((e) => {
       //   response = { err: e.message, message: 'this caterer has no menu set' };
       //   throw response;
@@ -146,6 +143,7 @@ class MenuService {
     try {
       let response = {};
       let meals;
+      console.log('mealids', mealId)
       // const today = new Date();
       if (!catererId) {
         console.log('dami');

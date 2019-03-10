@@ -1,6 +1,6 @@
 /* eslint-disable arrow-body-style */
 // const hashPassword = require('../services/helper');
-// import hashPassword from '../services/helper';
+import hashPassword from '../services/helper';
 // const date = new Date();
 module.exports = {
   up: (queryInterface) => {
@@ -15,8 +15,7 @@ module.exports = {
         email: 'dharmykoya38@gmail.com',
         phone_number: '08037145164',
         address: '12, oluwole street, Lagos.',
-        // password: hashPassword('admin'),
-        password: 'admin',
+        password: hashPassword('admin'),
         role_id: 1,
         restaurant_name: 'super-admin',
 	      restaurant_logo: 'chris.png',

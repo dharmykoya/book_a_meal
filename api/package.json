@@ -11,7 +11,7 @@
     "test-watch": "nodemon --exec \"npm test\"",
     "babel-build": "babel src -d dist",
     "clean": "rm -rf dist && mkdir dist",
-    "build": "npm run clean && npm run babel-build",
+    "build": "npm run clean && npm run babel-build && npm run migrate && npm run seed",
     "generate-lcov": "nyc report --reporter=text-lcov > lcov.info",
     "coveralls-coverage": "coveralls < lcov.info",
     "codeclimate-coverage": "codeclimate-test-reporter < lcov.info",
