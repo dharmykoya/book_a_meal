@@ -4,7 +4,8 @@
   "description": "Book-A-Meal is an application that connect customers and food vendors together.",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --exec babel-node src/index.js",
+    "start": "npm run migrate && npm run seed && nodemon --exec babel-node src/index.js",
+    "start-dev": "nodemon --exec babel-node src/index.js",
     "test": "mocha **/*.spec.js --require @babel/register --timeout 30000",
     "test:travis": "mocha **/*.spec.js --require @babel/register --exit",
     "test-watch": "nodemon --exec \"npm test\"",
