@@ -2,6 +2,7 @@
 /* eslint-disable max-len */
 /* eslint-disable consistent-return */
 import { Meal, Menu } from '../models';
+// import meal from '../models/meal';
 // import { sequelize } from '../models/index';
 
 /**
@@ -69,27 +70,17 @@ class MenuService {
     try {
       let response = {};
       const today = this.todayDate();
-      await Menu.findAll({
+      const foundMenu = await Menu.findAll({
+        attributes: ['meals'],
         where: { createdAt: today },
-      }).then(async (menus) => {
-        const foundMenuMeal = await menus.map(async (menu) => {
-          console.log(menu.meals);
-          await this.getMealById(menu.meals);
-        });
-        response = { menu: foundMenuMeal, error: false };
-        return response;
-      }).catch((e) => {
-        response = { err: e.message };
-        throw response;
+        raw: true,
       });
-      // .catch((e) => {
-      //   response = { err: e.message, message: 'this caterer has no menu set' };
-      //   throw response;
-      // });
-      // console.log(foundMenus);
-      // const mealId = foundMenus.dataValues.meals;
-      // const foundMenuMeal = await this.getMealById(mealId);
-      // response = { menu: foundMenuMeal, error: false };
+      if (foundMenu.length > 0) {
+        const menuMeal = await this.getMealById(foundMenu);
+        response = { menuMeal };
+        return response;
+      }
+      response = { messgae: 'No menu has been set for today'};
       return response;
     } catch (err) {
       const error = { error: true, error_message: 'could not fetch menu', err };
@@ -142,43 +133,108 @@ class MenuService {
    *
    * @return{json} menu available in the database
    */
-  static async getMealById(mealId, catererId) {
+  // static getMealById(menus) {
+  //   return new Promise(async (resolve, reject) => {
+  //     try {
+  //       console.log('menus', menus);
+  //       let response = {};
+  //       const meals_id = [];
+  //       menus.map((menu) => {
+  //         meals_id.push(menu.meals);
+  //       });
+  //       let food = {};
+  //       let food_item = [];
+  //       const foodList = [];
+  //       if (Array.isArray(meals_id) && meals_id.length > 0) {
+  //         meals_id.forEach((e) => {
+  //           if (Array.isArray(e) && e.length > 0) {
+  //             e.forEach((id) => {
+  //               Meal.findAll({
+  //                 where: { id },
+  //                 raw: true,
+  //               }).then((foundItem) => {
+  //                 food_item.push(foundItem);
+  //                 // console.log('found item at second loop: ', foundItem);
+  //                 console.log('food_item at second loop: ', food_item);
+  //                 resolve(food_item);
+  //               });
+  //             });
+  //             console.log('food_item: final after first loop: ', food_item);
+  //           }
+  //          /*  } else {
+  //             const foundItem = await Meal.findOne({
+  //               where: { id: e },
+  //               raw: true,
+  //             });
+  //             food_item.push(foundItem);
+  //             // console.log('found item at first loop: ', foundItem);
+  //             console.log('food_item at first loop: ', food_item);
+  //           } */
+  //           console.log('food_item: final after second loop:', food_item);
+  //         });
+  //         console.log('food_item: final', food_item);
+  //       } else {
+  //         console.log('no meals found');
+  //         resolve('no meals found');
+  //       }
+  //       /* meals_id.map((meal_id) => {
+  //         meal_id.map(async (id) => {
+  //           const foundItem = await Meal.findOne({
+  //             where: { id },
+  //             raw: true,
+  //           });
+  //           food_item.push(foundItem);
+  //         });
+  //         foodList.push(food_item);
+
+
+  //         console.log('foodList', foodList);
+  //       }); */
+
+  //       food = { ...foodList };
+  //       response = { food };
+  //       resolve(response);
+
+  //       // meals_id.map((meal_id) => {
+  //       //   const foodList = [];
+  //       //   meal_id.map((id) => {
+  //       //     const food_item = [];
+  //       //     Meal.findOne({
+  //       //       where: { id },
+  //       //       raw: true,
+  //       //     }).then((foundItem) => {
+  //       //       food_item.push(foundItem);
+  //       //     }).catch(e => e);
+
+  //       //     // console.log(foodItem);
+  //       //     // console.log('foood found', food);
+  //       //     // food = { ...foodItem };
+  //       //     foodList.push(food_item);
+  //       //   });
+  //       //   food.push(foodList);
+  //       // });
+  //       // console.log(food);
+  //     } catch (err) {
+  //       const response = { error: true, error_message: 'something went wrong', err };
+  //       // throw response;
+  //       reject(response);
+  //     }
+  //   });
+  // }
+
+  static async getMealById(menus) {
     try {
-      let response = {};
-      let meals;
-      // const today = new Date();
-      if (!catererId) {
-        console.log('dami');
-        await Meal.findAll()
-          .then((meal) => {
-            // console.log(meal);
-          // // const meal_id = mealId[0].split(',');
-          const singleMealId = meal.map(id => Number(id.id));
-          // console.log('meal_id', singleMealId);
-          response = meal.filter(mealed => singleMealId.includes(mealed.dataValues.id));
-          console.log('dddddd', response.dataValues);
-          return response;
-          }).catch((e) => {
-            response = { err: e.message };
-            throw response;
-          });
-      } else {
-        console.log('doyin');
-        meals = await Meal.findAll({
-          where: { caterer_id: catererId },
-        }).catch((e) => {
-          response = { err: e.message };
-          throw response;
-        });
-      }      
-      if (meals.length === 0) {
-        response = { error: true, error_message: 'no meal found for this caterer' };
-        throw response;
-      }
-      // const meal_id = mealId[0].split(',');
-      const singleMealId = mealId.map(id => Number(id));
-      response = meals.filter(mealed => singleMealId.includes(mealed.dataValues.id));
-      return response;
+      const big = [];
+      const mealsDb = await Meal.findAll({
+        attributes: ['id', 'name', 'price', 'image'],
+        raw: true,
+      });
+      menus.map(async (menu) => {
+        const small = await mealsDb.filter(mealId => menu.meals.indexOf(mealId.id) > -1);
+        big.push(small);
+      });
+      return big;
+
     } catch (err) {
       const response = { error: true, error_message: 'something went wrong', err };
       throw response;

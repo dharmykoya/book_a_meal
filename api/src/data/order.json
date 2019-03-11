@@ -1,22 +1,14 @@
 {
-  "user_id": 5,
-  "order": [
-    {
-      "id": "1",
-      "name": "Fried Rice",
-      "price": "600",
-      "quantity": "1",
-      "total": "600"
-    },
-    {
-      "id": "1",
-      "name": "Fried Rice",
-      "price": "600",
-      "quantity": "1",
-      "total": "600"
-    }
-  ],
-  "address": "20, Ajayi, Lagos.",
-  "phone_no": "08123456789",
-  "total_cost": "950"
+  "newOrder": {    
+      "meals": "1,2,4",
+      "total": 1250,
+      "caterer_id": 1
+  },
+  "update": {
+    "action": "increase"
+  },
+  "orderItem": {
+    "meal_id": 4,
+    "quantity": 3 
+  }
 }

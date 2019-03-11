@@ -32,7 +32,7 @@ module.exports = {
   test: {
     username: 'postgres',
     password: 'postgres',
-    database: 'bookmeal',
+    database: 'bookmealtest',
     host: '127.0.0.1',
     dialect: 'postgres',
   },

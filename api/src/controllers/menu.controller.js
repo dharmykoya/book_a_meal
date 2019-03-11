@@ -54,7 +54,7 @@ class MenuController {
       });
     } catch (err) {
       const errMessage = 'try again please';
-      res.status(500).send({ errMessage, err });
+      res.status(404).send({ errMessage, err });
     }
   }
 
@@ -80,7 +80,7 @@ class MenuController {
         createdMenu,
       });
     } catch (err) {
-      res.status(500).send({
+      res.status(404).send({
         status: 'failed',
         err,
       });
