@@ -234,6 +234,7 @@ class MenuService {
         big.push(small);
       });
       return big;
+
     } catch (err) {
       const response = { error: true, error_message: 'something went wrong', err };
       throw response;
