@@ -1,6 +1,7 @@
 import request from 'supertest';
 import expect from 'expect';
 import user from '../data/user.json';
+console.log(user);
 
 
 import { app } from '../index';

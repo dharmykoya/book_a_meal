@@ -12,7 +12,7 @@ describe('test user login', () => {
   it('should login a user', (done) => {
     request(app)
       .post('/api/v1/auth/login')
-      .send(user.caterer)
+      .send(user.user)
       .expect(200)
       .expect((res) => {
         expect(res.body)
@@ -44,8 +44,9 @@ describe('Meals endpoint\'s test', () => {
       .expect((res) => {
         expect(res.body)
           .toBeA('object');
-        expect(res.body.meals[0])
-          .toBeA('object')
+        expect(res.body.meals)
+          .toBeA('object');
+        expect(res.body.meals.meal[0])
           .toIncludeKeys(['id', 'name', 'price']);
       })
       .end(done);
@@ -83,7 +84,7 @@ describe('Meals endpoint\'s test', () => {
   //   // should get a meal by id, and return the object including the required keys
   //   it('should get a meal by id', (done) => {
   //     request(app)
-  //       .get('/api/v1/meals/1')
+  //       .get('/api/v1/meals/14')
   //       .set('Authorization', token)
   //       .expect(200)
   //       .expect((res) => {
@@ -97,11 +98,11 @@ describe('Meals endpoint\'s test', () => {
   //   });
 
   //   // should return status:400 when user enters a meal id that doesn't exit
-  //   it('should return a 400 for a meal id that doen\'t exist', (done) => {
+  //   it('should return a 404 for a meal id that doen\'t exist', (done) => {
   //     request(app)
   //       .get('/api/v1/meals/40')
   //       .set('Authorization', token)
-  //       .expect(400)
+  //       .expect(404)
   //       .end(done);
   //   });
   // });
@@ -113,7 +114,7 @@ describe('Meals endpoint\'s test', () => {
     // test to see if we get a status: 202, when we delete a meal
     it('should delete a meal by id', (done) => {
       request(app)
-        .delete('/api/v1/meals/1')
+        .delete('/api/v1/meals/12')
         .set('Authorization', token)
         .expect(202)
         .end(done);
@@ -130,14 +131,14 @@ describe('Meals endpoint\'s test', () => {
   });
 
 
-  // /*
-  // // tests for update a meal API
-  // */
+  /*
+  // tests for update a meal API
+  */
   describe('Update Meals API', () => {
     // test to see if we get a status: 202, when we update a meal
     it('should update a meal by id', (done) => {
       request(app)
-        .put('/api/v1/meals/3')
+        .put('/api/v1/meals/14')
         .set('Authorization', token)
         .send(meals.updateMeal)
         .expect(202)
