@@ -63,8 +63,6 @@ class MealService {
    */
   static async addMeal(meal, catererId) {
     try {
-      // console.log('id', catererId);
-      // console.log('meal', ...meal);
       const createdMeal = await Meal.create({
         caterer_id: catererId,
         ...meal,
@@ -97,8 +95,7 @@ class MealService {
         { where: { id, caterer_id: catererId }, returning: true, plain: true },
       );
       if (updateMeal === null) {
-        console.log(updateMeal);
-        response = { err: true, error_message: 'update failed'};
+        response = { err: true, error_message: 'update failed' };
         throw response;
       }
       response = { meal: updateMeal, err: false };

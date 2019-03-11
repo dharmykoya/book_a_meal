@@ -73,7 +73,7 @@ class OrderController {
     try {
       const { caterer_id } = req.decoded.user;
       const orders = await OrderService.getOrders(caterer_id);
-      res.status(201).send({
+      res.status(200).send({
         status: 'success',
         orders,
       });
@@ -99,7 +99,14 @@ class OrderController {
       const { action } = req.body;
       const { id } = req.params;
       const updatedOrders = await OrderService.updateOrder(id, user_id, action);
-      res.status(201).send({
+
+      if (updatedOrders.status === 'not found') {
+        res.status(404).send({
+          status: 'success',
+          data: updatedOrders,
+        });
+      }
+      res.status(202).send({
         status: 'success',
         data: updatedOrders,
       });

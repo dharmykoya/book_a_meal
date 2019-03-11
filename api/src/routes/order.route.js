@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { Router } from 'express';
 import authMiddleware from '../middlewares/auth';
 import OrderMiddleware from '../middlewares/order.middleware';
@@ -9,7 +10,7 @@ const router = Router();
 router.get('/', authMiddleware.checkToken, OrderMiddleware.getOrders, OrderController.getOrders);
 
 // route for getting all order owned by a particular user
-//router.get('/:user_id', authMiddleware.checkToken, OrderMiddleware.getOrders, OrderController.getOrderItems);
+// router.get('/:user_id', authMiddleware.checkToken, OrderMiddleware.getOrders, OrderController.getOrderItems);
 
 // adding a meal to item
 router.post('/', authMiddleware.checkToken, OrderMiddleware.createOrder, OrderController.addToOrder);

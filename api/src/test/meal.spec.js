@@ -29,6 +29,27 @@ describe('test user login', () => {
   });
 });
 
+/*
+  // test for Add meal API
+  // test to see if the res body is an object
+  // test to see if the response data is an object and if it includes required keys
+  */
+describe('Add meal API\'s', () => {
+  it('should add new meal', (done) => {
+    request(app)
+      .post('/api/v1/meals')
+      .send(meals.newMeal)
+      .set('Authorization', token)
+      .expect(201)
+      .expect((res) => {
+        expect(res.body).toBeA('object');
+        expect(res.body.createdMeal.meal)
+          .toBeA('object')
+          .toIncludeKeys(['id', 'name', 'price']);
+      })
+      .end(done);
+  });
+});
 
 describe('Meals endpoint\'s test', () => {
   /*
@@ -47,33 +68,11 @@ describe('Meals endpoint\'s test', () => {
         expect(res.body.meals)
           .toBeA('object');
         expect(res.body.meals.meal[0])
+          .toBeA('object')
           .toIncludeKeys(['id', 'name', 'price']);
       })
       .end(done);
   });
-
-  /*
-  // test for Add meal API
-  // test to see if the res body is an object
-  // test to see if the response data is an object and if it includes required keys
-  */
-  describe('Add meal API\'s', () => {
-    it('should add new meal', (done) => {
-      request(app)
-        .post('/api/v1/meals')
-        .send(meals.newMeal)
-        .set('Authorization', token)
-        .expect(201)
-        .expect((res) => {
-          expect(res.body).toBeA('object');
-          expect(res.body.createdMeal.meal)
-            .toBeA('object')
-            .toIncludeKeys(['id', 'name', 'price']);
-        })
-        .end(done);
-    });
-  });
-
 
   /*
   // test for fetch a meal API
@@ -107,30 +106,6 @@ describe('Meals endpoint\'s test', () => {
   //   });
   // });
 
-  // /*
-  // // tests for delete a meal API
-  // */
-  describe('Delete Meals API', () => {
-    // test to see if we get a status: 202, when we delete a meal
-    it('should delete a meal by id', (done) => {
-      request(app)
-        .delete('/api/v1/meals/12')
-        .set('Authorization', token)
-        .expect(202)
-        .end(done);
-    });
-
-    //  test if we get a status: 400 when the delete id doesn't exist
-    it('should return a 400 if meal id doesn\'t exist', (done) => {
-      request(app)
-        .delete('/api/v1/meals/50')
-        .set('Authorization', token)
-        .expect(400)
-        .end(done);
-    });
-  });
-
-
   /*
   // tests for update a meal API
   */
@@ -138,7 +113,7 @@ describe('Meals endpoint\'s test', () => {
     // test to see if we get a status: 202, when we update a meal
     it('should update a meal by id', (done) => {
       request(app)
-        .put('/api/v1/meals/14')
+        .put('/api/v1/meals/1')
         .set('Authorization', token)
         .send(meals.updateMeal)
         .expect(202)
@@ -151,6 +126,30 @@ describe('Meals endpoint\'s test', () => {
         .put('/api/v1/meals/50')
         .set('Authorization', token)
         .send(meals.updateMeal)
+        .expect(400)
+        .end(done);
+    });
+  });
+
+  /*
+  // tests for delete a meal API
+  */
+
+  describe('Delete Meals API', () => {
+    // test to see if we get a status: 202, when we delete a meal
+    it('should delete a meal by id', (done) => {
+      request(app)
+        .delete('/api/v1/meals/1')
+        .set('Authorization', token)
+        .expect(202)
+        .end(done);
+    });
+
+    //  test if we get a status: 400 when the delete id doesn't exist
+    it('should return a 400 if meal id doesn\'t exist', (done) => {
+      request(app)
+        .delete('/api/v1/meals/50')
+        .set('Authorization', token)
         .expect(400)
         .end(done);
     });
