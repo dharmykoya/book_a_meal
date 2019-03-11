@@ -1,6 +1,6 @@
 {
   "newOrder": {    
-      "meals": "1,2,4",
+      "meals": [1,2,4],
       "total": 1250,
       "caterer_id": 1
   },

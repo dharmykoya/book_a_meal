@@ -26,6 +26,10 @@
       "email": "newuser@gmail.com",
       "password": "testuser"
   },
+  "user_customer": {
+    "email": "newuser2@gmail.com",
+    "password": "testuser"
+},
   "invalid_user": {
       "email": "notauser@gmail.com",
       "password": "testuser"

@@ -130,33 +130,39 @@ class OrderService {
     try {
       const orderItem = await Item.findOne({
         where: { id: orderId, user_id: userId },
-        include: [{ 
+        include: [{
           model: Meal,
           as: 'meal',
         }],
         raw: true,
       });
-      // console.log('name', orderItem);
-      if (action === 'increase') {
-        orderItem.quantity += 1;
-        await Item.update({ quantity: orderItem.quantity }, { where: { id: orderItem.id } })
-          .catch((err) => {
-            const response = { err };
-            throw response;
-          });
-      } else if (action === 'decrease') {
-        orderItem.quantity -= 1;
-        if (orderItem.quantity === 0) {
+      if (orderItem !== null) {
+        if (action === 'increase') {
+          orderItem.quantity += 1;
+          await Item.update({ quantity: orderItem.quantity }, { where: { id: orderItem.id } })
+            .catch((err) => {
+              const response = { err };
+              throw response;
+            });
+        } else if (action === 'decrease') {
+          orderItem.quantity -= 1;
+          if (orderItem.quantity === 0) {
+            await Item.destroy({ where: { id: orderItem.id } });
+          } else {
+            await Item.update({ quantity: orderItem.quantity }, { where: { id: orderItem.id } });
+          }
+        } else if (action === 'delete') {
           await Item.destroy({ where: { id: orderItem.id } });
-        } else {
-          await Item.update({ quantity: orderItem.quantity }, { where: { id: orderItem.id } });
         }
-      } else if (action === 'delete') {
-        await Item.destroy({ where: { id: orderItem.id } });
+        const response = {
+          status: 'success',
+          message: 'Order Updated',
+        };
+        return response;
       }
       const response = {
-        status: 'success',
-        message: 'Order Updated',
+        status: 'not found',
+        message: 'No orderItem found',
       };
       return response;
     } catch (err) {
@@ -180,7 +186,7 @@ class OrderService {
   static async createOrders(meals, userId, catererId, orderTotal) {
     try {
       const createdOrder = await Order.create({
-        order: [meals],
+        order: meals,
         total: orderTotal,
         caterer_id: catererId,
         user_id: userId,

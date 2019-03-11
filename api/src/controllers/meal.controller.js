@@ -76,8 +76,8 @@ class MealController {
    * @returns {*} - created meal
    */
   static async addMeal(req, res) {
-    const { caterer_id } = req.decoded.user;    
-    const { name, price } = req.body;    
+    const { caterer_id } = req.decoded.user;
+    const { name, price } = req.body;
     const meal = req.body;
     try {
       if (!name || !price) {
