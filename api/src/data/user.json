@@ -1,0 +1,37 @@
+{
+  "caterer": {
+      "name": "Damilola Adekoya",
+      "email": "newuser@gmail.com",
+      "phone_number": "08037145164",
+      "type": 2,
+      "password": "testuser",
+	  "restaurant_name": "AMB",
+	  "restaurant_logo": "chris.png"
+  },
+  "normalUser": {
+    "name": "Bola Adekoya",
+    "email": "newuser2@gmail.com",
+    "phone_number": "08037145164",
+    "type": 3,
+    "password": "testuser"
+},
+  "oldUser": {
+      "firstName": "Damilola",
+      "lastName": "Adekoya",
+      "email": "Damilolaarogundade@gmail.com",
+      "phoneNo": "08037145164",
+      "password": "testUser"
+  },
+  "user": {
+      "email": "newuser@gmail.com",
+      "password": "testuser"
+  },
+  "invalid_user": {
+      "email": "notauser@gmail.com",
+      "password": "testuser"
+  },
+  "invalid_password": {
+      "email": "newuser2@gmail.com",
+      "password": "wrongpassword"
+  }
+}

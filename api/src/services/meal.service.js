@@ -38,16 +38,18 @@ class MealService {
    */
   static async fetchAllMealsByCaterer(caterer_id) {
     try {
+      let response = {};
       const foundMeals = await Meal.findAll({
         where: { caterer_id },
       });
       if (!foundMeals) {
-        return { err: true, error_message: 'could not fetch meals' };
+        response = { err: true, message: 'could not fetch meals' };
+        throw response;
       }
-      return { meal: foundMeals, err: false };       
-    } catch (err) {
-      const error = { error_message: 'something went wrong', err };
-      throw error;
+      return { meal: foundMeals, err: false };
+    } catch (error) {
+      const response = { message: error.message };
+      throw response;
     }
   }
 
@@ -68,9 +70,10 @@ class MealService {
         ...meal,
       });
       if (!createdMeal) {
-        return { err: true, error_message: 'could not create meal' };
+        const error = { err: true, error_message: 'could not create meal' };
+        throw error;
       }
-      return { meal: createdMeal, err: false };       
+      return { meal: createdMeal, err: false };
     } catch (err) {
       const error = { error_message: 'something went wrong', err };
       throw error;
@@ -88,17 +91,21 @@ class MealService {
    */
   static async updateMeal(id, catererId, meal) {
     try {
+      let response = {};
       const updateMeal = await Meal.update(
         meal,
         { where: { id, caterer_id: catererId }, returning: true, plain: true },
       );
-      if (!updateMeal) {        
-        return { err: true, error_message: 'update failed'};
+      if (updateMeal === null) {
+        console.log(updateMeal);
+        response = { err: true, error_message: 'update failed'};
+        throw response;
       }
-      return { meal: updateMeal, err: false };
-    } catch (err) {     
-      const error = { error_message: 'something went wrong', err };
-      throw error;
+      response = { meal: updateMeal, err: false };
+      return response;
+    } catch (err) {
+      const response = { message: err.message, err };
+      throw response;
     }
   }
 
@@ -112,16 +119,19 @@ class MealService {
    */
   static async deleteMeal(id, catererId) {
     try {
+      let response = {};
       const destroyedMeal = await Meal.destroy({ where: { id, caterer_id: catererId } });
-      if (!destroyedMeal) {        
-        return { err: true, error_message: 'delete failed' };
+      if (!destroyedMeal) {
+        response = { err: true, message: 'delete failed' };
+        throw response;
       }
-      return { message: 'Meal deleted', err: false };
+      response = { message: 'Meal deleted', err: false };
+      return response;
     } catch (err) {
-      const error = { error_message: 'something went wrong', err };
-      throw error;
+      const response = { message: err.message, err };
+      throw response;
     }
-  }   
+  }
 }
 
 export default MealService;

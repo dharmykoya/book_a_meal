@@ -1,0 +1,14 @@
+{
+  "newOrder": {    
+      "meals": "1,2,4",
+      "total": 1250,
+      "caterer_id": 1
+  },
+  "update": {
+    "action": "increase"
+  },
+  "orderItem": {
+    "meal_id": 4,
+    "quantity": 3 
+  }
+}
