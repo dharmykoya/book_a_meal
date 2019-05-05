@@ -15,7 +15,7 @@ import UsersRoute from './routes/user.route';
 export const app = express();
 
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 5000;
 // const PORT = 8080;
 
 app.use(bodyParser.json());
@@ -37,24 +37,24 @@ app.use('/api/v1/menu', MenuRoute);
 app.use('/api/v1/orders', OrdersRoute);
 
 
-// app.use((req, res) => {
-//   const error = new Error('Not found');
-//   res.status(404);
-//   res.json({
-//     error: {
-//       message: error.message,
-//     },
-//   });
-// });
+app.use((req, res) => {
+  const error = new Error('Not found');
+  res.status(404);
+  res.json({
+    error: {
+      message: error.message,
+    },
+  });
+});
 
-// app.use((error, req, res) => {
-//   res.status(error.status || 500);
-//   res.json({
-//     error: {
-//       message: error.message,
-//     },
-//   });
-// });
+app.use((error, req, res) => {
+  res.status(error.status || 500);
+  res.json({
+    error: {
+      message: error.message,
+    },
+  });
+});
 
 // export const server = app.listen(PORT, () => (`Server is running at ${PORT}`));
 app.listen(PORT, () => console.log(`Server is running at ${PORT}`));
