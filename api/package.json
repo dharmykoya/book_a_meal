@@ -22,7 +22,9 @@
     "seed-role": "./node_modules/.bin/sequelize db:seed --seed 20190303014723-role",
     "migrate-test": "NODE_ENV=test npm run node_modules/.bin/sequelize db:migrate",
     "seed": "npm run sequelize db:seed:all",
-    "seed-test": "npm run sequelize db:seed:all"
+    "seed-test": "npm run sequelize db:seed:all",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run start-dev\" \"npm run client\""
   },
   "heroku-run-build-script": true,
   "author": "Damilola Adekoya",
@@ -31,6 +33,7 @@
     "@babel/polyfill": "^7.2.5",
     "bcrypt": "^3.0.4",
     "body-parser": "^1.18.3",
+    "concurrently": "^4.1.0",
     "dotenv": "^6.2.0",
     "express": "^4.16.4",
     "jsonwebtoken": "^8.5.0",
@@ -65,9 +68,6 @@
     "chai": "^4.2.0",
     "codeclimate-test-reporter": "^0.5.1",
     "coveralls": "^3.0.2",
-    "eslint": "^5.13.0",
-    "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.16.0",
     "expect": "^1.20.2",
     "istanbul": "^0.4.5",
     "mocha": "^5.2.0",
