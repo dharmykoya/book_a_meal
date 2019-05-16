@@ -5,6 +5,10 @@
   overflow: hidden;
 }
 
+.orange {
+  color:#dd4f05;
+}
+
 /* Style the links inside the navigation bar */
 .topnav a {
   float: left;
