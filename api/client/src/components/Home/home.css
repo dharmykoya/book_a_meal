@@ -1,0 +1,57 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+body {
+    /*font-family: "Roboto", sans-serif;*/
+    font-family: "Comic Sans MS";
+}
+
+/*styling the main page*/
+
+.headerContainer {
+    display: grid;
+    grid-template-columns: auto auto;
+    width: 90%;
+    margin: 20px auto;
+}
+
+.WelcomeImage {
+  margin-top: 70px;
+}
+
+.WelcomeImage img {
+  width: 100%;
+}
+
+.formContainer {
+  margin-left: auto;
+}
+
+.textOrange {
+  color: #dd4f05;
+}
+
+.Message {
+  margin: 15px 0 0;
+  color: #b3b3b3;
+  font-size: 12px;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .headerContainer {
+      max-width: 100%;
+      grid-template-columns: auto;
+  }
+
+  .WelcomeImage {
+    margin-top: 0px;
+  }
+
+  .formContainer {
+    margin-left: 0px;
+  }
+}
+
+
+@media (min-width: 601px) and (max-width: 968px) { 
+  
+}

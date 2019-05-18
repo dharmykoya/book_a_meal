@@ -1,0 +1,14 @@
+.NavRight {
+  background-color: #dd4f05;
+  color: white;
+}
+.NavRight ul {
+  margin-top: 0px;
+  display: none,
+}
+
+@media screen and (max-width: 600px) {
+  .NavRight ul a {
+    display: none;
+  }
+}
