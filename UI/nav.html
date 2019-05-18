@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Meal App</title>
+
+    <link rel="stylesheet" href="css/nav.css">
+
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+</head>
+<body>
+  <header>
+      <div>
+          Logo
+      </div>   
+    
+    <nav class="nav-item-left">        
+      <ul>
+        <li><a href="">Home</a></li>
+        <li><a href="">about</a></li>
+        <li><a href="">service</a></li>
+        <li><a href="">Contact</a></li>
+      </ul>
+    </nav>
+    
+    <div class="nav-item-right">
+      <ul>
+        <li><a href="">Signin</a></li>
+        <li><a href="">SIgnup</a></li>
+        <li><a href="">SIgnup</a></li>
+      </ul>
+    </div>
+    
+    <div class="hamburger">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </header>
+
+  <script>
+    const btn = document.querySelector('.hamburger');
+    const leftNav = document.querySelector('.nav-item-left');
+    const rightNav = document.querySelector('.nav-item-right');
+    const toggle = () => {
+      if(leftNav.className === 'nav-item-left' || rightNav.className === 'nav-item-left') {
+        leftNav.className = 'nav-item-left-responsive';
+        rightNav.className = 'nav-item-right-responsive';
+      } else {
+        leftNav.className = 'nav-item-left';
+        rightNav.className = 'nav-item-right';
+      }
+    }
+
+    btn.addEventListener('click', toggle);
+  </script>
+</body>
+</html>
