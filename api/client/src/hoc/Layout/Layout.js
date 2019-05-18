@@ -3,6 +3,7 @@ import Aux from '../Cover/Cover';
 import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
 import Home from '../../components/Home/Home';
 import NavToggle from '../../components/Navigation/NavToggle/NavToggle';
+import Login from '../../components/Login/login';
 
 class Layout extends Component {
   state = {
@@ -26,6 +27,7 @@ class Layout extends Component {
           closed={this.navToggleClosedHandler} 
         />
         <Home />
+        <Login />
       </Aux>
     );
   }

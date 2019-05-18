@@ -1,12 +1,19 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
-body {
-    /*font-family: "Roboto", sans-serif;*/
-    font-family: "Comic Sans MS";
+
+.textOrange {
+  color: #dd4f05;
 }
 
+.Message {
+  margin: 15px 0 0;
+  color: #b3b3b3;
+  font-size: 12px;
+}
 
-
-
+.LoginHeader {
+  color: #9f8181;
+  text-align: center;
+}
 
 /*styling the main page*/
 
