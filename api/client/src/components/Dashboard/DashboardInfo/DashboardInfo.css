@@ -1,0 +1,11 @@
+.dashboardHeader {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  align-items: center;
+  align-content: center;
+  margin: 20px auto;
+  background-color: #e9e9e9;
+  height: 260px;
+  width: 80%
+}
