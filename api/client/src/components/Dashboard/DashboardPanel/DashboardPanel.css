@@ -1,0 +1,36 @@
+.dashboardPanelContainer {
+  display: grid;
+  grid-template-columns: auto auto;
+  width: 80%;
+  margin: 0px auto;
+}
+
+.dashboardPanel a {
+  text-decoration: none;
+  color: #dd4f05;
+  padding: 5px;
+}
+
+.dashboardPanel svg {
+  text-decoration: none;
+  color: #dd4f05;
+  padding-right: 5px;
+}
+
+.dashboardPanel {
+  margin-right: 25px;
+}
+
+.dashboardPanel h5 {
+  padding: 10px;
+  border-bottom: 4px solid rgba(0,0,0,.1);
+}
+
+.dashboardPanel ul {
+  display: flex;
+  justify-content: space-between;
+}
+
+.dashboardPanel li {
+  list-style: none;
+}

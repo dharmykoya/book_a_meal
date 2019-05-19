@@ -4,6 +4,7 @@ import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
 import Home from '../../components/Home/Home';
 import NavToggle from '../../components/Navigation/NavToggle/NavToggle';
 import Login from '../../components/Login/login';
+import Dashboard from '../../components/Dashboard/Dashboard';
 
 class Layout extends Component {
   state = {
@@ -28,6 +29,7 @@ class Layout extends Component {
         />
         <Home />
         <Login />
+        <Dashboard />
       </Aux>
     );
   }

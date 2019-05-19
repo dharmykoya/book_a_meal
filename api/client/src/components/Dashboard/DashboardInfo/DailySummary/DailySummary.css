@@ -1,0 +1,13 @@
+
+.dailySummary li {
+  text-decoration: none;
+  color: #dd4f05;
+  list-style: none;
+  display: inline-block;
+  text-align: center;
+  padding-right: 10px;
+}
+
+.dailySummary li small {
+  text-align: center;
+}
