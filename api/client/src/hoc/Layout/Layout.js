@@ -5,6 +5,7 @@ import Home from '../../components/Home/Home';
 import NavToggle from '../../components/Navigation/NavToggle/NavToggle';
 import Login from '../../components/Login/login';
 import Dashboard from '../../components/Dashboard/Dashboard';
+import SelectCaterer from '../../components/SelectCaterer/SelectCaterer';
 
 class Layout extends Component {
   state = {
@@ -30,6 +31,7 @@ class Layout extends Component {
         <Home />
         <Login />
         <Dashboard />
+        <SelectCaterer />
       </Aux>
     );
   }

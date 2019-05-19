@@ -1,0 +1,20 @@
+.selectCaterer {
+  text-align: center;
+}
+
+.catererContainer {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  width: 70%;
+  margin: 20px auto;
+}
+
+.selectCaterer img {
+  width: 200px;
+  height: 200px;
+}
+
+.selectCaterer a {
+  text-decoration: none;
+  color: #dd4f05;
+}
