@@ -1,0 +1,42 @@
+.orderTable {
+  border-collapse: collapse;
+  /* position: fixed;
+  right: 100px; */
+}
+
+.orderTable th, td {
+  padding: 8px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+.orderTable thead tr:hover {
+  background-color: white;
+}
+
+.orderTable tr:hover {
+  background-color: #dd4f05;
+}
+
+.orderTable tfoot tr:hover {
+  background-color: white;
+}
+
+.orderTable input {
+  width: 70px;
+  height: 30px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.icon {
+  padding: 3px 5px;
+  font-size: 10px;
+  cursor: pointer;
+}
+
+.quantity {
+  border: 1px solid #ddd;
+  margin: 0px auto;
+  padding: 3px 5px;
+}
