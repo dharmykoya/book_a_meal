@@ -7,6 +7,7 @@ import Login from '../../components/Login/login';
 import Dashboard from '../../components/Dashboard/Dashboard';
 import SelectCaterer from '../../components/SelectCaterer/SelectCaterer';
 import Order from '../../components/Order/Order';
+import ConfirmOrder from '../../components/ConfirmOrder/ConfirmOrder';
 
 class Layout extends Component {
   state = {
@@ -139,6 +140,14 @@ class Layout extends Component {
         <Dashboard />
         <SelectCaterer />
         <Order 
+          addToCart={this.addFoodCartHandler} 
+          currentOrder={this.state.orders} 
+          price={this.state.totalPrice}
+          addQuantity={this.addToQuantity}
+          reduceQuantity={this.reduceQuantity}
+          removeMeal={this.removeMealHandler}
+        />
+        <ConfirmOrder 
           addToCart={this.addFoodCartHandler} 
           currentOrder={this.state.orders} 
           price={this.state.totalPrice}
