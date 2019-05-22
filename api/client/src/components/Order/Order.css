@@ -1,0 +1,14 @@
+.order h2 {
+  text-align: center;
+}
+.orderBody {
+  width: 90%;
+  margin: 0px auto;
+  display: grid;
+  grid-template-columns: auto auto;
+}
+
+.orderCard {
+  display: grid;
+  grid-template-columns: repeat(3, 200px);
+}
