@@ -42,12 +42,12 @@ export default (sequelize, DataTypes) => {
       as: 'caterer',
     });
   };
-  Meal.associate = (models) => {
-    Meal.hasMany(models.Item, {
-      foreignKey: 'meal_id',
-      as: 'meals',
-    });
-  };
+  // Meal.associate = (models) => {
+  //   Meal.hasMany(models.Item, {
+  //     foreignKey: 'meal_id',
+  //     as: 'meals',
+  //   });
+  // };
   // Meal.associate = (models) => {
   //   Meal.hasMany(models.Order, {
   //     foreignKey: 'user_id',

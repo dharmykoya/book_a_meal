@@ -43,6 +43,7 @@ class UserController {
   //     });
   // }
   static async signUp(req, res) {
+    console.log('dami')
     console.log(process.env.DATABASE_URL);
     const user = req.body;
     try {

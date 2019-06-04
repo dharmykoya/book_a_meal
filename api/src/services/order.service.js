@@ -17,11 +17,10 @@ class OrderService {
    * @param{Object} caterer_id - caterer that owns the meal to be created
    * @return{json} the created menu detail
    */
-  static async addToOrder(mealId, userId, quantity) {
+  static async addToOrder(meals, userId) {
     try {
-      // console.log(mealId, userId, quantity);
       let response;
-      const orderItem = await Item.findOne({ where: { meal_id: mealId, user_id: userId } });
+      const orderItem = await Item.findOne({ where: { order: mealId, user_id: userId } });
       if (orderItem) {
         response = {
           err: true,
@@ -183,15 +182,55 @@ class OrderService {
    * @param{Object} caterer_id - caterer that owns the meal to be created
    * @return{json} the created menu detail
    */
-  static async createOrders(meals, userId, catererId, orderTotal) {
+  // static async createOrders(meals, userId, catererId, orderTotal) {
+  //   try {
+  //     const createdOrder = await Order.create({
+  //       order: meals,
+  //       total: orderTotal,
+  //       caterer_id: catererId,
+  //       user_id: userId,
+  //       delivery_status: 0,
+  //     });
+  //     const response = {
+  //       status: 'success',
+  //       message: 'order created',
+  //       data: createdOrder,
+  //     };
+  //     return response;
+  //   } catch (error) {
+  //     const response = { message: error.message, err: true };
+  //     throw response;
+  //   }
+  // }
+   /**
+   * create a new order
+   * @static
+   * @description - Updates a new order in the app.
+   * @param{Object} orders - meal to be created
+   * @param{Object} userId - user that created the order.
+   * @param{Object} caterer_id - caterer that owns the meal to be created
+   * @return{json} the created menu detail
+   */
+  static async createOrders(meals, userId, catererId) {
     try {
+      // console.log(12, JSON.stringify(meals));
+      const newMeals = JSON.stringify(meals);
+      // console.log(18, JSON.parse(newJ));
+      // console.log(14, userId);
       const createdOrder = await Order.create({
-        order: meals,
-        total: orderTotal,
+        order: newMeals,
+        total: 20180,
         caterer_id: catererId,
         user_id: userId,
         delivery_status: 0,
       });
+
+      console.log(90, createdOrder.dataValues.order);
+      const { order } = createdOrder.dataValues;
+      let newOrder = [];
+      order.map((ord) => {
+        
+      })
       const response = {
         status: 'success',
         message: 'order created',

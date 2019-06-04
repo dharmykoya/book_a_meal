@@ -1,16 +1,7 @@
 export default (sequelize, DataTypes) => {
   const Order = sequelize.define('Order', {
-    // meal_id: {
-    //   type: DataTypes.INTEGER,
-    //   allowNull: false,
-    //   references: {
-    //     model: 'Meals',
-    //     key: 'id',
-    //     as: 'meal_id',
-    //   },
-    // },
     order: {
-      type: DataTypes.ARRAY(DataTypes.INTEGER),
+      type: DataTypes.TEXT,
       allowNull: false,
     },
     total: {

@@ -11,11 +11,27 @@ export default {
       createdAt: now,
       updatedAt: now,
     },
+    {  
+      caterer_id: 1,
+      name: 'Amala and ewedu',
+      image: 'rice.png',
+      price: 500,
+      createdAt: now,
+      updatedAt: now,
+    },
+    {  
+      caterer_id: 1,
+      name: 'moi moi and veg',
+      image: 'rice.png',
+      price: 600,
+      createdAt: now,
+      updatedAt: now,
+    },
     {
       caterer_id: 1,
       name: 'bread and beans',
       image: 'beans.png',
-      price: 200,
+      price: 400,
       createdAt: now,
       updatedAt: now,
     }], {});

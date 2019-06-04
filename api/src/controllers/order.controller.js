@@ -22,8 +22,8 @@ class OrderController {
   static async createOrder(req, res) {
     try {
       const { user_id } = req.decoded.user;
-      const { meals, total, caterer_id } = req.body;
-      const createdOrder = await OrderService.createOrders(meals, user_id, caterer_id, total);
+      const { meals, caterer_id } = req.body;
+      const createdOrder = await OrderService.createOrders(meals, user_id, caterer_id);
       res.status(201).send({
         status: 'success',
         createdOrder,
@@ -47,8 +47,8 @@ class OrderController {
   static async addToOrder(req, res) {
     try {
       const { user_id } = req.decoded.user;
-      const { meal_id, quantity } = req.body;
-      const createdOrder = await OrderService.addToOrder(meal_id, user_id, quantity);
+      const { meals } = req.body;
+      const createdOrder = await OrderService.addToOrder(meals, user_id,);
       res.status(201).send({
         status: 'success',
         createdOrder,

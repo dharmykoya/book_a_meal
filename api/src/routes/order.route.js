@@ -13,7 +13,10 @@ router.get('/', authMiddleware.checkToken, OrderMiddleware.getOrders, OrderContr
 // router.get('/:user_id', authMiddleware.checkToken, OrderMiddleware.getOrders, OrderController.getOrderItems);
 
 // adding a meal to item
-router.post('/', authMiddleware.checkToken, OrderMiddleware.createOrder, OrderController.addToOrder);
+router.post('/', 
+authMiddleware.checkToken, 
+OrderMiddleware.createOrder, 
+OrderController.createOrder);
 
 // creating an order
 router.post('/checkout', authMiddleware.checkToken, OrderMiddleware.createOrder, OrderController.createOrder);
