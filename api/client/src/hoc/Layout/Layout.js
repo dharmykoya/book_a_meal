@@ -8,6 +8,7 @@ import Dashboard from '../../components/Dashboard/Dashboard';
 import SelectCaterer from '../../components/SelectCaterer/SelectCaterer';
 import Order from '../../components/Order/Order';
 import ConfirmOrder from '../../components/ConfirmOrder/ConfirmOrder';
+import Checkout from '../../components/Checkout/Checkout';
 
 class Layout extends Component {
   state = {
@@ -80,7 +81,7 @@ class Layout extends Component {
   reduceQuantity = (meal) => {
     // Get the current state and loop through to reduce the quantityt
     const oldOrder = Object.values(this.state.orders);
-    oldOrder.map((order) => {
+    oldOrder.forEach((order) => {
       if (order.id === meal.id) {
         order.quantity -= 1;
         if (order.quantity < 1) {
@@ -98,7 +99,6 @@ class Layout extends Component {
     
     // update the state
     this.setState({
-      orders: oldOrder,
       totalPrice: updatedTotalPrice,
     });
 
@@ -155,6 +155,7 @@ class Layout extends Component {
           reduceQuantity={this.reduceQuantity}
           removeMeal={this.removeMealHandler}
         />
+        <Checkout price={this.state.totalPrice} />
       </Aux>
     );
   }

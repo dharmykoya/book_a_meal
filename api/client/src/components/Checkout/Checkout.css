@@ -1,0 +1,13 @@
+.checkout h2{
+  text-align: center;
+}
+
+.checkoutMain {
+  display: grid;
+  grid-template-columns: auto auto;
+}
+
+.checkoutMain form {
+  display: grid;
+  grid-template-columns: auto auto;
+}

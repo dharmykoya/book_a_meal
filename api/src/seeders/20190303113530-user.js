@@ -1,4 +1,4 @@
-import hashPassword from '../services/hashPassword';
+
 
 const now = new Date();
 
@@ -70,7 +70,7 @@ module.exports = {
       email: 'dharmykoya38@gmail.com',
       phone_number: '08037145164',
       address: '12, oluwole street, Lagos.',
-      password: 'super-admin',
+      password: '$2b$08$hcVrTjGvlJ9jV5S0RIe23.I6eoow8fXT.gA06A3oVIwPDiYXC4GEC',
       role_id: 1,
       // restaurant_name: 'super-admin',
 	      // restaurant_logo: 'chris.png',
@@ -84,11 +84,11 @@ module.exports = {
       email: 'doyin@gmail.com',
       phone_number: '0801234567',
       address: '12, ajayi street, Lagos.',
-      password: 'meal-app',
+      password: '$2b$08$hcVrTjGvlJ9jV5S0RIe23.I6eoow8fXT.gA06A3oVIwPDiYXC4GEC',
       role_id: 2,
       // type: 2,
       // restaurant_name: 'African kitchen',
-	      // restaurant_logo: 'chris.png',
+	    // restaurant_logo: 'chris.png',
       authorizations: [5, 6, 7, 8, 9, 10],
       createdAt: now,
       updatedAt: now,
@@ -98,7 +98,7 @@ module.exports = {
       email: 'isaac@gmail.com',
       phone_number: '0809876543',
       address: '12, solanke street, Lagos.',
-      password: 'meal-app',
+      password: '$2b$08$hcVrTjGvlJ9jV5S0RIe23.I6eoow8fXT.gA06A3oVIwPDiYXC4GEC',
       role_id: 3,
       // type: 3,
       authorizations: [3, 10, 13, 14, 15],

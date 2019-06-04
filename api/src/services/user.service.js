@@ -195,6 +195,8 @@ class UserService {
           return response;
         }
       }
+      response = { message: 'Please select a type', err: true };
+      return response;
     } catch (error) {
       const response = { message: error.message, err: true };
       throw response;
