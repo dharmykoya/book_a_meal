@@ -226,6 +226,11 @@ class OrderService {
       });
 
       console.log(90, createdOrder.dataValues.order);
+      const { order } = createdOrder.dataValues;
+      let newOrder = [];
+      order.map((ord) => {
+        
+      })
       const response = {
         status: 'success',
         message: 'order created',
