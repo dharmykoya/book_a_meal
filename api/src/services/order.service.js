@@ -2,6 +2,7 @@
 /* eslint-disable max-len */
 /* eslint-disable consistent-return */
 import { Order, Item, Meal } from '../models';
+import { Op } from 'sequelize';
 
 /**
  * @class OrderService
@@ -215,32 +216,66 @@ class OrderService {
     try {
       // console.log(12, JSON.stringify(meals));
       const newMeals = JSON.stringify(meals);
+      // console.log(23, newMeals)
       // console.log(18, JSON.parse(newJ));
       // console.log(14, userId);
       const createdOrder = await Order.create({
         order: newMeals,
         total: 20180,
-        caterer_id: catererId,
+        caterer_id: 1,
         user_id: userId,
         delivery_status: 0,
-      });
+      }, { raw: true });
 
-      console.log(90, createdOrder.dataValues.order);
+      // console.log(90, createdOrder);
       const { order } = createdOrder.dataValues;
+      // const result = await this.mealOrder(order);
+      // console.log(34, order)
+      console.log(13, Object.keys(order));
       let newOrder = [];
-      order.map((ord) => {
-        
+      // return order;
+      return order.map(async (ord) => {
+        const mealId = Object.keys(ord)
+        const meal = await Meal.findAll({
+          where: { 
+            id: {
+              [Op.or]: [...mealId] 
+            }
+          },
+          raw: true,
+        })
+        return meal;        
       })
+      console.log(73, newOrder) 
       const response = {
         status: 'success',
         message: 'order created',
-        data: createdOrder,
+        data: newOrder,
       };
-      return response;
+      return response;        
     } catch (error) {
       const response = { message: error.message, err: true };
       throw response;
     }
+  }
+
+  static async mealOrder (order) {
+    let newOrder = [];
+    order.forEach( async(ord) => {
+      const mealId = Object.keys(ord)
+      const meal = await Meal.findAll({
+        where: { 
+          id: {
+            [Op.or]: [...mealId] 
+          }
+        },
+        raw: true,
+      })
+      newOrder.push(meal);
+      console.log(73, newOrder)         
+    })
+
+    return newOrder
   }
 }
 

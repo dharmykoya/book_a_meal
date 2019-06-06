@@ -7,7 +7,10 @@ import OrderController from '../controllers/order.controller';
 const router = Router();
 
 // route for getting all order owned by a particular caterer
-router.get('/', authMiddleware.checkToken, OrderMiddleware.getOrders, OrderController.getOrders);
+router.get('/', 
+    authMiddleware.checkToken, 
+    // OrderMiddleware.getOrders, 
+    OrderController.getOrders);
 
 // route for getting all order owned by a particular user
 // router.get('/:user_id', authMiddleware.checkToken, OrderMiddleware.getOrders, OrderController.getOrderItems);
