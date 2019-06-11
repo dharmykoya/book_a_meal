@@ -4,13 +4,14 @@ import classes from './Order.css';
 import OrderTable from './OrderTable/OrderTable';
 
 
+
 const meals = [
-  { id: 11, name: 'Semo', image: '/static/media/food4.59d61834.jpg', price: 1000, quantity: 2} ,
-  { id: 12, name: 'Coconut Rice', image: '/static/media/food3.7c96f246.jpg', price: 700, quantity: 2} ,
-  { id: 13, name: 'Moi moi', image: '/static/media/food.b25a5729.jpg', price: 1500, quantity: 2} ,
-  { id: 4, name: 'Chicken and chips', image: '/static/media/food4.59d61834.jpg', price: 1000, quantity: 2} ,
-  { id: 5, name: 'Porridge', image: '/static/media/food3.7c96f246.jpg', price: 700, quantity: 2} ,
-  { id: 6, name: 'Jollof Rice', image: '/static/media/food.b25a5729.jpg', price: 1500, quantity: 2} ,
+  { id: 11, name: 'Semo', image: '/../../assets/images/food4.jpg', price: 1000, quantity: 2} ,
+  { id: 12, name: 'Coconut Rice', image: '/../../assets/images/food.jpg', price: 700, quantity: 2} ,
+  { id: 13, name: 'Moi moi', image: '/../../assets/images/food1.jpg', price: 1500, quantity: 2} ,
+  { id: 4, name: 'Chicken and chips', image: '/../../assets/images/food3.jpg', price: 1000, quantity: 2} ,
+  { id: 5, name: 'Porridge', image: '/../../assets/images/food4.jpg', price: 700, quantity: 2} ,
+  { id: 6, name: 'Jollof Rice', image: '/../../assets/images/food1.jpg', price: 1500, quantity: 2}
 ]
 
 const order = (props) => (

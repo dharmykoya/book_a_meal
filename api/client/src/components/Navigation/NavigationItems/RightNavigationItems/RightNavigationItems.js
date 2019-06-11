@@ -5,9 +5,10 @@ import classes from './RightNavigationItems.css';
 const rightNavigationItems = () => (
   <div className={classes.NavRight}>
     <ul>
-      <NavigationItem>Signin</NavigationItem>
-      <NavigationItem>Signup</NavigationItem>
-      <NavigationItem>Caterer</NavigationItem>
+      <NavigationItem link="/login">Signin</NavigationItem>
+      <NavigationItem link="/signup">Signup</NavigationItem>
+      <NavigationItem link="/caterer">Caterer</NavigationItem>
+      <NavigationItem link="/dashboard">Dashboard</NavigationItem>
     </ul>
   </div>
 );

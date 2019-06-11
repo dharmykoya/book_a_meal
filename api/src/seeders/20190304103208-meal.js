@@ -1,9 +1,10 @@
 /* eslint-disable arrow-body-style */
 const now = new Date();
 
-export default {
-  up: (queryInterface) => {
-    return queryInterface.bulkInsert('Meals', [{  
+
+module.exports = {
+  up: queryInterface => queryInterface.bulkInsert('Meals', [
+    {  
       caterer_id: 1,
       name: 'Rice and beans with two beefs',
       image: 'rice.png',
@@ -34,10 +35,9 @@ export default {
       price: 400,
       createdAt: now,
       updatedAt: now,
-    }], {});
-  },
+    }
+  ]),
 
-  down: (queryInterface) => {
-    return queryInterface.bulkDelete('Meals', null, {});
-  },
+  down: queryInterface => queryInterface.bulkDelete('Caterers', null, {}),
 };
+

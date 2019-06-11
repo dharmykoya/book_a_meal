@@ -1,9 +1,12 @@
-import React, { Component } from 'react';
-import Aux from '../Cover/Cover';
-import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
-import NavToggle from '../../components/Navigation/NavToggle/NavToggle';
+import React, { Component} from 'react';
+import Order from '../../components/Order/Order';
+import ConfirmOrder from '../../components/ConfirmOrder/ConfirmOrder';
+// import MealCard from './MealCard/MealCard';
+// import classes from './Order.css';
+// import OrderTable from './OrderTable/OrderTable';
 
-class Layout extends Component {
+
+class OrderPage extends Component {
   state = {
     showNavToggle: false,
     orders: [
@@ -118,31 +121,13 @@ class Layout extends Component {
     this.setState({
       orders: updateOrder,
       totalPrice: updatedTotalPrice,
-    })
+    });
   }
 
-  render () {
-    return (
-      <Aux>
-        <Toolbar navClicked={this.navToggleHandler} />        
-        <NavToggle open={this.state.showNavToggle} 
-          closed={this.navToggleClosedHandler} 
-        />
-        <main>
-          {this.props.children}
-        </main>
-        {/* <Home />
-        <Login />
-        <Dashboard />
-        <SelectCaterer />
-        <Order 
-          addToCart={this.addFoodCartHandler} 
-          currentOrder={this.state.orders} 
-          price={this.state.totalPrice}
-          addQuantity={this.addToQuantity}
-          reduceQuantity={this.reduceQuantity}
-          removeMeal={this.removeMealHandler}
-        />
+  render() {
+    let order;
+    if (this.props.match.path === '/confirm-order') {
+      order = (
         <ConfirmOrder 
           addToCart={this.addFoodCartHandler} 
           currentOrder={this.state.orders} 
@@ -151,10 +136,25 @@ class Layout extends Component {
           reduceQuantity={this.reduceQuantity}
           removeMeal={this.removeMealHandler}
         />
-        <Checkout price={this.state.totalPrice} /> */}
-      </Aux>
-    );
+      );
+    } else {
+      order = (
+        <Order 
+          addToCart={this.addFoodCartHandler} 
+          currentOrder={this.state.orders} 
+          price={this.state.totalPrice}
+          addQuantity={this.addToQuantity}
+          reduceQuantity={this.reduceQuantity}
+          removeMeal={this.removeMealHandler}
+        />
+      );
+    }
+    return (
+      <div>   
+        {order}
+      </div>
+    )
   }
 }
 
-export default Layout;
+export default OrderPage;
